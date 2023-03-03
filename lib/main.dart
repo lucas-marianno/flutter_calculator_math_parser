@@ -1,6 +1,6 @@
 import 'package:calculator2/appbar.dart';
 import 'package:flutter/material.dart';
-import 'color_palette.dart';
+import 'style.dart';
 import 'keyboard.dart';
 import 'screen.dart';
 
@@ -14,9 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        elevatedButtonTheme: defaultButtonThemeData(),
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
@@ -32,13 +34,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
+  //int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(),
-      backgroundColor: Palette.darkest(),
+      backgroundColor: Palette.darkest,
       body: SafeArea(
         minimum: const EdgeInsets.all(30),
         child: Center(

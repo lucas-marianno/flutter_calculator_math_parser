@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'color_palette.dart';
+import 'style.dart';
 
 class Screen extends StatefulWidget {
   const Screen({super.key});
@@ -14,7 +14,7 @@ class _ScreenState extends State<Screen> {
     return Card(
       elevation: 5,
       shadowColor: Colors.black,
-      color: Palette.dark(),
+      color: Palette.dark,
       child: SizedBox(
         width: 500,
         height: 300,

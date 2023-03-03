@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'color_palette.dart';
+import 'style.dart';
 
 
 AppBar myAppBar() {
   return AppBar(
     elevation: 0,
-    backgroundColor: Palette.darkest(),
+    backgroundColor: Palette.darkest,
     actions: [
       PopupMenuButton(
         icon: const Icon(Icons.settings),
