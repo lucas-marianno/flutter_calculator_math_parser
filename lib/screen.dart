@@ -18,10 +18,12 @@ class _ScreenState extends State<Screen> {
       child: SizedBox(
         width: 500,
         height: 300,
-        child: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
           child: Text(
             '0123456789',
-            style: myTextStyle(),
+            style: displayTextStyle(),
+            textAlign: TextAlign.center,
           ),
         ),
       ),

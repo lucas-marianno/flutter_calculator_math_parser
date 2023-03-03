@@ -1,7 +1,7 @@
 import 'package:calculator2/appbar.dart';
 import 'package:flutter/material.dart';
-
 import 'color_palette.dart';
+import 'keyboard.dart';
 import 'screen.dart';
 
 void main() {
@@ -44,9 +44,13 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Screen(),
-              ElevatedButton(onPressed: () {}, child: null),
+            children: const [
+              Screen(),
+              MemRow(),
+              Row1(),
+              Row2(),
+              Row3(),
+              Row4(),
             ],
           ),
         ),
