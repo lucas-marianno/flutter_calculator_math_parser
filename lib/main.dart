@@ -1,7 +1,7 @@
 import 'package:calculator2/appbar.dart';
 import 'package:flutter/material.dart';
 import 'style.dart';
-import 'keyboard.dart';
+import 'keyboard_rows.dart';
 import 'screen.dart';
 import 'package:flutter/services.dart';
 
@@ -9,14 +9,17 @@ import 'package:flutter/services.dart';
 
 void main() {
   
+  
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       
@@ -43,12 +46,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: myAppBar(),
-      backgroundColor: Palette.darkest,
-      body: SafeArea(
-        minimum: const EdgeInsets.all(30),
-        child: Center(
+    return SafeArea(
+      
+      child: Scaffold(
+        appBar: myAppBar(),
+        backgroundColor: Palette.darkest,
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [

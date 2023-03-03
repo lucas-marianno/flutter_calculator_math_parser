@@ -11,8 +11,9 @@ class Palette {
 }
 
 class DefaultSizes {
+  
   static double defaultKeyHeight = 100;
-  static double defaultKeyWidth = 85;
+  static double defaultKeyWidth = 75;
   static Size defaultKeySize = Size(defaultKeyWidth, defaultKeyHeight);
 
   static double defaultKeyPadding = 5;
@@ -40,7 +41,7 @@ ElevatedButtonThemeData defaultButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
-      fixedSize: DefaultSizes.defaultKeySize,
+      //fixedSize: DefaultSizes.defaultKeySize,
       backgroundColor: Palette.dark,
       foregroundColor: Palette.light,
       textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
