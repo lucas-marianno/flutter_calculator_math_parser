@@ -2,17 +2,19 @@ import 'package:calculator2/style.dart';
 import 'package:flutter/material.dart';
 
 class FunctionKey extends StatelessWidget {
-  const FunctionKey({super.key});
+  final String keyText;
+  const FunctionKey(this.keyText,{super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
       child: ElevatedButton(
+        style: functionButtonStyle(),
         onPressed: () {},
         child: Text(
-          'MEM',
-          style: keyTextStyle(),
+          keyText,
+          //style: keyTextStyle(),
         ),
       ),
     );
@@ -26,12 +28,12 @@ class NumKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
       child: ElevatedButton(
         onPressed: () {},
         child: Text(
           keyText,
-          style: keyTextStyle(),
+          //style: keyTextStyle(),
         ),
       ),
     );
@@ -43,13 +45,13 @@ class EqualKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
       child: ElevatedButton(
         style: equalButtonStyle(),
         onPressed: () {},
         child: Text(
           '=',
-          style: keyTextStyle(),
+          //style: keyTextStyle(),
         ),
       ),
     );
@@ -64,16 +66,33 @@ class MemRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
-        FunctionKey(),
-        FunctionKey(),
-        FunctionKey(),
-        FunctionKey(),
-        FunctionKey(),
+        FunctionKey('MC'),
+        FunctionKey('MR'),
+        FunctionKey('M+'),
+        FunctionKey('M-'),
+        FunctionKey('MS'),
       ],
     );
   }
 }
 
+class Row0 extends StatelessWidget {
+  const Row0({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const[
+        NumKey('%'),
+        NumKey('CE'),
+        NumKey('AC'),
+        NumKey('DEL'),
+        NumKey('x^y'),
+      ],
+    );
+  }
+}
 class Row1 extends StatelessWidget {
   const Row1({super.key});
 
@@ -136,9 +155,9 @@ class Row4 extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
+        NumKey('+-'),
         NumKey('0'),
         NumKey('.'),
-        NumKey('+-'),
         EqualKey(),
       ],
     );

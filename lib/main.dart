@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'style.dart';
 import 'keyboard.dart';
 import 'screen.dart';
+import 'package:flutter/services.dart';
+
+
 
 void main() {
+  
   runApp(const MyApp());
 }
 
@@ -13,6 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       
       debugShowCheckedModeBanner: false,
@@ -49,6 +54,7 @@ class _HomePageState extends State<HomePage> {
             children: const [
               Screen(),
               MemRow(),
+              Row0(),
               Row1(),
               Row2(),
               Row3(),

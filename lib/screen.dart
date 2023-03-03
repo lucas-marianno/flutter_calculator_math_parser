@@ -21,7 +21,7 @@ class _ScreenState extends State<Screen> {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Text(
-            '0123456789',
+            '01234567890',
             style: displayTextStyle(),
             textAlign: TextAlign.center,
           ),

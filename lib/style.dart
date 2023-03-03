@@ -11,14 +11,14 @@ class Palette {
 }
 
 class DefaultSizes {
-  
-  static double defaultKeyHeight = 15;
-  static double defaultKeyWidth = 70;
+  static double defaultKeyHeight = 100;
+  static double defaultKeyWidth = 85;
   static Size defaultKeySize = Size(defaultKeyWidth, defaultKeyHeight);
 
-  static double defaultKeyPadding = 10;
+  static double defaultKeyPadding = 5;
   static double screenLargeTextSize = 75;
-  static double defaultKeyTextSize = 20;
+  static double defaultKeyTextSize = 25;
+  static double functionKeyTextSize = 18;
   DefaultSizes();
 }
 
@@ -36,48 +36,44 @@ TextStyle displayTextStyle() {
   );
 }
 
-TextStyle keyTextStyle() {
-  return GoogleFonts.robotoMono(
-    color: Palette.light,
-    fontSize: DefaultSizes.defaultKeyTextSize,
-  );
-}
-
 ElevatedButtonThemeData defaultButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       fixedSize: DefaultSizes.defaultKeySize,
       backgroundColor: Palette.dark,
-      foregroundColor: Palette.darkest,
+      foregroundColor: Palette.light,
+      textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
+      
     ),
   );
 }
 
-ElevatedButtonThemeData operatorButtonThemeData() {
-  return ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      textStyle: TextStyle(color: Palette.textAccentColor),
+ButtonStyle operatorButtonThemeData() {
+  return ElevatedButton.styleFrom(
       fixedSize: DefaultSizes.defaultKeySize,
       backgroundColor: Palette.dark,
-      foregroundColor: Palette.darkest,
-    ),
+      foregroundColor: Palette.light,
+      textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*1.5),
   );
 }
 
-ElevatedButtonThemeData memButtonThemeData() {
-  return ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      fixedSize: DefaultSizes.defaultKeySize,
-      backgroundColor: Palette.dark,
-      foregroundColor: Palette.darkest,
-    ),
+ButtonStyle functionButtonStyle() {
+  return ElevatedButton.styleFrom(
+    elevation: 0,
+    fixedSize:
+        Size(DefaultSizes.defaultKeyWidth, DefaultSizes.defaultKeyHeight / 2),
+    backgroundColor: Palette.darkest,
+    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.functionKeyTextSize),
   );
 }
 
-ButtonStyle equalButtonStyle(){
+ButtonStyle equalButtonStyle() {
   return ElevatedButton.styleFrom(
     backgroundColor: Colors.deepPurple,
-    textStyle: TextStyle(color: Palette.textAccentColor),
-    fixedSize: Size(DefaultSizes.defaultKeyWidth*2, DefaultSizes.defaultKeyHeight)
+    fixedSize: Size(
+      DefaultSizes.defaultKeyWidth * 2 + DefaultSizes.defaultKeyPadding * 2,
+      DefaultSizes.defaultKeyHeight),
+    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
   );
 }
