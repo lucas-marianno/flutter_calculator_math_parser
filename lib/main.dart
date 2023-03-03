@@ -50,13 +50,16 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: myAppBar(),
         backgroundColor: Palette.darkest,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Screen(),
-              KeyBoard(),
-            ],
+        body: SafeArea(
+          minimum: const EdgeInsets.all(20),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Screen(),
+                KeyBoard(),
+              ],
+            ),
           ),
         ),
       ),

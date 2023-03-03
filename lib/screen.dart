@@ -11,13 +11,11 @@ class Screen extends StatefulWidget {
 class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      shadowColor: Colors.black,
-      color: Palette.dark,
-      child: SizedBox(
-        width: 500,
-        height: 300,
+    return Expanded(
+      child: Card(
+        elevation: 5,
+        shadowColor: Colors.black,
+        color: Palette.dark,
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Text(

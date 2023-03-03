@@ -11,10 +11,6 @@ class Palette {
 }
 
 class DefaultSizes {
-  
-  static double defaultKeyHeight = 100;
-  static double defaultKeyWidth = 75;
-  static Size defaultKeySize = Size(defaultKeyWidth, defaultKeyHeight);
 
   static double defaultKeyPadding = 5;
   static double screenLargeTextSize = 75;
@@ -41,7 +37,6 @@ ElevatedButtonThemeData defaultButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
-      minimumSize: DefaultSizes.defaultKeySize,
       backgroundColor: Palette.dark,
       foregroundColor: Palette.light,
       textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
@@ -50,31 +45,16 @@ ElevatedButtonThemeData defaultButtonThemeData() {
   );
 }
 
-ButtonStyle operatorButtonThemeData() {
-  return ElevatedButton.styleFrom(
-      fixedSize: DefaultSizes.defaultKeySize,
-      backgroundColor: Palette.dark,
-      foregroundColor: Palette.light,
-      textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*1.5),
-  );
-}
-
-ButtonStyle memButtonStyle() {
-  return ElevatedButton.styleFrom(
-    elevation: 0,
-    fixedSize:
-        Size(DefaultSizes.defaultKeyWidth, DefaultSizes.defaultKeyHeight / 2),
-    backgroundColor: Palette.darkest,
-    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.functionKeyTextSize),
-  );
-}
-
 ButtonStyle equalButtonStyle() {
   return ElevatedButton.styleFrom(
     backgroundColor: Colors.deepPurple,
-    fixedSize: Size(
-      DefaultSizes.defaultKeyWidth * 2 + DefaultSizes.defaultKeyPadding * 2,
-      DefaultSizes.defaultKeyHeight),
     textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
+  );
+}
+
+ButtonStyle functionButtonStyle() {
+  return TextButton.styleFrom(
+    foregroundColor: Palette.light,
+    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*0.75),
   );
 }

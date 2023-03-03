@@ -9,9 +9,14 @@ class FunctionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
-          child: TextButton(onPressed: () {}, child: Text(keyText))),
+        padding:
+            EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
+        child: TextButton(
+          style: functionButtonStyle(),
+          onPressed: () {},
+          child: Text(keyText),
+        ),
+      ),
     );
   }
 }
