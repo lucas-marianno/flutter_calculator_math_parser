@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'buttons.dart';
 
+class KeyBoard extends StatelessWidget {
+  const KeyBoard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: const [
+        MemRow(),
+        Row0(),
+        Row1(),
+        Row2(),
+        Row3(),
+        Row4(),
+      ],
+    );
+  }
+}
+
 class MemRow extends StatelessWidget {
   const MemRow({super.key});
 
@@ -26,16 +44,17 @@ class Row0 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const[
-        NumButton('%'),
-        NumButton('CE'),
-        NumButton('AC'),
-        NumButton('DEL'),
-        NumButton('x^y'),
+      children: const [
+        DefaultButton('%'),
+        DefaultButton('CE'),
+        DefaultButton('AC'),
+        DefaultButton('DEL'),
+        DefaultButton('x^y'),
       ],
     );
   }
 }
+
 class Row1 extends StatelessWidget {
   const Row1({super.key});
 
@@ -43,12 +62,12 @@ class Row1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const[
-        NumButton('7'),
-        NumButton('8'),
-        NumButton('9'),
-        NumButton('('),
-        NumButton(')'),
+      children: const [
+        DefaultButton('7'),
+        DefaultButton('8'),
+        DefaultButton('9'),
+        DefaultButton('('),
+        DefaultButton(')'),
       ],
     );
   }
@@ -62,11 +81,11 @@ class Row2 extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
-        NumButton('4'),
-        NumButton('5'),
-        NumButton('6'),
-        NumButton('X'),
-        NumButton('/'),
+        DefaultButton('4'),
+        DefaultButton('5'),
+        DefaultButton('6'),
+        DefaultButton('X'),
+        DefaultButton('/'),
       ],
     );
   }
@@ -80,11 +99,11 @@ class Row3 extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
-        NumButton('1'),
-        NumButton('2'),
-        NumButton('3'),
-        NumButton('+'),
-        NumButton('-'),
+        DefaultButton('1'),
+        DefaultButton('2'),
+        DefaultButton('3'),
+        DefaultButton('+'),
+        DefaultButton('-'),
       ],
     );
   }
@@ -98,9 +117,9 @@ class Row4 extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
-        NumButton('+-'),
-        NumButton('0'),
-        NumButton('.'),
+        DefaultButton('+-'),
+        DefaultButton('0'),
+        DefaultButton('.'),
         EqualButton(),
       ],
     );

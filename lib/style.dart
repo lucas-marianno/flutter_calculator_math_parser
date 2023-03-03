@@ -41,7 +41,7 @@ ElevatedButtonThemeData defaultButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
-      //fixedSize: DefaultSizes.defaultKeySize,
+      minimumSize: DefaultSizes.defaultKeySize,
       backgroundColor: Palette.dark,
       foregroundColor: Palette.light,
       textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
@@ -59,7 +59,7 @@ ButtonStyle operatorButtonThemeData() {
   );
 }
 
-ButtonStyle functionButtonStyle() {
+ButtonStyle memButtonStyle() {
   return ElevatedButton.styleFrom(
     elevation: 0,
     fixedSize:

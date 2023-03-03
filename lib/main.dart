@@ -1,7 +1,7 @@
 import 'package:calculator2/appbar.dart';
 import 'package:flutter/material.dart';
 import 'style.dart';
-import 'keyboard_rows.dart';
+import 'keyboard_layout.dart';
 import 'screen.dart';
 import 'package:flutter/services.dart';
 
@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      
       child: Scaffold(
         appBar: myAppBar(),
         backgroundColor: Palette.darkest,
@@ -56,12 +55,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Screen(),
-              MemRow(),
-              Row0(),
-              Row1(),
-              Row2(),
-              Row3(),
-              Row4(),
+              KeyBoard(),
             ],
           ),
         ),
