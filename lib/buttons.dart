@@ -23,14 +23,17 @@ class FunctionButton extends StatelessWidget {
 
 class DefaultButton extends StatelessWidget {
   final String keyText;
-  const DefaultButton(this.keyText, {super.key});
+  final Function? callbackFunction; //TODO: Can be null, be careful
+  const DefaultButton(this.keyText, {super.key, this.callbackFunction});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
-        child: ElevatedButton(onPressed: () {}, child: Text(keyText)),
+        child: ElevatedButton(onPressed: (){
+          callbackFunction!(keyText);
+        }, child: Text(keyText)),
       ),
     );
   }

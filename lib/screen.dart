@@ -9,6 +9,16 @@ class Screen extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen> {
+
+  String clickedButton = '';
+  String screenText = 'button clicked = ';
+
+  callback(buttonId){
+    setState(() {
+      clickedButton = buttonId;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,7 +32,7 @@ class _ScreenState extends State<Screen> {
             alignment: Alignment.bottomCenter,
             fit: BoxFit.contain,
             child: Text(
-              '01234567890',
+              screenText + clickedButton,
               style: displayTextStyle(),
               textAlign: TextAlign.center,
             ),
