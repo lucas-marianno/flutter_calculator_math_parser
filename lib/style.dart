@@ -7,6 +7,7 @@ class Palette {
   static Color screenBackground = const Color.fromARGB(255, 40, 40, 37);
   static Color light = const Color(0xffDDDDDD);
   static Color textAccentColor = Colors.amber;
+
   Palette();
 }
 
@@ -53,6 +54,13 @@ ButtonStyle equalButtonStyle() {
 ButtonStyle functionButtonStyle() {
   return TextButton.styleFrom(
     foregroundColor: Palette.light,
+    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*0.75),
+  );
+}
+
+ButtonStyle aboutPageButtonStyle() {
+  return ElevatedButton.styleFrom(
+    backgroundColor: Colors.deepPurple,
     textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*0.75),
   );
 }

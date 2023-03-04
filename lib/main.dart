@@ -4,25 +4,19 @@ import 'style.dart';
 import 'keyboard_layout.dart';
 import 'screen.dart';
 import 'package:flutter/services.dart';
-
-
+import 'about_page.dart';
 
 void main() {
-  
-  
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -48,16 +42,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar(),
+        //appBar: myAppBar(),
         backgroundColor: Palette.darkest,
         body: SafeArea(
           minimum: const EdgeInsets.all(20),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Screen(),
-                KeyBoard(),
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => const AboutPage(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.settings,
+                      color: Palette.light,),
+                  ),
+                ),
+                const Screen(),
+                const KeyBoard(),
               ],
             ),
           ),
