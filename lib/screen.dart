@@ -13,15 +13,19 @@ class _ScreenState extends State<Screen> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
-        elevation: 5,
+        elevation: 10,
         shadowColor: Colors.black,
-        color: Palette.dark,
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Text(
-            '01234567890',
-            style: displayTextStyle(),
-            textAlign: TextAlign.center,
+        color: Palette.screenBackground,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: FittedBox(
+            alignment: Alignment.bottomCenter,
+            fit: BoxFit.contain,
+            child: Text(
+              '01234567890',
+              style: displayTextStyle(),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),
