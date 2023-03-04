@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         elevatedButtonTheme: defaultButtonThemeData(),
-        primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
     );
@@ -36,13 +35,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //appBar: myAppBar(),
         backgroundColor: Palette.darkest,
         body: SafeArea(
           minimum: const EdgeInsets.all(20),

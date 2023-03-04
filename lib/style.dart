@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Palette {
-  static Color darkest = const Color(0xff202020);
+  static Color darkest = const Color(0xff171717);
   static Color dark = const Color(0xff282828);
   static Color screenBackground = const Color.fromARGB(255, 40, 40, 37);
   static Color light = const Color(0xffDDDDDD);
