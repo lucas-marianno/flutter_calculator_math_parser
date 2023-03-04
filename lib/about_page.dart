@@ -47,7 +47,7 @@ class AboutPage extends StatelessWidget {
               shadows: [
                 Shadow(
                   color: Palette.darkest,
-                  offset: Offset(1, 1),
+                  offset: const Offset(1, 1),
                   blurRadius: 5,
                 )
               ],
@@ -69,7 +69,7 @@ class AboutPage extends StatelessWidget {
               shadows: [
                 Shadow(
                   color: Palette.darkest,
-                  offset: Offset(1, 1),
+                  offset: const Offset(1, 1),
                   blurRadius: 5,
                 )
               ],

@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'buttons.dart';
 
 class KeyBoard extends StatelessWidget {
-  const KeyBoard({super.key});
+  final Function updateScreenFunction;
+  const KeyBoard(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
       child: Column(
-        children: const[
-          MemRow(),
-          Row0(),
-          Row1(),
-          Row2(),
-          Row3(),
-          Row4(),
+        children: [
+          MemRow(updateScreenFunction),
+          Row0(updateScreenFunction),
+          Row1(updateScreenFunction),
+          Row2(updateScreenFunction),
+          Row3(updateScreenFunction),
+          Row4(updateScreenFunction),
         ],
       ),
     );
@@ -23,7 +24,8 @@ class KeyBoard extends StatelessWidget {
 }
 
 class MemRow extends StatelessWidget {
-  const MemRow({super.key});
+  final Function updateScreenFunction;
+  const MemRow(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,8 @@ class MemRow extends StatelessWidget {
 }
 
 class Row0 extends StatelessWidget {
-  const Row0({super.key});
+  final Function updateScreenFunction;
+  const Row0(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +55,12 @@ class Row0 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          DefaultButton('%'),
-          DefaultButton('CE'),
-          DefaultButton('AC'),
-          DefaultButton('DEL'),
-          DefaultButton('x^y'),
+        children: [
+          DefaultButton('%', updateScreenFunction),
+          DefaultButton('CE', updateScreenFunction),
+          DefaultButton('AC', updateScreenFunction),
+          DefaultButton('DEL', updateScreenFunction),
+          DefaultButton('x^y', updateScreenFunction),
         ],
       ),
     );
@@ -65,7 +68,8 @@ class Row0 extends StatelessWidget {
 }
 
 class Row1 extends StatelessWidget {
-  const Row1({super.key});
+  final Function updateScreenFunction;
+  const Row1(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +78,12 @@ class Row1 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          DefaultButton('7'),
-          DefaultButton('8'),
-          DefaultButton('9'),
-          DefaultButton('('),
-          DefaultButton(')'),
+        children: [
+          DefaultButton('7', updateScreenFunction),
+          DefaultButton('8', updateScreenFunction),
+          DefaultButton('9', updateScreenFunction),
+          DefaultButton('(', updateScreenFunction),
+          DefaultButton(')', updateScreenFunction),
         ],
       ),
     );
@@ -87,7 +91,8 @@ class Row1 extends StatelessWidget {
 }
 
 class Row2 extends StatelessWidget {
-  const Row2({super.key});
+  final Function updateScreenFunction;
+  const Row2(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +101,12 @@ class Row2 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          DefaultButton('4'),
-          DefaultButton('5'),
-          DefaultButton('6'),
-          DefaultButton('X'),
-          DefaultButton('/'),
+        children: [
+          DefaultButton('4', updateScreenFunction),
+          DefaultButton('5', updateScreenFunction),
+          DefaultButton('6', updateScreenFunction),
+          DefaultButton('*', updateScreenFunction),
+          DefaultButton('/', updateScreenFunction),
         ],
       ),
     );
@@ -109,7 +114,8 @@ class Row2 extends StatelessWidget {
 }
 
 class Row3 extends StatelessWidget {
-  const Row3({super.key});
+  final Function updateScreenFunction;
+  const Row3(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +124,12 @@ class Row3 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          DefaultButton('1'),
-          DefaultButton('2'),
-          DefaultButton('3'),
-          DefaultButton('+'),
-          DefaultButton('-'),
+        children: [
+          DefaultButton('1', updateScreenFunction),
+          DefaultButton('2', updateScreenFunction),
+          DefaultButton('3', updateScreenFunction),
+          DefaultButton('+', updateScreenFunction),
+          DefaultButton('-', updateScreenFunction),
         ],
       ),
     );
@@ -131,7 +137,8 @@ class Row3 extends StatelessWidget {
 }
 
 class Row4 extends StatelessWidget {
-  const Row4({super.key});
+  final Function updateScreenFunction;
+  const Row4(this.updateScreenFunction,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -140,11 +147,11 @@ class Row4 extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          DefaultButton('+-'),
-          DefaultButton('0'),
-          DefaultButton('.'),
-          EqualButton(),
+        children: [
+          DefaultButton('+-', updateScreenFunction),
+          DefaultButton('0', updateScreenFunction),
+          DefaultButton('.', updateScreenFunction),
+          EqualButton(updateScreenFunction),
         ],
       ),
     );

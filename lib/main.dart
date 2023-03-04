@@ -1,5 +1,5 @@
-import 'package:calculator2/appbar.dart';
 import 'package:flutter/material.dart';
+import 'logic.dart';
 import 'style.dart';
 import 'keyboard_layout.dart';
 import 'screen.dart';
@@ -36,6 +36,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  String screenValue = '0';
+
+  updateScreen(buttonId){
+    setState(() {
+      screenValue = Logic.newScreenValue(buttonId, screenValue);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,8 +70,8 @@ class _HomePageState extends State<HomePage> {
                       color: Palette.light,),
                   ),
                 ),
-                const Screen(),
-                const KeyBoard(),
+                Screen(screenValue),
+                KeyBoard(updateScreen),
               ],
             ),
           ),
