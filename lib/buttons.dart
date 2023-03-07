@@ -26,7 +26,7 @@ class ButtonId {
     percent = '%',
     ce = 'CE',
     ac = 'AC',
-    delete = '<',
+    delete = '<-',
     power = '^',
     mc = 'MC',
     mr = 'MR',

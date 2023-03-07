@@ -1,4 +1,7 @@
 import 'package:calculator2/buttons.dart';
+import 'equal_logic.dart';
+
+String lastBtnPressed = '';
 
 class Logic {
   final String buttonId;
@@ -6,9 +9,19 @@ class Logic {
 
   Logic(this.buttonId, this.currentScreen);
 
+  
+
   static String newScreenValue(buttonId, currentScreen) {
+    if(lastBtnPressed == ButtonId.equal && '0123456789'.contains(buttonId)) {
+      currentScreen = '0';
+    }
+    lastBtnPressed = buttonId;
+
+    if(currentScreen == 'invalid expression') buttonId = ButtonId.ce;
+
     if (buttonId == ButtonId.equal) {
-      return equalTest(currentScreen);
+      
+      return equalButtonPressed(currentScreen);
     } else if (buttonId == ButtonId.ce || buttonId == ButtonId.ac) {
       return '0';
     } else if (buttonId == ButtonId.delete) {
