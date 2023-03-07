@@ -1,3 +1,5 @@
+import 'logic.dart';
+
 void main() {
   test();
 }
@@ -5,17 +7,17 @@ void main() {
 void test() {
   var tests = [
     ["(81)", 81],
-    ['12*(25+1)', 312]
-    // ["1 + 1", 2],
-    // ["8/16", 0.5],
-    // ["3 -(-1)", 4],
-    // ["2 + -2", 0],
-    // ["10- 2- -5", 13],
-    // ["(((10)))", 10],
-    // ["3 * 5", 15],
-    // ["-7 * -(6 / 3)", 14],
-    // ['50+2*3', 56],
-    // ['(50+2)*3', 156]
+    ['12*(25+1)', 312],
+    ["1 + 1", 2],
+    ["8/16", 0.5],
+    ["3 -(-1)", 4],
+    ["2 + -2", 0],
+    ["10- 2- -5", 13],
+    ["(((10)))", 10],
+    ["3 * 5", 15],
+    ["-7 * -(6 / 3)", 14],
+    ['50+2*3', 56],
+    ['(50+2)*3', 156]
   ];
 
   for (List ls in tests) {
@@ -51,7 +53,7 @@ bool errorFinder(String s){
 
 String equalButtonPressed(String screenValue) {
   if(!errorFinder(screenValue)) return 'invalid expression';
-  return '${calc(screenValue)}';
+  return '${equalTest(screenValue)}';
 }
 
 num calc(String s) => num.parse(addSub(multDiv(parentheses(s))));
@@ -59,6 +61,13 @@ num calc(String s) => num.parse(addSub(multDiv(parentheses(s))));
 String parentheses(String s) {
   //goes through a string and executes math operations between parentheses
   //returning a string without any parentheses
+
+  while(s.contains('(')){
+    String temp = s.substring(0,s.indexOf(')'));
+    temp = temp.substring(temp.indexOf('(')+1);
+    s = s.replaceAll('($temp)', equalButtonPressed(s));
+  }
+
 
   List expr = cleaner(s).split(' ');
   int lastOpndParIndex = 0;
@@ -134,11 +143,11 @@ String multDiv(String s) {
 String cleaner(String s) {
   //removes all unecessary and/or redundant characters in string
   s[0] == '(' ? s = '0$s' : s;
-  s = s.replaceAll(' ', '');
-  s = s.replaceAll('()', '');
-  s = s.replaceAll('--', '+');
-  s = s.replaceAll('-+ ', '-');
-  s = s.replaceAll('+-', '-');
+  s.replaceAll(' ', '')
+    .replaceAll('()', '')
+    .replaceAll('--', '+')
+    .replaceAll('-+ ', '-')
+    .replaceAll('+-', '-');
 
   String isolated_ = '';
 

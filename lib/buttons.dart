@@ -1,6 +1,42 @@
 import 'package:flutter/material.dart';
 import 'style.dart';
 
+
+class ButtonId {
+  static const String 
+    zero = '0',
+    one = '1',
+    two = '2',
+    three = '3',
+    four = '4',
+    five = '5',
+    six = '6',
+    seven = '7',
+    eight = '8',
+    nine = '9',
+    equal = '=',
+    add = '+',
+    subtract = '-',
+    multiply = '*',
+    divide = '/',
+    openParentheses = '(',
+    closeParentheses = ')',
+    dot = '.',
+    reverseSign = '+-',
+    percent = '%',
+    ce = 'CE',
+    ac = 'AC',
+    delete = '<',
+    power = '^',
+    mc = 'MC',
+    mr = 'MR',
+    mAdd = 'M+',
+    mSub = 'M-',
+    ms = 'MS';
+  ButtonId();
+}
+
+
 class FunctionButton extends StatelessWidget {
   final String keyText;
   const FunctionButton(this.keyText, {super.key});
@@ -52,8 +88,8 @@ class EqualButton extends StatelessWidget {
         padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
         child: ElevatedButton(
           style: equalButtonStyle(),
-          onPressed: ()=>buttonFunction('='),
-          child: const Text('='),
+          onPressed: ()=>buttonFunction(ButtonId.equal),
+          child: Text(ButtonId.equal),
         ),
       ),
     );
