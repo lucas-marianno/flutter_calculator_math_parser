@@ -148,7 +148,7 @@ class Row4 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DefaultButton('+-', updateScreenFunction),
+          DefaultButton('+/-', updateScreenFunction),
           DefaultButton('0', updateScreenFunction),
           DefaultButton('.', updateScreenFunction),
           EqualButton(updateScreenFunction),
