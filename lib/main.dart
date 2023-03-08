@@ -35,10 +35,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   String screenValue = '0';
 
-  updateScreen(buttonId){
+  updateScreen(buttonId) {
     setState(() {
       screenValue = Logic.newScreenValue(buttonId, screenValue);
     });
@@ -46,36 +45,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Palette.darkest,
-        body: SafeArea(
-          minimum: const EdgeInsets.all(20),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => const AboutPage(),
-                        ),
-                      );
-                    },
-                    icon: Icon(
-                      Icons.settings,
-                      color: Palette.light,),
+    return Scaffold(
+      backgroundColor: Palette.darkest,
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const AboutPage(),
                   ),
-                ),
-                Screen(screenValue),
-                KeyBoard(updateScreen),
-              ],
+                );
+              },
+              icon: Icon(
+                Icons.settings,
+                color: Palette.light,
+              ),
             ),
           ),
-        ),
+          Screen(screenValue),
+          KeyBoard(updateScreen),
+        ],
       ),
     );
   }
