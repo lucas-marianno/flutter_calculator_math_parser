@@ -47,27 +47,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Palette.darkest,
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const AboutPage(),
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.settings,
-                color: Palette.light,
+      body: SafeArea(
+        minimum: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const AboutPage(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.settings,
+                  color: Palette.light,
+                ),
               ),
             ),
-          ),
-          Screen(screenValue),
-          KeyBoard(updateScreen),
-        ],
+            Screen(screenValue),
+            KeyBoard(updateScreen),
+          ],
+        ),
       ),
     );
   }
