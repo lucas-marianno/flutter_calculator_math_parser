@@ -45,11 +45,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Palette.darkest,
-      body: SafeArea(
-        minimum: const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Palette.darkest,
+        body: Column(
           children: [
             Align(
               alignment: Alignment.topRight,

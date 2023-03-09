@@ -1,5 +1,13 @@
 
-String calculateMathExpr(String s) => parentheses(s);
+String calculateMathExpr(String s){
+  
+  s.contains(RegExp(s));
+
+
+  return parentheses(s);
+  }
+
+String expressionError = 'invalid expression';
 
 String parentheses(String s) {
   if (!s.contains('(')) return addSub(multDiv(s));
@@ -18,7 +26,7 @@ String parentheses(String s) {
     tempS += s[i];
   }
 
-  if (prths != 0) return 'invalid';
+  if (prths != 0) return expressionError;
 
   s = tempS;
 

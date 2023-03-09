@@ -17,7 +17,7 @@ class Logic {
     }
     lastBtnPressed = buttonId;
 
-    if(currentScreen == 'invalid expression') buttonId = ButtonId.c;
+    if(currentScreen == expressionError) buttonId = ButtonId.c;
 
     if (buttonId == ButtonId.equal) {
       

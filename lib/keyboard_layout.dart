@@ -56,11 +56,12 @@ class Row0 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DefaultButton(ButtonId.percent, updateScreenFunction),
+          DefaultButton(ButtonId.squareRoot, updateScreenFunction),
+          DefaultButton(ButtonId.power, updateScreenFunction),
           DefaultButton(ButtonId.c, updateScreenFunction),
           DefaultButton(ButtonId.ac, updateScreenFunction),
           DefaultButton(ButtonId.delete, updateScreenFunction),
-          DefaultButton(ButtonId.power, updateScreenFunction),
+          
         ],
       ),
     );
@@ -148,7 +149,7 @@ class Row4 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DefaultButton(ButtonId.squareRoot, updateScreenFunction),
+          Expanded(child: Container()),
           DefaultButton(ButtonId.zero, updateScreenFunction),
           DefaultButton(ButtonId.dot, updateScreenFunction),
           EqualButton(updateScreenFunction),

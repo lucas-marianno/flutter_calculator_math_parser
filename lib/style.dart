@@ -39,7 +39,9 @@ ElevatedButtonThemeData defaultButtonThemeData() {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
       backgroundColor: Palette.dark,
       foregroundColor: Palette.light,
-      textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
+      textStyle: GoogleFonts.robotoMono(
+        fontSize: DefaultSizes.defaultKeyTextSize
+        ),
     ),
   );
 }
