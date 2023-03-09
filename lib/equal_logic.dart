@@ -1,15 +1,19 @@
 
 String calculateMathExpr(String s){
-  
-  //s.contains(RegExp(s));
+  // if input doesnt contain digits, returns error
+  if(!s.contains(RegExp(r'\d'))) return expressionError;
 
+  // if input contains repeated operators, returns error
+  if(s.contains(RegExp(r'[*/+-]{2,}'))) return expressionError;
 
-  return parentheses(s);
+  // gets rid of trailing .0s and returns it
+  return parentheses(s).replaceAll(RegExp(r'\.0+$'),'');
   }
 
 String expressionError = 'invalid expression';
 
 String parentheses(String s) {
+  // skips this function if no parentheses are found
   if (!s.contains('(')) return addSub(multDiv(s));
   int prths = 0;
   String tempS = '';
@@ -25,14 +29,17 @@ String parentheses(String s) {
     }
     tempS += s[i];
   }
-
+  // returns error if the number of '(' & ')' are different
   if (prths != 0) return expressionError;
 
   s = tempS;
 
-  int lastOpenPar = s.lastIndexOf('(') + 1;
-  int firstClosePar = s.substring(lastOpenPar).indexOf(')');
-  String betweenPar = s.substring(lastOpenPar, firstClosePar + lastOpenPar);
+  // Locates the first math espression between parentheses without any 
+  // parentheses within it
+  String betweenPar = (RegExp(r'\([^\(\)]+\)').firstMatch(s)![0]!);
+  
+  // Removes the parenthesis from both start and end, saving a clean expression
+  betweenPar= betweenPar.replaceAll(RegExp(r'[\(\)]'), '');
 
   s = s.replaceAll('($betweenPar)', addSub(multDiv(betweenPar)));
   if (s.contains('(')) {
@@ -79,9 +86,6 @@ String multDiv(String s) {
         result.last = (num.parse(result.last) / tempNum).toString();
       } else {
         result.last = (num.parse(result.last) * tempNum).toString();
-      }
-      if (num.parse(result.last) - num.parse(result.last).toInt() == 0) {
-        result.last = num.parse(result.last).toInt().toString();
       }
       expr[i + 1] == '-' ? i += 2 : i++;
     } else {
