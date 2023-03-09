@@ -1,7 +1,7 @@
 
 String calculateMathExpr(String s){
   
-  s.contains(RegExp(s));
+  //s.contains(RegExp(s));
 
 
   return parentheses(s);
@@ -16,9 +16,9 @@ String parentheses(String s) {
 
   for (int i = 0; i < s.length; i++) {
     if (s[i] == '(' || s[i] == ')') {
-      if (s[i] == ')')
+      if (s[i] == ')') {
         prths--;
-      else {
+      } else {
         prths++;
         if (i > 0 && isNum(s[i - 1])) tempS += '*';
       }
@@ -34,7 +34,7 @@ String parentheses(String s) {
   int firstClosePar = s.substring(lastOpenPar).indexOf(')');
   String betweenPar = s.substring(lastOpenPar, firstClosePar + lastOpenPar);
 
-  s = s.replaceAll('($betweenPar)', '${addSub(multDiv(betweenPar))}');
+  s = s.replaceAll('($betweenPar)', addSub(multDiv(betweenPar)));
   if (s.contains('(')) {
     s = parentheses(s);
   }
@@ -94,7 +94,7 @@ String multDiv(String s) {
 List cleaner(String s) {
   //removes all unecessary and/or redundant characters in string
   //returns a list with all separated elements
-  s[0] == '(' ? s = '0+' + s : s;
+  s[0] == '(' ? s = '0+$s' : s;
   s = s
       .replaceAll(' ', '')
       .replaceAll('()', '')
@@ -102,7 +102,7 @@ List cleaner(String s) {
       .replaceAll('-+ ', '-')
       .replaceAll('+-', '-')
       .split('')
-      .map((e) => e = '0123456789.'.contains(e) ? e : ' ${e} ')
+      .map((e) => e = '0123456789.'.contains(e) ? e : ' $e ')
       .join();
 
   return s.replaceAll('  ', ' ').trim().split(' ');
