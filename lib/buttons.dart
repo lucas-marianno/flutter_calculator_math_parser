@@ -16,11 +16,11 @@ class ButtonId {
       add = '+',
       subtract = '-',
       multiply = '*',
-      divide = '/',
+      divide = '\u00f7',
       openParentheses = '(',
       closeParentheses = ')',
       dot = '.',
-      squareRoot = '¬',
+      squareRoot = '\u221a',
       c = 'C',
       ac = 'AC',
       delete = '<-',
@@ -76,10 +76,10 @@ class ButtonLabel extends StatelessWidget {
           label = const Icon(Icons.close);
           break;
         case ButtonId.divide:
-          label = const Text('\u00f7');
+          label = const Text(ButtonId.divide);
           break;
         case ButtonId.squareRoot:
-          label = const Text('\u221a');
+          label = const Text('²${ButtonId.squareRoot}');
           break;
         case ButtonId.delete:
           label = const Icon(Icons.backspace_outlined);

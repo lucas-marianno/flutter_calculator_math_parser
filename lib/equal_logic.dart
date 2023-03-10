@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:calculator2/buttons.dart';
+
 
 String calculateMathExpr(String s){
   // if input doesnt contain digits, returns error
@@ -10,11 +14,12 @@ String calculateMathExpr(String s){
   return parentheses(s).replaceAll(RegExp(r'\.0+$'),'');
   }
 
-String expressionError = 'invalid expression';
+const String expressionError = 'invalid expression';
 
 String parentheses(String s) {
+
   // skips this function if no parentheses are found
-  if (!s.contains('(')) return addSub(multDiv(s));
+  if (!s.contains('(')) return addSub(multDiv(powRoot(s)));
   int prths = 0;
   String tempS = '';
 
@@ -38,15 +43,15 @@ String parentheses(String s) {
   // parentheses within it
   String betweenPar = (RegExp(r'\([^\(\)]+\)').firstMatch(s)![0]!);
   
-  // Removes the parenthesis from both start and end, saving a clean expression
+  // Removes the parentheses from both start and end, saving a clean expression
   betweenPar= betweenPar.replaceAll(RegExp(r'[\(\)]'), '');
 
-  s = s.replaceAll('($betweenPar)', addSub(multDiv(betweenPar)));
+  s = s.replaceAll('($betweenPar)', addSub(multDiv(powRoot(betweenPar))));
   if (s.contains('(')) {
     s = parentheses(s);
   }
 
-  return addSub(multDiv(s));
+  return addSub(multDiv(powRoot(s)));
 }
 
 bool isNum(String s) => '0123456789'.contains(s);
@@ -69,6 +74,33 @@ String addSub(String expression) {
 
   return result.toString();
 }
+String powRoot(String s) {
+  if(!s.contains('\u221a') && !s.contains(ButtonId.power)) return s;
+  
+  //goes through a string and executes all squareroots and power within it
+  //while preserving all other symbols such as parentheses and/or sum/sub
+  List expr = cleaner(s);
+  List result = [];
+
+  for (int i = 0; i < expr.length; i++) {
+    if (expr[i] == ButtonId.power || expr[i] == '\u221a') {
+      num tempNum = expr[i + 1] == '-'
+          ? num.parse(expr[i + 2]) * -1
+          : num.parse(expr[i + 1]);
+      
+      if (expr[i] == '\u221a') {
+        result.last = (sqrt(num.parse(result.last))).toString();
+      } else {
+        result.last = (pow(num.parse(result.last),tempNum)).toString();
+      }
+      expr[i + 1] == '-' ? i += 2 : i++;
+    } else {
+      result.add(expr[i]);
+    }
+  }
+  return result.join(' ');
+}
+
 
 String multDiv(String s) {
   //goes through a string and executes all multiplications and divisions within it
@@ -77,12 +109,12 @@ String multDiv(String s) {
   List result = [];
 
   for (int i = 0; i < expr.length; i++) {
-    if (expr[i] == '*' || expr[i] == '/') {
+    if (expr[i] == ButtonId.multiply || expr[i] == ButtonId.divide) {
       num tempNum = expr[i + 1] == '-'
           ? num.parse(expr[i + 2]) * -1
           : num.parse(expr[i + 1]);
 
-      if (expr[i] == '/') {
+      if (expr[i] == ButtonId.divide) {
         result.last = (num.parse(result.last) / tempNum).toString();
       } else {
         result.last = (num.parse(result.last) * tempNum).toString();

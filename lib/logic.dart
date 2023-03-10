@@ -9,8 +9,6 @@ class Logic {
 
   Logic(this.buttonId, this.currentScreen);
 
-  
-
   static String newScreenValue(buttonId, currentScreen) {
     if(lastBtnPressed == ButtonId.equal && '0123456789.'.contains(buttonId)) {
       currentScreen = '0';
@@ -30,7 +28,7 @@ class Logic {
       var temp = currentScreen.split('');
       temp.removeLast();
       return temp.join();
-    } else if ('0123456789.+-*/()DEL'.contains(buttonId)) {
+    } else if ('0123456789.+-*/()DEL^\u221a\u00f7'.contains(buttonId)) {
       currentScreen == '0' ? currentScreen = '' : null;
       return currentScreen + buttonId;
     } else {
