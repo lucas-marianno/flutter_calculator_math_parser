@@ -3,17 +3,16 @@ import 'style.dart';
 
 class Screen extends StatefulWidget {
   final String screenValue;
-  const Screen(this.screenValue, {super.key});
+  final Widget memoryValue;
+  const Screen(this.screenValue, this.memoryValue, {super.key});
 
   @override
   State<Screen> createState() => _ScreenState();
 }
 
 class _ScreenState extends State<Screen> {
-
   @override
   Widget build(BuildContext context) {
-    //return Text(widget.screenValue);
     return Expanded(
       child: Card(
         elevation: 10,
@@ -24,10 +23,8 @@ class _ScreenState extends State<Screen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Expanded(child: Text('')),
-              const Expanded(child: Text('')),
+              widget.memoryValue,
               Expanded(
-                flex: 2,
                 child: FittedBox(
                   alignment: Alignment.bottomRight,
                   fit: BoxFit.contain,
@@ -40,6 +37,27 @@ class _ScreenState extends State<Screen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class MemoryEntry extends StatelessWidget {
+  final String entry;
+  final String result;
+  const MemoryEntry(this.entry, this.result,{super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.centerRight,
+        child: Text(
+          '$entry=$result',
+          style: displayTextStyle(),
         ),
       ),
     );

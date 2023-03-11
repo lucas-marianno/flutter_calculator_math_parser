@@ -7,7 +7,11 @@ String calculateMathExpr(String s) {
   if (!s.contains(RegExp(r'\d'))) return expressionError;
 
   // if input contains repeated operators, returns error
-  if (s.contains(RegExp(r'[*/+-]{2,}'))) return expressionError;
+  if (s.contains(RegExp('[${ButtonId.divide}^*+]{2,}')) ||
+      s.contains('--') ||
+      s.contains(ButtonId.squareRoot + ButtonId.squareRoot)) {
+    return expressionError;
+  }
 
   // gets rid of trailing .0s and returns it
   return parentheses(s).replaceAll(RegExp(r'\.0+$'), '');
@@ -100,6 +104,8 @@ String powRoot(String s) {
         result.last = pow(num.parse(expr[i - 1]), tempNum);
       } else {
         if (tempNum < 0) return expressionError;
+        if (i > 0 && isNum(result.last)) result.add('*');
+
         result.add(sqrt(tempNum));
       }
       expr[i + 1] == '-' ? i += 2 : i++;
@@ -129,6 +135,7 @@ String multDiv(String s) {
           : num.parse(expr[i + 1]);
 
       if (expr[i] == ButtonId.divide) {
+        if (tempNum == 0) return expressionError;
         result.last = (num.parse(result.last) / tempNum).toString();
       } else {
         result.last = (num.parse(result.last) * tempNum).toString();

@@ -25,7 +25,7 @@ class KeyBoard extends StatelessWidget {
 
 class MemRow extends StatelessWidget {
   final Function updateScreenFunction;
-  const MemRow(this.updateScreenFunction,{super.key});
+  const MemRow(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class MemRow extends StatelessWidget {
 
 class Row0 extends StatelessWidget {
   final Function updateScreenFunction;
-  const Row0(this.updateScreenFunction,{super.key});
+  const Row0(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,6 @@ class Row0 extends StatelessWidget {
           DefaultButton(ButtonId.c, updateScreenFunction),
           DefaultButton(ButtonId.ac, updateScreenFunction),
           DefaultButton(ButtonId.delete, updateScreenFunction),
-          
         ],
       ),
     );
@@ -70,7 +69,7 @@ class Row0 extends StatelessWidget {
 
 class Row1 extends StatelessWidget {
   final Function updateScreenFunction;
-  const Row1(this.updateScreenFunction,{super.key});
+  const Row1(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +92,7 @@ class Row1 extends StatelessWidget {
 
 class Row2 extends StatelessWidget {
   final Function updateScreenFunction;
-  const Row2(this.updateScreenFunction,{super.key});
+  const Row2(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +115,7 @@ class Row2 extends StatelessWidget {
 
 class Row3 extends StatelessWidget {
   final Function updateScreenFunction;
-  const Row3(this.updateScreenFunction,{super.key});
+  const Row3(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +138,7 @@ class Row3 extends StatelessWidget {
 
 class Row4 extends StatelessWidget {
   final Function updateScreenFunction;
-  const Row4(this.updateScreenFunction,{super.key});
+  const Row4(this.updateScreenFunction, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +148,14 @@ class Row4 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: Container()),
+          Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              DefaultButton(ButtonId.rndUp, updateScreenFunction),
+              DefaultButton(ButtonId.rndDown, updateScreenFunction),
+            ],
+          )),
           DefaultButton(ButtonId.zero, updateScreenFunction),
           DefaultButton(ButtonId.dot, updateScreenFunction),
           EqualButton(updateScreenFunction),

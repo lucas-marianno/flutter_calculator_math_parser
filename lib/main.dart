@@ -36,10 +36,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String screenValue = '0';
+  Widget memoryValue = const Expanded(child: Text(''));
 
   updateScreen(buttonId) {
     setState(() {
       screenValue = Logic.newScreenValue(buttonId, screenValue);
+      memoryValue = Logic.newMemoryScreenValue();
     });
   }
 
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Screen(screenValue),
+            Screen(screenValue, memoryValue),
             KeyBoard(updateScreen),
           ],
         ),
