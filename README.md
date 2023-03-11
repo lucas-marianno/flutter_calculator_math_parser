@@ -39,4 +39,3 @@ This project will be used for:
       - Slider 2: brightness level
     - Identify based on brightness level if the theme is light or dark
 
-![alt text](design_references/AppPrintScreen.jpg)
