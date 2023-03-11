@@ -21,13 +21,16 @@ This project will be used for:
   - Add thousand separator e.g. 1,000,000.00
   - Create a Scientific Notation function in order to display big numbers.
   - Implement a way for history to display the full equation
+
 **PHASE 2:**
   - Create a new view.
   - Implement a basic math equation solver screen
+
 **PHASE 3:**
   - Create a new view.
   - Implement a more complex calculator.
   - Percentages and interest converter (juros aa -> am -> ad / ad -> am -> aa)
+
 **PHASE 4:**
   - Create a new view.
   - Allow the user to customize the app:
