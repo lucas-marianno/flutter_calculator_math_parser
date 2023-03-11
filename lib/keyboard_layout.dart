@@ -32,12 +32,9 @@ class MemRow extends StatelessWidget {
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          FunctionButton(ButtonId.mc),
-          FunctionButton(ButtonId.mr),
-          FunctionButton(ButtonId.mAdd),
-          FunctionButton(ButtonId.mSub),
-          FunctionButton(ButtonId.ms),
+        children: [
+          FunctionButton(ButtonId.mr, updateScreenFunction),
+          FunctionButton(ButtonId.ms, updateScreenFunction),
         ],
       ),
     );
@@ -150,7 +147,7 @@ class Row4 extends StatelessWidget {
         children: [
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               DefaultButton(ButtonId.rndUp, updateScreenFunction),
               DefaultButton(ButtonId.rndDown, updateScreenFunction),

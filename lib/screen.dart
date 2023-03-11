@@ -54,7 +54,7 @@ class MemoryEntry extends StatelessWidget {
     return Expanded(
       child: FittedBox(
         fit: BoxFit.contain,
-        alignment: Alignment.centerRight,
+        alignment: Alignment.bottomRight,
         child: Text(
           '$entry=$result',
           style: displayTextStyle(),

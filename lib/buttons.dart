@@ -27,33 +27,10 @@ class ButtonId {
       ac = 'AC',
       delete = '<-',
       power = '^',
-      mc = 'MC',
       mr = 'MR',
-      mAdd = 'M+',
-      mSub = 'M-',
       ms = 'MS',
       pi = 'pi';
   ButtonId();
-}
-
-class FunctionButton extends StatelessWidget {
-  final String keyText;
-  const FunctionButton(this.keyText, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
-        child: TextButton(
-          style: functionButtonStyle(),
-          onPressed: () {},
-          child: Text(keyText),
-        ),
-      ),
-    );
-  }
 }
 
 class ButtonLabel extends StatelessWidget {
@@ -92,28 +69,18 @@ class ButtonLabel extends StatelessWidget {
         case ButtonId.rndUp:
           label = Column(
             children: const [
-              Text('Round'),
-              Text('Up'),
+              Text('ROUND'),
+              Text('UP'),
             ],
           );
           break;
         case ButtonId.rndDown:
           label = label = Column(
             children: const [
-              Text('Round'),
-              Text('Down'),
+              Text('ROUND'),
+              Text('DOWN'),
             ],
           );
-          break;
-        case ButtonId.mc:
-          break;
-        case ButtonId.mr:
-          break;
-        case ButtonId.mAdd:
-          break;
-        case ButtonId.mSub:
-          break;
-        case ButtonId.ms:
           break;
         case ButtonId.pi:
           label = const Text('\u03c0');
@@ -122,6 +89,27 @@ class ButtonLabel extends StatelessWidget {
     }
 
     return FittedBox(child: label);
+  }
+}
+
+class FunctionButton extends StatelessWidget {
+  final String buttonId;
+  final Function buttonFunction;
+  const FunctionButton(this.buttonId, this.buttonFunction, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding:
+            EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
+        child: TextButton(
+          style: functionButtonStyle(),
+          onPressed: () => buttonFunction(buttonId),
+          child: Text(buttonId),
+        ),
+      ),
+    );
   }
 }
 
