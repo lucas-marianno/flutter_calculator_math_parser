@@ -14,46 +14,54 @@ String calculateMathExpr(String s) {
   }
 
   // gets rid of trailing .0s and returns it
-  return parentheses(s).replaceAll(RegExp(r'\.0+$'), '');
+  return evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '');
 }
 
 const String expressionError = 'invalid expression';
 
-String parentheses(String s) {
-  // skips this function if no parentheses are found
+String evaluateParentheses(String s) {
+  // Skips this function if no parentheses are found
   if (!s.contains('(')) return addSub(multDiv(powRoot(s)));
-  int prths = 0;
-  String tempS = '';
 
-  for (int i = 0; i < s.length; i++) {
-    if (s[i] == '(' || s[i] == ')') {
-      if (s[i] == ')') {
-        prths--;
-      } else {
-        prths++;
-        if (i > 0 && isNum(s[i - 1])) tempS += '*';
-      }
-    }
-    tempS += s[i];
-  }
-  // returns error if the number of '(' & ')' are different
-  if (prths != 0) return expressionError;
+  // Returns error if the amount of '(' and ')' is not the same
+  if ('('.allMatches(s).length != ')'.allMatches(s).length) return expressionError;
 
-  s = tempS;
+  // Replaces all 'n(' with 'n*('
+  s = multiplicationBeforeParentheses(s);
 
-  // Locates the first math espression between parentheses without any
-  // parentheses within it
-  String betweenPar = (RegExp(r'\([^\(\)]+\)').firstMatch(s)![0]!);
+  // Locates the first math expr between () without any () within it
+  final String inner = innermostExpression(s);
 
-  // Removes the parentheses from both start and end, saving a clean expression
-  betweenPar = betweenPar.replaceAll(RegExp(r'[\(\)]'), '');
-
-  s = s.replaceAll('($betweenPar)', addSub(multDiv(powRoot(betweenPar))));
+  s = s.replaceAll('($inner)', addSub(multDiv(powRoot(inner))));
   if (s.contains('(')) {
-    s = parentheses(s);
+    s = evaluateParentheses(s);
   }
 
   return addSub(multDiv(powRoot(s)));
+}
+
+String innermostExpression(String s){
+  // Locates the first math expr between () without any () within it
+  String innermostExpr = RegExp(r'\([^\(\)]+\)').firstMatch(s)![0]!;
+
+  // Removes the parentheses from both start and end, saving a clean expression
+  return innermostExpr.substring(1, innermostExpr.length - 1);
+}
+
+String multiplicationBeforeParentheses(String s) {
+  // Replaces all '(' preceded with a digit with '*('
+  if (s.contains(RegExp(r'\d\('))) {
+    final int temp = s.indexOf(RegExp(r'\d\(')) + 1;
+    s = s.replaceRange(temp, temp + 1, '*(');
+
+    // Checks if there are any more implicit multiplications in the expression.
+    // Recursively calls itself until there are no more occurences.
+    if (s.contains(RegExp(r'\d\('))) {
+      s = multiplicationBeforeParentheses(s);
+    }
+  }
+
+  return s;
 }
 
 bool isNum(String s) => '0123456789'.contains(s);
