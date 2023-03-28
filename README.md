@@ -22,17 +22,25 @@ The project serves the following purposes:
   - Incorporate interactive functionality to the display text:
     - Implement a cursor.
     - Refactor the expression in real-time.
+    - Allow users to recall and edit previous calculations from history.
 
 **PHASE 3:**
   - Create a new view.
-  - Add percentage and interest converter (annual -> monthly -> daily).
+  - Add a percentage and interest converter (annual -> monthly -> daily).
+  - Add a unit converter, such as length, weight, and temperature.
 
 **PHASE 4:**
   - Create a new view.
   - Enable users to customize the app:
     - Build two sliders:
-      - Slider 1: primarySwatch color
-      - Slider 2: brightness level
+      - Slider 1: primarySwatch color.
+      - Slider 2: brightness level.
     - Determine whether the theme is light or dark based on the brightness level.
+
+**PHASE 5:**
+  - Integration with other apps or services, such as cloud storage, database, google account sign in, etc.
+
+**PHASE 6:**
+  - Deploy project to PlayStore.
 
 ![alt text](design_references/printScreen.jpg)
