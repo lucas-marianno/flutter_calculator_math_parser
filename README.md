@@ -1,42 +1,38 @@
 # Math Expression Calculator
 
-A calculator with the capabilities to evaluate complex math expressions.
+The Math Expression Calculator has been designed to evaluate complex mathematical expressions. 
 
 ## About this project:
 
-The main goal of this project is to serve as a starting point on a Flutter Developer career.
+The primary objective of this project is to provide a foundation for a career as a Flutter Developer.
 
-This project will be used for:
-- putting in practice the coding techniques, ideas and concepts learned;
-- keeping track of my progress through the development of this app;
-- keeping track of my flutter coding skills improvement.
+The project serves the following purposes:
+- To implement coding techniques, ideas, and concepts acquired during the course of learning.
+- To monitor my progress in the development of the application.
+- To track improvements in Flutter, Dart and general coding skills.
 
 ### Phases of development (TODO list):
 
 **PHASE 1:**
-  - Change the vars _display  / _displayHistory to double, AND
-    only convert them to String when they have to de displayed (try toInt())
-  - Implement a WrapAround mode for the display in order to increase the size of
-      digits on display when needed.
-  - Add thousand separator e.g. 1,000,000.00
-  - Create a Scientific Notation function in order to display big numbers.
-  - Implement a way for history to display the full equation
+  - Introduce a WrapAround mode to enlarge digits on display when necessary. COMPLETED!
+  - Implement a feature to show the entire equation in history. COMPLETED!
+  - Develop a Scientific Notation function for displaying large numbers.
 
 **PHASE 2:**
-  - Create a new view.
-  - Implement a basic math equation solver screen
+  - Incorporate interactive functionality to the display text:
+    - Implement a cursor.
+    - Refactor the expression in real-time.
 
 **PHASE 3:**
   - Create a new view.
-  - Implement a more complex calculator.
-  - Percentages and interest converter (juros aa -> am -> ad / ad -> am -> aa)
+  - Add percentage and interest converter (annual -> monthly -> daily).
 
 **PHASE 4:**
   - Create a new view.
-  - Allow the user to customize the app:
+  - Enable users to customize the app:
     - Build two sliders:
-      - Slider 1: primatySwatch color
+      - Slider 1: primarySwatch color
       - Slider 2: brightness level
-    - Identify based on brightness level if the theme is light or dark
+    - Determine whether the theme is light or dark based on the brightness level.
 
 ![alt text](design_references/printScreen.jpg)
