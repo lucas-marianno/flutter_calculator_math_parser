@@ -36,12 +36,12 @@ ElevatedButtonThemeData defaultButtonThemeData() {
   return ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 7,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5))),
       backgroundColor: Palette.dark,
       foregroundColor: Palette.light,
-      textStyle: GoogleFonts.robotoMono(
-        fontSize: DefaultSizes.defaultKeyTextSize
-        ),
+      textStyle:
+          GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
     ),
   );
 }
@@ -49,20 +49,23 @@ ElevatedButtonThemeData defaultButtonThemeData() {
 ButtonStyle equalButtonStyle() {
   return ElevatedButton.styleFrom(
     backgroundColor: Colors.deepPurple,
-    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
+    textStyle:
+        GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize),
   );
 }
 
 ButtonStyle functionButtonStyle() {
   return TextButton.styleFrom(
     foregroundColor: Palette.light,
-    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*0.75),
+    textStyle: GoogleFonts.robotoMono(
+        fontSize: DefaultSizes.defaultKeyTextSize * 0.75),
   );
 }
 
 ButtonStyle aboutPageButtonStyle() {
   return ElevatedButton.styleFrom(
     backgroundColor: Colors.deepPurple,
-    textStyle: GoogleFonts.robotoMono(fontSize: DefaultSizes.defaultKeyTextSize*0.75),
+    textStyle: GoogleFonts.robotoMono(
+        fontSize: DefaultSizes.defaultKeyTextSize * 0.75),
   );
 }
