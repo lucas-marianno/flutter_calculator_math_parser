@@ -104,6 +104,7 @@ class FunctionButton extends StatelessWidget {
         padding:
             EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
         child: TextButton(
+          //TODO: add a 'glow effect' when theres a value stored in the MS button.
           style: functionButtonStyle(),
           onPressed: () => buttonFunction(buttonId),
           child: Text(buttonId),
