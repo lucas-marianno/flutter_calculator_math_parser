@@ -16,7 +16,7 @@ class CalculatorApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      initialRoute: homeScreen,
+      initialRoute: BMIScreen,
       routes: routes,
     );
   }

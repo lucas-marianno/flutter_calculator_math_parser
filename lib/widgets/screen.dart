@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-class Screen extends StatefulWidget {
+class Screen extends StatelessWidget {
   final String screenValue;
   final Widget memoryValue;
   const Screen(this.screenValue, this.memoryValue, {super.key});
 
-  @override
-  State<Screen> createState() => _ScreenState();
-}
-
-class _ScreenState extends State<Screen> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -23,13 +18,13 @@ class _ScreenState extends State<Screen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              widget.memoryValue,
+              memoryValue,
               Expanded(
                 child: FittedBox(
                   alignment: Alignment.bottomRight,
                   fit: BoxFit.contain,
                   child: Text(
-                    widget.screenValue,
+                    screenValue,
                     style: kDisplayTextStyle,
                     textAlign: TextAlign.center,
                   ),
@@ -45,8 +40,8 @@ class _ScreenState extends State<Screen> {
 
 class MemoryEntry extends StatelessWidget {
   final String entry;
-  final String result;
-  const MemoryEntry(this.entry, this.result, {super.key});
+  //final String result;
+  const MemoryEntry(this.entry, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +49,7 @@ class MemoryEntry extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.bottomRight,
-        child: Text(
-          '$entry=$result',
-          style: kDisplayTextStyle,
-        ),
+        child: Text(entry, style: kMemEntryTextStyle),
       ),
     );
   }

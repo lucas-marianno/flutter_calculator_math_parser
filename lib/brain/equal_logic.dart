@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:calculator2/widgets/buttons.dart';
 import 'package:calculator2/constants.dart';
+import 'logic.dart';
 
 String calculateMathExpr(String s) {
-  // if input doesnt contain digits, returns error
+  s = removeEqualSignFromScreen(s);
+
+  // if input doesn't contain digits, returns error
   if (!s.contains(RegExp(r'\d'))) return expressionError;
 
   // if input contains repeated operators, returns error
@@ -14,7 +17,7 @@ String calculateMathExpr(String s) {
   }
 
   // gets rid of trailing .0s and returns it
-  return evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '');
+  return '= ${evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '')}';
 }
 
 String evaluateParentheses(String s) {

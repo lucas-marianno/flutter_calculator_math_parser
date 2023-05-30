@@ -27,21 +27,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(actions: [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, aboutScreen),
+            icon: const Icon(
+              Icons.settings,
+              color: kTextColor,
+            ),
+          ),
+        ]),
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () => Navigator.pushNamed(context, aboutScreen),
-                icon: const Icon(
-                  Icons.settings,
-                  color: kTextColor,
-                ),
-              ),
-            ),
             Screen(screenValue, memoryValue),
-            KeyBoard(updateScreen),
+            Keyboard(updateScreen),
           ],
         ),
       ),

@@ -4,8 +4,14 @@ import 'package:calculator2/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import 'equal_logic.dart';
 
-String lastBtnPressed = '';
-List<Widget> mathHistory = [];
+String previousButtonId = '';
+List<Widget> mathHistory = [
+  const Text(' '),
+  const Text(' '),
+  const Text(' '),
+  const Text(' '),
+  const Text(' '),
+];
 num memory = 0;
 
 class Logic {
@@ -15,17 +21,21 @@ class Logic {
   Logic(this.buttonId, this.currentScreen);
 
   static String newScreenValue(String buttonId, String currentScreen) {
-    if ((lastBtnPressed == ButtonId.equal || lastBtnPressed == ButtonId.ms) &&
+    currentScreen = removeEqualSignFromScreen(currentScreen);
+
+    // if the last button pressed was '=' or 'ms' AND the current button is a
+    // num, it will clear the currentScreen.
+    if ((previousButtonId == ButtonId.equal ||
+            previousButtonId == ButtonId.ms) &&
         '0123456789.'.contains(buttonId)) {
       currentScreen = '0';
     }
 
-    lastBtnPressed = buttonId;
+    previousButtonId = buttonId;
 
-    // equal pressed
+    // EQUAL pressed
     if (buttonId == ButtonId.equal) {
-      mathHistory
-          .add(MemoryEntry(currentScreen, calculateMathExpr(currentScreen)));
+      mathHistory.add(MemoryEntry(currentScreen));
       return calculateMathExpr(currentScreen);
       // C pressed
     } else if (buttonId == ButtonId.c) {
@@ -39,11 +49,18 @@ class Logic {
     } else if (buttonId == ButtonId.delete) {
       if (currentScreen.length <= 1) return currentScreen;
       return currentScreen.substring(0, currentScreen.length - 1);
+      // MS Pressed
     } else if (buttonId == ButtonId.ms) {
-      lastBtnPressed = ButtonId.ms;
-      memory = num.parse(calculateMathExpr(currentScreen));
+      previousButtonId = ButtonId.ms;
+      memory = num.parse(
+          removeEqualSignFromScreen(calculateMathExpr(currentScreen)));
       return currentScreen;
+      // MR Pressed
     } else if (buttonId == ButtonId.mr) {
+      if (currentScreen == memory.toString()) return currentScreen;
+      if (memory == 0) return currentScreen;
+      // TODO: evaluate if the screen ends with a symbol, otherwise it should clear the screen first
+      if (currentScreen == '0') return memory.toString();
       return currentScreen + memory.toString();
       // no math screen
     } else if (currentScreen != '0' &&
@@ -53,33 +70,18 @@ class Logic {
       // sqrt pressed
       if (buttonId == ButtonId.squareRoot) {
         return currentScreen == '0' ? buttonId : buttonId + currentScreen;
-        // round up pressed
-      } else if (buttonId == ButtonId.rndUp) {
-        return num.parse(currentScreen).ceil().toString();
-        // round down pressed
-      } else if (buttonId == ButtonId.rndDown) {
-        return num.parse(currentScreen).floor().toString();
       }
       // this should never return
       return '?';
-    } else {
-      // round up pressed
-      if (buttonId == ButtonId.rndUp) {
-        return num.parse(calculateMathExpr(currentScreen)).ceil().toString();
-        // round down pressed
-      } else if (buttonId == ButtonId.rndDown) {
-        return num.parse(calculateMathExpr(currentScreen)).floor().toString();
-      }
-
-      return currentScreen == '0' ? buttonId : currentScreen + buttonId;
     }
+    return currentScreen == '0' ? buttonId : currentScreen + buttonId;
   }
 
   static Widget newMemoryScreenValue() {
+    // Defines the lenght of memory that appears on display (limits to 6 entries)
     if (mathHistory.length > 6) {
       mathHistory = mathHistory.sublist(1);
     }
-
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -87,4 +89,9 @@ class Logic {
       ),
     );
   }
+}
+
+String removeEqualSignFromScreen(String s) {
+  // if the first character is '=', removes the first and second character ' '.
+  return s[0] == '=' ? s = s.substring(2) : s;
 }

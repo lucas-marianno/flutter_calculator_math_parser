@@ -13,8 +13,6 @@ class ButtonId {
       seven = '7',
       eight = '8',
       nine = '9',
-      rndUp = 'up',
-      rndDown = 'dn',
       equal = '=',
       add = '+',
       subtract = '-',
@@ -29,8 +27,7 @@ class ButtonId {
       delete = '<-',
       power = '^',
       mr = 'MR',
-      ms = 'MS',
-      pi = 'pi';
+      ms = 'MS';
   ButtonId();
 }
 
@@ -66,25 +63,6 @@ class ButtonLabel extends StatelessWidget {
           break;
         case ButtonId.power:
           label = const Text('xⁿ');
-          break;
-        case ButtonId.rndUp:
-          label = const Column(
-            children: [
-              Text('ROUND'),
-              Text('UP'),
-            ],
-          );
-          break;
-        case ButtonId.rndDown:
-          label = label = const Column(
-            children: [
-              Text('ROUND'),
-              Text('DOWN'),
-            ],
-          );
-          break;
-        case ButtonId.pi:
-          label = const Text('\u03c0');
           break;
       }
     }
@@ -125,6 +103,25 @@ class DefaultButton extends StatelessWidget {
         padding: const EdgeInsets.all(kKeyPadding),
         child: ElevatedButton(
           onPressed: () => buttonFunction(buttonId),
+          child: ButtonLabel(buttonId),
+        ),
+      ),
+    );
+  }
+}
+
+class BMIButton extends StatelessWidget {
+  final String buttonId;
+  final Function buttonFunction;
+  const BMIButton(this.buttonId, this.buttonFunction, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.all(kKeyPadding),
+        child: ElevatedButton(
+          onPressed: () => buttonFunction(),
           child: ButtonLabel(buttonId),
         ),
       ),
