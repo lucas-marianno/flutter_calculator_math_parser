@@ -1,6 +1,6 @@
+import 'package:calculator2/routes.dart';
+import 'package:calculator2/theme.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_page.dart';
-import 'style.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -15,11 +15,9 @@ class CalculatorApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        elevatedButtonTheme: defaultButtonThemeData(),
-      ),
-      home: const HomePage(),
+      theme: themeData,
+      initialRoute: homeScreen,
+      routes: routes,
     );
   }
 }

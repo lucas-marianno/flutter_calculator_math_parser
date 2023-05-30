@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import '../style.dart';
 
 class Screen extends StatefulWidget {
   final String screenValue;
@@ -31,7 +30,7 @@ class _ScreenState extends State<Screen> {
                   fit: BoxFit.contain,
                   child: Text(
                     widget.screenValue,
-                    style: displayTextStyle(),
+                    style: kDisplayTextStyle,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -57,7 +56,7 @@ class MemoryEntry extends StatelessWidget {
         alignment: Alignment.bottomRight,
         child: Text(
           '$entry=$result',
-          style: displayTextStyle(),
+          style: kDisplayTextStyle,
         ),
       ),
     );

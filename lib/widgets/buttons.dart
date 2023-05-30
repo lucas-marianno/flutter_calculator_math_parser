@@ -102,10 +102,9 @@ class FunctionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: kKeyPadding),
+        padding: const EdgeInsets.symmetric(horizontal: kKeyPadding),
         child: TextButton(
           //TODO: add a 'glow effect' when theres a value stored in the MS button.
-          style: functionButtonStyle(),
           onPressed: () => buttonFunction(buttonId),
           child: Text(buttonId),
         ),
@@ -123,7 +122,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.all(kKeyPadding),
+        padding: const EdgeInsets.all(kKeyPadding),
         child: ElevatedButton(
           onPressed: () => buttonFunction(buttonId),
           child: ButtonLabel(buttonId),
@@ -142,7 +141,7 @@ class EqualButton extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Padding(
-        padding: EdgeInsets.all(kKeyPadding),
+        padding: const EdgeInsets.all(kKeyPadding),
         child: ElevatedButton(
           style: equalButtonStyle(),
           onPressed: () => buttonFunction(ButtonId.equal),

@@ -1,9 +1,8 @@
 import 'package:calculator2/constants.dart';
+import 'package:calculator2/routes.dart';
 import 'package:calculator2/widgets/keyboard_layout.dart';
 import 'package:calculator2/widgets/screen.dart';
-import 'package:calculator2/screens/about_page.dart';
 import 'package:flutter/material.dart';
-
 import '../brain/logic.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,13 +33,7 @@ class _HomePageState extends State<HomePage> {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const AboutPage(),
-                    ),
-                  );
-                },
+                onPressed: () => Navigator.pushNamed(context, aboutScreen),
                 icon: const Icon(
                   Icons.settings,
                   color: kTextColor,
