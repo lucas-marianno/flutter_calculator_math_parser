@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'style.dart';
+import '../constants.dart';
+import '../style.dart';
 
 class ButtonId {
   static const String zero = '0',
@@ -67,16 +68,16 @@ class ButtonLabel extends StatelessWidget {
           label = const Text('xⁿ');
           break;
         case ButtonId.rndUp:
-          label = Column(
-            children: const [
+          label = const Column(
+            children: [
               Text('ROUND'),
               Text('UP'),
             ],
           );
           break;
         case ButtonId.rndDown:
-          label = label = Column(
-            children: const [
+          label = label = const Column(
+            children: [
               Text('ROUND'),
               Text('DOWN'),
             ],
@@ -101,8 +102,7 @@ class FunctionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: DefaultSizes.defaultKeyPadding),
+        padding: EdgeInsets.symmetric(horizontal: kKeyPadding),
         child: TextButton(
           //TODO: add a 'glow effect' when theres a value stored in the MS button.
           style: functionButtonStyle(),
@@ -123,7 +123,7 @@ class DefaultButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
+        padding: EdgeInsets.all(kKeyPadding),
         child: ElevatedButton(
           onPressed: () => buttonFunction(buttonId),
           child: ButtonLabel(buttonId),
@@ -142,7 +142,7 @@ class EqualButton extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Padding(
-        padding: EdgeInsets.all(DefaultSizes.defaultKeyPadding),
+        padding: EdgeInsets.all(kKeyPadding),
         child: ElevatedButton(
           style: equalButtonStyle(),
           onPressed: () => buttonFunction(ButtonId.equal),

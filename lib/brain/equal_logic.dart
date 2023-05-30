@@ -1,6 +1,6 @@
 import 'dart:math';
-
-import 'package:calculator2/buttons.dart';
+import 'package:calculator2/widgets/buttons.dart';
+import 'package:calculator2/constants.dart';
 
 String calculateMathExpr(String s) {
   // if input doesnt contain digits, returns error
@@ -17,14 +17,14 @@ String calculateMathExpr(String s) {
   return evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '');
 }
 
-const String expressionError = 'invalid expression';
-
 String evaluateParentheses(String s) {
   // Skips this function if no parentheses are found
   if (!s.contains('(')) return addSub(multDiv(powRoot(s)));
 
   // Returns error if the amount of '(' and ')' is not the same
-  if ('('.allMatches(s).length != ')'.allMatches(s).length) return expressionError;
+  if ('('.allMatches(s).length != ')'.allMatches(s).length) {
+    return expressionError;
+  }
 
   // Replaces all 'n(' with 'n*('
   s = multiplicationBeforeParentheses(s);
@@ -40,7 +40,7 @@ String evaluateParentheses(String s) {
   return addSub(multDiv(powRoot(s)));
 }
 
-String innermostExpression(String s){
+String innermostExpression(String s) {
   // Locates the first math expr between () without any () within it
   String innermostExpr = RegExp(r'\([^\(\)]+\)').firstMatch(s)![0]!;
 

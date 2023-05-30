@@ -1,5 +1,5 @@
-import 'package:calculator2/buttons.dart';
-import 'package:calculator2/screen.dart';
+import 'package:calculator2/widgets/buttons.dart';
+import 'package:calculator2/widgets/screen.dart';
 
 import 'package:flutter/material.dart';
 import 'equal_logic.dart';
@@ -15,7 +15,8 @@ class Logic {
   Logic(this.buttonId, this.currentScreen);
 
   static String newScreenValue(String buttonId, String currentScreen) {
-    if ((lastBtnPressed == ButtonId.equal ||lastBtnPressed == ButtonId.ms) && '0123456789.'.contains(buttonId)) {
+    if ((lastBtnPressed == ButtonId.equal || lastBtnPressed == ButtonId.ms) &&
+        '0123456789.'.contains(buttonId)) {
       currentScreen = '0';
     }
 

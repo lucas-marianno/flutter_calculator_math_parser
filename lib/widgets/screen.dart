@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'style.dart';
+import '../constants.dart';
+import '../style.dart';
 
 class Screen extends StatefulWidget {
   final String screenValue;
@@ -16,8 +17,8 @@ class _ScreenState extends State<Screen> {
     return Expanded(
       child: Card(
         elevation: 10,
-        shadowColor: Colors.black,
-        color: Palette.screenBackground,
+        shadowColor: kShadowColor,
+        color: kScreenBackground,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -46,11 +47,10 @@ class _ScreenState extends State<Screen> {
 class MemoryEntry extends StatelessWidget {
   final String entry;
   final String result;
-  const MemoryEntry(this.entry, this.result,{super.key});
+  const MemoryEntry(this.entry, this.result, {super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Expanded(
       child: FittedBox(
         fit: BoxFit.contain,
