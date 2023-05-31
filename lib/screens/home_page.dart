@@ -1,9 +1,10 @@
 import 'package:calculator2/constants.dart';
 import 'package:calculator2/routes.dart';
-import 'package:calculator2/widgets/keyboard_layout.dart';
+import 'package:calculator2/widgets/keyboard_builder.dart';
 import 'package:calculator2/widgets/screen.dart';
 import 'package:flutter/material.dart';
 import '../brain/logic.dart';
+import '../widgets/keyboards.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,20 +28,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, aboutScreen),
-            icon: const Icon(
-              Icons.settings,
-              color: kTextColor,
-            ),
-          ),
-        ]),
+        appBar: AppBar(
+            centerTitle: true,
+            title: const Text('CALCULATOR'),
+            actions: [
+              PopupMenuButton(
+                onSelected: (value) => Navigator.pushNamed(context, value),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                      value: BMIScreen, child: const Text('BMI Calculator')),
+                  PopupMenuItem(
+                      value: aboutScreen, child: const Text('About this App')),
+                ],
+              ),
+            ]),
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
             Screen(screenValue, memoryValue),
-            Keyboard(updateScreen),
+            const Divider(),
+            KeyboardBuilder(
+              firstRowShorter: true,
+              keyboard: calculatorKeyboard(updateScreen),
+            ),
           ],
         ),
       ),

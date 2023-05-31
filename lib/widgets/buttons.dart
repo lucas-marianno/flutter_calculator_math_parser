@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../style.dart';
 
+enum Emphasis { low, medium, high, max }
+
 class ButtonId {
   static const String zero = '0',
       one = '1',
@@ -37,7 +39,7 @@ class ButtonLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget label = const Placeholder();
+    Widget label = Text(buttonId);
 
     if ('0123456789.()AC'.contains(buttonId)) {
       label = Text(buttonId);
@@ -71,79 +73,40 @@ class ButtonLabel extends StatelessWidget {
   }
 }
 
-class FunctionButton extends StatelessWidget {
-  final String buttonId;
-  final Function buttonFunction;
-  const FunctionButton(this.buttonId, this.buttonFunction, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kKeyPadding),
-        child: TextButton(
-          //TODO: add a 'glow effect' when theres a value stored in the MS button.
-          onPressed: () => buttonFunction(buttonId),
-          child: Text(buttonId),
-        ),
-      ),
-    );
-  }
-}
-
 class DefaultButton extends StatelessWidget {
   final String buttonId;
   final Function buttonFunction;
-  const DefaultButton(this.buttonId, this.buttonFunction, {super.key});
+  final Emphasis? emphasis;
+  final int? flex;
+
+  const DefaultButton(
+    this.buttonId,
+    this.buttonFunction, {
+    super.key,
+    this.emphasis,
+    this.flex,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
+      flex: flex ?? 1,
       child: Padding(
         padding: const EdgeInsets.all(kKeyPadding),
-        child: ElevatedButton(
-          onPressed: () => buttonFunction(buttonId),
-          child: ButtonLabel(buttonId),
-        ),
-      ),
-    );
-  }
-}
-
-class BMIButton extends StatelessWidget {
-  final String buttonId;
-  final Function buttonFunction;
-  const BMIButton(this.buttonId, this.buttonFunction, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(kKeyPadding),
-        child: ElevatedButton(
-          onPressed: () => buttonFunction(),
-          child: ButtonLabel(buttonId),
-        ),
-      ),
-    );
-  }
-}
-
-class EqualButton extends StatelessWidget {
-  final Function buttonFunction;
-  const EqualButton(this.buttonFunction, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(kKeyPadding),
-        child: ElevatedButton(
-          style: equalButtonStyle(),
-          onPressed: () => buttonFunction(ButtonId.equal),
-          child: const Text(ButtonId.equal),
-        ),
+        child: () {
+          if (emphasis != Emphasis.low) {
+            return ElevatedButton(
+              style: defaultButtonStyle(emphasis),
+              onPressed: () => buttonFunction(buttonId),
+              child: ButtonLabel(buttonId),
+            );
+          }
+          return TextButton(
+            //TODO: add a 'glow effect' when theres a value stored in the MS button.
+            onPressed: () => buttonFunction(buttonId),
+            child: ButtonLabel(buttonId),
+          );
+        }(),
       ),
     );
   }

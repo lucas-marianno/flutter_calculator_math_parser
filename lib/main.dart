@@ -1,7 +1,6 @@
 import 'package:calculator2/routes.dart';
 import 'package:calculator2/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   runApp(const CalculatorApp());
@@ -12,11 +11,12 @@ class CalculatorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    // Uncomment this to run the app in fullscreen mode (full restart required):
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      initialRoute: BMIScreen,
+      initialRoute: homeScreen,
       routes: routes,
     );
   }

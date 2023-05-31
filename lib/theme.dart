@@ -2,9 +2,9 @@ import 'package:calculator2/constants.dart';
 import 'package:flutter/material.dart';
 
 ThemeData themeData = ThemeData(
-  appBarTheme: AppBarTheme(elevation: 0, color: kBackgroundColor),
+  appBarTheme: const AppBarTheme(elevation: 0, color: kBackgroundColor),
   colorScheme: const ColorScheme.dark(
-    primary: kButtonBackgroundColor,
+    primary: kHighEmphasisButtonColor,
     onPrimary: kTextColor,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(

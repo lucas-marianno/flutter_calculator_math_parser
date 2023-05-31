@@ -5,13 +5,15 @@ const String expressionError = 'invalid expression';
 
 // Color Constants
 const Color kAboutScreenBackgroundColor = Color(0xff282828);
-const Color kAccentColor = Colors.deepPurple;
 const Color kBackgroundColor = Color(0xff171717);
-const Color kButtonBackgroundColor = Color(0xff282828);
 const Color kInactiveTextColor = Colors.grey;
 const Color kScreenBackground = Color.fromARGB(255, 40, 40, 37);
 const Color kShadowColor = Color(0xff171717);
 const Color kTextColor = Colors.white;
+
+const Color kMediumEmphasisButtonColor = Color(0xff202020);
+const Color kHighEmphasisButtonColor = Color(0xff282828);
+const Color kMaxEmphasisButtonColor = Colors.deepPurple;
 
 // Values
 const double kFunctionKeyTextSize = 18;

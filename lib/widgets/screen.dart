@@ -9,29 +9,24 @@ class Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Card(
-        elevation: 10,
-        shadowColor: kShadowColor,
-        color: kScreenBackground,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              memoryValue,
-              Expanded(
-                child: FittedBox(
-                  alignment: Alignment.bottomRight,
-                  fit: BoxFit.contain,
-                  child: Text(
-                    screenValue,
-                    style: kDisplayTextStyle,
-                    textAlign: TextAlign.center,
-                  ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            memoryValue,
+            Expanded(
+              child: FittedBox(
+                alignment: Alignment.bottomRight,
+                fit: BoxFit.contain,
+                child: Text(
+                  screenValue,
+                  style: kDisplayTextStyle,
+                  textAlign: TextAlign.center,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
