@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ButtonStyle defaultButtonStyle(Emphasis? emphasis) {
-  Color? color() {
-    if (emphasis == Emphasis.max) return kMaxEmphasisButtonColor;
-    if (emphasis == Emphasis.medium) return kMediumEmphasisButtonColor;
-    return null;
+  Color color() {
+    if (emphasis == Emphasis.high) return kHighEmphasisButtonColor;
+    if (emphasis == Emphasis.low) return kLowEmphasisButtonColor;
+    return kDefaultButtonColor;
   }
 
   return ButtonStyle(backgroundColor: MaterialStatePropertyAll(color()));
@@ -15,7 +15,7 @@ ButtonStyle defaultButtonStyle(Emphasis? emphasis) {
 
 ButtonStyle aboutPageButtonStyle() {
   return ElevatedButton.styleFrom(
-    backgroundColor: kMaxEmphasisButtonColor,
+    backgroundColor: kHighEmphasisButtonColor,
     textStyle: GoogleFonts.robotoMono(fontSize: kKeyTextSize * 0.75),
   );
 }

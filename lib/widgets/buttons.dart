@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../style.dart';
 
-enum Emphasis { low, medium, high, max }
+enum Emphasis { zero, low, high }
 
 class ButtonId {
   static const String zero = '0',
@@ -94,7 +94,7 @@ class DefaultButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(kKeyPadding),
         child: () {
-          if (emphasis != Emphasis.low) {
+          if (emphasis != Emphasis.zero) {
             return ElevatedButton(
               style: defaultButtonStyle(emphasis),
               onPressed: () => buttonFunction(buttonId),

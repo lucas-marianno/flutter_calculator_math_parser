@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ThemeData themeData = ThemeData(
   appBarTheme: const AppBarTheme(elevation: 0, color: kBackgroundColor),
   colorScheme: const ColorScheme.dark(
-    primary: kHighEmphasisButtonColor,
+    primary: kDefaultButtonColor,
     onPrimary: kTextColor,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(

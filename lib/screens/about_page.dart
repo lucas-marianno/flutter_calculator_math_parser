@@ -10,12 +10,9 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: rewrite this entire page, this is horrible and verbose.
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kAboutScreenBackgroundColor,
-        elevation: 0,
-      ),
-      backgroundColor: kAboutScreenBackgroundColor,
+      appBar: AppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -26,15 +23,9 @@ class AboutPage extends StatelessWidget {
           Text(
             'Lucas Marianno'.toUpperCase(),
             style: GoogleFonts.shadowsIntoLight(
-              fontSize: 80,
-              color: Colors.white,
-              shadows: [
-                const Shadow(
-                  color: kShadowColor,
-                  offset: Offset(1, 1),
-                  blurRadius: 5,
-                )
-              ],
+              fontSize: kScreenLargeTextSize * 0.9,
+              color: kTextColor,
+              shadows: kShadow,
             ),
           ),
           const Divider(
@@ -45,18 +36,11 @@ class AboutPage extends StatelessWidget {
           Text(
             'flutter developer'.toUpperCase(),
             style: GoogleFonts.fjallaOne(
-              fontSize: 25,
+              fontSize: kKeyTextSize,
               color: kTextColor,
               fontWeight: FontWeight.bold,
               letterSpacing: 8,
-              //fontStyle: FontStyle.italic,
-              shadows: [
-                const Shadow(
-                  color: kShadowColor,
-                  offset: Offset(1, 1),
-                  blurRadius: 5,
-                )
-              ],
+              shadows: kShadow,
             ),
           ),
           const Divider(
@@ -64,9 +48,7 @@ class AboutPage extends StatelessWidget {
             indent: 100,
             endIndent: 100,
           ),
-          const SizedBox(
-            height: 35,
-          ),
+          const SizedBox(height: 35),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
