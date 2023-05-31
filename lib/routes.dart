@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 String homeScreen = '/calculatorPage';
 String aboutScreen = '/aboutPage';
-String BMIScreen = '/bmiScreen';
+String bmiScreen = '/bmiScreen';
 
 Map<String, Widget Function(BuildContext)> routes = {
   homeScreen: (context) => const HomePage(),
   aboutScreen: (context) => const AboutPage(),
-  BMIScreen: (context) => const BMIPage(),
+  bmiScreen: (context) => const BMIPage(),
 };

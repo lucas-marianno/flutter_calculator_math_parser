@@ -13,7 +13,7 @@ class BMIPage extends StatefulWidget {
 class _BMIPageState extends State<BMIPage> {
   @override
   Widget build(BuildContext context) {
-    //TODO:
+    //TODO: implement the BMI screen
     updateBMIScreen(buttonId) => setState(() {});
 
     return Scaffold(

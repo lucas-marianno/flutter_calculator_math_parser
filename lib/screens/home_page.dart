@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 onSelected: (value) => Navigator.pushNamed(context, value),
                 itemBuilder: (context) => [
                   PopupMenuItem(
-                      value: BMIScreen, child: const Text('BMI Calculator')),
+                      value: bmiScreen, child: const Text('BMI Calculator')),
                   PopupMenuItem(
                       value: aboutScreen, child: const Text('About this App')),
                 ],

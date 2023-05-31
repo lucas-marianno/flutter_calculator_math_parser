@@ -21,7 +21,7 @@ class AboutPage extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 100,
-            foregroundImage: AssetImage("lib/assets/avatar.png"),
+            foregroundImage: AssetImage("assets/avatar.png"),
           ),
           Text(
             'Lucas Marianno'.toUpperCase(),
