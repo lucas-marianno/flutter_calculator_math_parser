@@ -19,7 +19,7 @@ class _BMIPageState extends State<BMIPage> {
   // TODO: implement a way to select imperial or metric measurements
   int _weight = 0;
   int _height = 0;
-  BMIScreenLineType _selectedScreen = BMIScreenLineType.weight;
+  BMIMeasurementType _selectedScreen = BMIMeasurementType.weight;
 
   _updateBMIScreen(buttonId) {
     setState(() {
@@ -32,7 +32,7 @@ class _BMIPageState extends State<BMIPage> {
         Navigator.pushNamed(context, bmiResultsPage);
         _height = 0;
         _weight = 0;
-      } else if (_selectedScreen == BMIScreenLineType.weight) {
+      } else if (_selectedScreen == BMIMeasurementType.weight) {
         _weight = '$_weight'.length < 3
             ? int.parse(Logic.newScreenValue(buttonId, _weight.toString()))
             : _weight;
@@ -44,7 +44,7 @@ class _BMIPageState extends State<BMIPage> {
     });
   }
 
-  _toggleSelectedScreen(BMIScreenLineType type) {
+  _toggleSelectedScreen(BMIMeasurementType type) {
     setState(() {
       _selectedScreen = type;
     });
@@ -60,7 +60,7 @@ class _BMIPageState extends State<BMIPage> {
       ),
       body: Column(
         children: [
-          BMIScreen(_weight, _height, _selectedScreen, _toggleSelectedScreen),
+          BMIDisplay(_weight, _height, _selectedScreen, _toggleSelectedScreen),
           const Divider(),
           KeyboardBuilder(
             firstRowShorter: true,

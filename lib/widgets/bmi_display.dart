@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-enum BMIScreenLineType { weight, height }
+enum BMIMeasurementType { weight, height }
 
-class BMIScreen extends StatelessWidget {
+class BMIDisplay extends StatelessWidget {
   final int weight;
   final int height;
-  final BMIScreenLineType selectedScreen;
+  final BMIMeasurementType selectedMeasurement;
   final Function screenToggler;
 
-  const BMIScreen(
+  const BMIDisplay(
     this.weight,
     this.height,
-    this.selectedScreen,
+    this.selectedMeasurement,
     this.screenToggler, {
     super.key,
   });
@@ -26,10 +26,10 @@ class BMIScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            BMIScreenLine(BMIScreenLineType.weight, weight, selectedScreen,
-                screenToggler),
-            BMIScreenLine(BMIScreenLineType.height, height, selectedScreen,
-                screenToggler),
+            BMIDisplayLine(BMIMeasurementType.weight, weight,
+                selectedMeasurement, screenToggler),
+            BMIDisplayLine(BMIMeasurementType.height, height,
+                selectedMeasurement, screenToggler),
           ],
         ),
       ),
@@ -37,15 +37,15 @@ class BMIScreen extends StatelessWidget {
   }
 }
 
-class BMIScreenLine extends StatelessWidget {
-  final BMIScreenLineType type;
+class BMIDisplayLine extends StatelessWidget {
+  final BMIMeasurementType type;
   final int value;
-  final BMIScreenLineType selectedScreen;
+  final BMIMeasurementType selectedMeasurement;
   final Function screenToggler;
-  const BMIScreenLine(
+  const BMIDisplayLine(
     this.type,
     this.value,
-    this.selectedScreen,
+    this.selectedMeasurement,
     this.screenToggler, {
     super.key,
   });
@@ -54,11 +54,11 @@ class BMIScreenLine extends StatelessWidget {
   Widget build(BuildContext context) {
     String measurementType = '';
     String measurmentUnity = '';
-    Color screenColor = selectedScreen == type
+    Color screenColor = selectedMeasurement == type
         ? kBMIActiveScreenColor
         : kBMIInactiveScreenColor;
 
-    if (type == BMIScreenLineType.weight) {
+    if (type == BMIMeasurementType.weight) {
       measurementType = 'Weight';
       measurmentUnity = 'Kilograms';
     } else {
