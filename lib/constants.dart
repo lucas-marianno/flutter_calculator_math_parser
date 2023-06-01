@@ -22,6 +22,8 @@ const Color kOverweight = Colors.orange;
 const Color kObese = Colors.red;
 
 // Values
+const int kScreenMaxLength = 30;
+
 const double kFunctionKeyTextSize = 18;
 const double kKeyPadding = 5;
 const double kKeyTextSize = 25;

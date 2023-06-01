@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../routes.dart';
 
 class PopupMenu extends StatelessWidget {
+  // TODO: Replace this widget by a top navigation bar.
   const PopupMenu({
     super.key,
   });

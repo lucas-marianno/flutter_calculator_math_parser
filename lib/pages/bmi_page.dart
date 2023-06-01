@@ -33,9 +33,13 @@ class _BMIPageState extends State<BMIPage> {
         _height = 0;
         _weight = 0;
       } else if (_selectedScreen == BMIScreenLineType.weight) {
-        _weight = int.parse(Logic.newScreenValue(buttonId, _weight.toString()));
+        _weight = '$_weight'.length < 3
+            ? int.parse(Logic.newScreenValue(buttonId, _weight.toString()))
+            : _weight;
       } else {
-        _height = int.parse(Logic.newScreenValue(buttonId, _height.toString()));
+        _height = '$_height'.length < 3
+            ? int.parse(Logic.newScreenValue(buttonId, _height.toString()))
+            : _height;
       }
     });
   }

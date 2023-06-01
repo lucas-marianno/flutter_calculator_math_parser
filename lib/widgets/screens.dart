@@ -70,6 +70,7 @@ class BMIScreenLine extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
+          //TODO: implement a dropdown menu to choose kg/lb | cm/ftin
           children: [
             Text(
               measurementType,
@@ -99,8 +100,8 @@ class BMIScreenLine extends StatelessWidget {
 }
 
 class CalculatorScreen extends StatelessWidget {
-  final String screenValue;
   final Widget memoryValue;
+  final String screenValue;
   const CalculatorScreen(this.screenValue, this.memoryValue, {super.key});
 
   @override
@@ -130,7 +131,33 @@ class CalculatorScreen extends StatelessWidget {
   }
 }
 
+class MemoryScreen {
+  final Widget currentMemoryValue;
+  final Function updateMemoryScreen;
+
+  const MemoryScreen(this.currentMemoryValue, this.updateMemoryScreen);
+
+  static Widget memoryValue() {
+    return const Expanded(child: Text(''));
+  }
+
+  static Widget addMemoryEntry(String entry) {
+    return Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain,
+        alignment: Alignment.bottomRight,
+        child: GestureDetector(
+            onTap: () {
+              print(entry.split(' = ')[0].runtimeType);
+            },
+            child: Text(entry, style: kMemEntryTextStyle)),
+      ),
+    );
+  }
+}
+
 class MemoryEntry extends StatelessWidget {
+  // TODO: Implement a gesture detector AND function that replaces the value on screen by its value
   final String entry;
   const MemoryEntry(this.entry, {super.key});
 
@@ -140,7 +167,11 @@ class MemoryEntry extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.bottomRight,
-        child: Text(entry, style: kMemEntryTextStyle),
+        child: GestureDetector(
+            onTap: () {
+              print(entry.split(' = ')[0]);
+            },
+            child: Text(entry, style: kMemEntryTextStyle)),
       ),
     );
   }

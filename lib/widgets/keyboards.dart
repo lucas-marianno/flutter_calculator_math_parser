@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'buttons.dart';
 
 List<List<Widget>> calculatorKeyboard(Function function) => [
+      // TODO: create a '%' button
       [
         DefaultButton(ButtonId.mr, function, emphasis: Emphasis.zero),
         DefaultButton(ButtonId.mc, function, emphasis: Emphasis.zero),
