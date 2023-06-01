@@ -1,3 +1,4 @@
+import 'package:calculator2/brain/logic.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../style.dart';
@@ -29,7 +30,8 @@ class ButtonId {
       delete = '<-',
       power = '^',
       mr = 'MR',
-      ms = 'MS';
+      ms = 'MS',
+      mc = 'MC';
   ButtonId();
 }
 
@@ -102,8 +104,11 @@ class DefaultButton extends StatelessWidget {
             );
           }
           return TextButton(
-            //TODO: add a 'glow effect' when theres a value stored in the MS button.
-            onPressed: () => buttonFunction(buttonId),
+            // Deactivates the memory buttons in case the memory is empty
+            onPressed: memory == 0 &&
+                    (buttonId == ButtonId.mr || buttonId == ButtonId.mc)
+                ? null
+                : () => buttonFunction(buttonId),
             child: ButtonLabel(buttonId),
           );
         }(),

@@ -4,6 +4,7 @@ import 'buttons.dart';
 List<List<Widget>> calculatorKeyboard(Function function) => [
       [
         DefaultButton(ButtonId.mr, function, emphasis: Emphasis.zero),
+        DefaultButton(ButtonId.mc, function, emphasis: Emphasis.zero),
         DefaultButton(ButtonId.ms, function, emphasis: Emphasis.zero),
       ],
       [
