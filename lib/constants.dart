@@ -43,7 +43,7 @@ const TextStyle kButtonTextStyle = TextStyle(fontSize: kKeyTextSize);
 
 const TextStyle kBMIScreenTextStyle = TextStyle(fontSize: kKeyTextSize * 0.75);
 
-const TextStyle kCalulatorScreenTextStyle =
+const TextStyle kCalulatorMainDisplayTextStyle =
     TextStyle(color: kTextColor, shadows: kShadow);
 
 const TextStyle kFunctionButtonTextStyle =

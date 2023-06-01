@@ -1,7 +1,7 @@
 import 'package:calculator2/pages/about_page.dart';
 import 'package:calculator2/pages/bmi_page.dart';
 import 'package:calculator2/pages/bmi_results_page.dart';
-import 'package:calculator2/pages/home_page.dart';
+import 'package:calculator2/pages/calculator_page.dart';
 import 'package:flutter/material.dart';
 
 String calculatorPage = '/calculatorPage';

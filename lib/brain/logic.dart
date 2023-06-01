@@ -1,18 +1,9 @@
 import 'package:calculator2/widgets/buttons.dart';
-import 'package:calculator2/widgets/screens.dart';
-
-import 'package:flutter/material.dart';
 import 'equal_logic.dart';
 
 //TODO: encapsulate the following variables, they should not be public
 String _previousButtonId = '';
-List<Widget> _mathHistory = [
-  const Text(' '),
-  const Text(' '),
-  const Text(' '),
-  const Text(' '),
-  const Text(' '),
-];
+
 num memory = 0;
 
 class Logic {
@@ -37,8 +28,7 @@ class Logic {
 
     // EQUAL pressed
     if (buttonId == ButtonId.equal) {
-      _mathHistory.add(
-          MemoryEntry('$currentScreen ${calculateMathExpr(currentScreen)}'));
+      //TODO: when equal is pressed, it should save the current screen expression + ' = ' + result to memory
       return calculateMathExpr(currentScreen);
       // C pressed
     } else if (buttonId == ButtonId.c) {
@@ -46,7 +36,7 @@ class Logic {
       // AC pressed
     } else if (buttonId == ButtonId.ac) {
       memory = 0;
-      _mathHistory = [];
+      // TODO: clearMathHistory()
       return '0';
       // DEL pressed
     } else if (buttonId == ButtonId.delete) {
@@ -83,19 +73,6 @@ class Logic {
       return '?';
     }
     return currentScreen == '0' ? buttonId : currentScreen + buttonId;
-  }
-
-  static Widget newMemoryScreenValue() {
-    // Defines the lenght of memory that appears on display (limits it to 6 entries)
-    if (_mathHistory.length > 6) {
-      _mathHistory = _mathHistory.sublist(1);
-    }
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: _mathHistory,
-      ),
-    );
   }
 }
 

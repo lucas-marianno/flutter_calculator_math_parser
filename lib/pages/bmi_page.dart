@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../brain/bmi_calculator.dart';
 import '../brain/logic.dart';
 import '../widgets/popupmenu.dart';
-import '../widgets/screens.dart';
+import '../widgets/bmi_display.dart';
 
 class BMIPage extends StatefulWidget {
   const BMIPage({super.key});
