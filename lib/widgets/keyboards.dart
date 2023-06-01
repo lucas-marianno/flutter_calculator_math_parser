@@ -37,7 +37,7 @@ List<List<Widget>> calculatorKeyboard(Function function) => [
         DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
       ],
       [
-        Expanded(child: Container()),
+        const Spacer(),
         DefaultButton(ButtonId.zero, function),
         DefaultButton(ButtonId.dot, function),
         DefaultButton(
@@ -51,6 +51,7 @@ List<List<Widget>> calculatorKeyboard(Function function) => [
 
 List<List<Widget>> bmiKeyboard(Function function) => [
       [
+        DefaultButton(ButtonId.c, function, emphasis: Emphasis.zero),
         DefaultButton(ButtonId.ac, function, emphasis: Emphasis.zero),
         DefaultButton(ButtonId.delete, function, emphasis: Emphasis.zero),
       ],
@@ -70,7 +71,7 @@ List<List<Widget>> bmiKeyboard(Function function) => [
         DefaultButton(ButtonId.three, function),
       ],
       [
-        DefaultButton(ButtonId.dot, function),
+        const Spacer(),
         DefaultButton(ButtonId.zero, function),
         DefaultButton(
           ButtonId.equal,

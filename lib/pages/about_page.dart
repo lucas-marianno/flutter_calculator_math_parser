@@ -1,4 +1,5 @@
 import 'package:calculator2/constants.dart';
+import 'package:calculator2/widgets/popupmenu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../style.dart';
@@ -12,7 +13,9 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO: rewrite this entire page, this is horrible and verbose.
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: const [PopupMenu()],
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

@@ -1,9 +1,9 @@
 import 'package:calculator2/constants.dart';
-import 'package:calculator2/routes.dart';
 import 'package:calculator2/widgets/keyboard_builder.dart';
-import 'package:calculator2/widgets/screen.dart';
+import 'package:calculator2/widgets/screens.dart';
 import 'package:flutter/material.dart';
 import '../brain/logic.dart';
+import '../widgets/popupmenu.dart';
 import '../widgets/keyboards.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,21 +31,11 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             centerTitle: true,
             title: const Text('CALCULATOR'),
-            actions: [
-              PopupMenuButton(
-                onSelected: (value) => Navigator.pushNamed(context, value),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                      value: bmiScreen, child: const Text('BMI Calculator')),
-                  PopupMenuItem(
-                      value: aboutScreen, child: const Text('About this App')),
-                ],
-              ),
-            ]),
+            actions: const [PopupMenu()]),
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
-            Screen(screenValue, memoryValue),
+            CalculatorScreen(screenValue, memoryValue),
             const Divider(),
             KeyboardBuilder(
               firstRowShorter: true,

@@ -1,5 +1,5 @@
 import 'package:calculator2/widgets/buttons.dart';
-import 'package:calculator2/widgets/screen.dart';
+import 'package:calculator2/widgets/screens.dart';
 
 import 'package:flutter/material.dart';
 import 'equal_logic.dart';
@@ -47,7 +47,7 @@ class Logic {
       return '0';
       // DEL pressed
     } else if (buttonId == ButtonId.delete) {
-      if (currentScreen.length <= 1) return currentScreen;
+      if (currentScreen.length <= 1) return '0';
       return currentScreen.substring(0, currentScreen.length - 1);
       // MS Pressed
     } else if (buttonId == ButtonId.ms) {
