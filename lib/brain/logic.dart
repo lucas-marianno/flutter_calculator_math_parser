@@ -37,7 +37,8 @@ class Logic {
 
     // EQUAL pressed
     if (buttonId == ButtonId.equal) {
-      _mathHistory.add(MemoryEntry(currentScreen));
+      _mathHistory.add(
+          MemoryEntry('$currentScreen ${calculateMathExpr(currentScreen)}'));
       return calculateMathExpr(currentScreen);
       // C pressed
     } else if (buttonId == ButtonId.c) {
@@ -85,7 +86,7 @@ class Logic {
   }
 
   static Widget newMemoryScreenValue() {
-    // Defines the lenght of memory that appears on display (limits to 6 entries)
+    // Defines the lenght of memory that appears on display (limits it to 6 entries)
     if (_mathHistory.length > 6) {
       _mathHistory = _mathHistory.sublist(1);
     }

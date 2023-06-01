@@ -9,6 +9,9 @@ String calculateMathExpr(String s) {
   // if input doesn't contain digits, returns error
   if (!s.contains(RegExp(r'\d'))) return expressionError;
 
+  // cleans the expression for trivial errors before computing
+  s = cleaner(s).join();
+
   // if input contains repeated operators, returns error
   if (s.contains(RegExp('[${ButtonId.divide}^*+]{2,}')) ||
       s.contains('--') ||
@@ -29,8 +32,8 @@ String evaluateParentheses(String s) {
     return expressionError;
   }
 
-  // Replaces all 'n(' with 'n*('
-  s = multiplicationBeforeParentheses(s);
+  // Resolves all implicit multiplications.
+  s = implicitMultiplications(s);
 
   // Locates the first math expr between () without any () within it
   final String inner = innermostExpression(s);
@@ -51,18 +54,18 @@ String innermostExpression(String s) {
   return innermostExpr.substring(1, innermostExpr.length - 1);
 }
 
-String multiplicationBeforeParentheses(String s) {
+String implicitMultiplications(String s) {
+  // Resolves all implicit multiplications.
+  // Example: (2)3 = (2)*3 | 2(3) = 2*(3) | (2)(3) = (2)*(3)
   // Replaces all '(' preceded with a digit with '*('
-  if (s.contains(RegExp(r'\d\('))) {
-    final int temp = s.indexOf(RegExp(r'\d\(')) + 1;
-    s = s.replaceRange(temp, temp + 1, '*(');
+  s = s.replaceAllMapped(
+      RegExp(r'\d\('), (m) => '${s.substring(m.start, m.end - 1)}*(');
 
-    // Checks if there are any more implicit multiplications in the expression.
-    // Recursively calls itself until there are no more occurences.
-    if (s.contains(RegExp(r'\d\('))) {
-      s = multiplicationBeforeParentheses(s);
-    }
-  }
+  // Replaces all ')' followed by a digit with ')*'
+  s = s.replaceAllMapped(
+      RegExp(r'\)\d'), (m) => ')*${s.substring(m.start + 1, m.end)}');
+
+  s = s.replaceAll(')(', ')*(');
 
   return s;
 }
@@ -97,6 +100,9 @@ String addSub(String s) {
 String powRoot(String s) {
   //goes through a string and executes all squareroots and power within it
   //while preserving all other symbols such as parentheses and/or sum/sub
+
+  //TODO: 10^2^2 should return 10000 not 4. A possible solution is to go from right to left in the loop
+  //TODO: -10^2 should return 100 not -100.
 
   if (s == expressionError) return expressionError;
 
@@ -162,6 +168,10 @@ String multDiv(String s) {
 List cleaner(String s) {
   //removes all unecessary and/or redundant characters in string
   //returns a list with all separated elements
+
+  // if the string ends with a '+', replaces it with '*2'
+  s = s.endsWith('+') ? s.replaceRange(s.length - 1, null, '*2') : s;
+
   s[0] == '(' ? s = '0+$s' : s;
   s = s
       .replaceAll(' ', '')
@@ -169,6 +179,7 @@ List cleaner(String s) {
       .replaceAll('--', '+')
       .replaceAll('-+ ', '-')
       .replaceAll('+-', '-')
+      .replaceAll('**', '^')
       .split('')
       .map((e) => e = '0123456789.'.contains(e) ? e : ' $e ')
       .join();
