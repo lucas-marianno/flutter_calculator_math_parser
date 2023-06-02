@@ -1,6 +1,17 @@
 # Math Expression Calculator
 
-The Math Expression Calculator has been designed to evaluate complex mathematical expressions. 
+The Math Expression Calculator has been designed to evaluate mathematical expressions containing Square Root, Power, basic operators and even parentheses.
+
+The calculator is smart snough to recognize implicit multiplications and order of operations.
+
+## FEATURES:
+You can input complex math expressions.
+
+Users to retrieve previous math expressions by clicking on them.
+
+Users can store and retrieve results using memory controls.
+
+Users can easily calculate their Body Mass Index.
 
 ## About this project:
 
@@ -22,18 +33,18 @@ The project serves the following purposes:
   - Incorporate interactive functionality to the display text:
     - Implement a cursor.
     - Refactor the expression in real-time.
-    - Allow users to recall and edit previous calculations from history.
+    - Allow users to recall previous calculations from history. COMPLETED!
 
 **PHASE 3:**
-  - Create a new view.
+  - Create a new page.
   - Add a percentage and interest converter (annual -> monthly -> daily).
   - Add a unit converter, such as length, weight, and temperature.
 
 **PHASE 4:**
-  - Create a new view.
+  - Create a new page.
   - Enable users to customize the app:
     - Build two sliders:
-      - Slider 1: primarySwatch color.
+      - Slider 1: primary color.
       - Slider 2: brightness level.
     - Determine whether the theme is light or dark based on the brightness level.
 
