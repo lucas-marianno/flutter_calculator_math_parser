@@ -1,20 +1,21 @@
 import 'package:calculator2/widgets/buttons.dart';
+import '../constants.dart';
 import 'equal_logic.dart';
 import 'memory.dart';
 
 class Logic {
-  static String newScreenValue(String buttonId, String currentScreen) {
+  static String newScreenValue(String buttonId, String currentDisplay) {
     String previousButtonId = Memory.getPreviousButtonId();
     num memory = Memory.getMemoryValue();
 
-    currentScreen = removeEqualSignFromScreen(currentScreen);
+    currentDisplay = removeEqualSignFromScreen(currentDisplay);
 
     // if the last button pressed was '=' or 'ms' AND the current button is a
     // num, it will clear the currentScreen.
     if ((previousButtonId == ButtonId.equal ||
             previousButtonId == ButtonId.ms) &&
         '0123456789.'.contains(buttonId)) {
-      currentScreen = '0';
+      currentDisplay = '0';
     }
 
     previousButtonId = buttonId;
@@ -23,8 +24,8 @@ class Logic {
     // EQUAL pressed
     if (buttonId == ButtonId.equal) {
       Memory.addToMathHistory(
-          '$currentScreen ${calculateMathExpr(currentScreen)}');
-      return calculateMathExpr(currentScreen);
+          '$currentDisplay ${calculateMathExpr(currentDisplay)}');
+      return calculateMathExpr(currentDisplay);
       // C pressed
     } else if (buttonId == ButtonId.c) {
       return '0';
@@ -34,40 +35,44 @@ class Logic {
       return '0';
       // DEL pressed
     } else if (buttonId == ButtonId.delete) {
-      if (currentScreen.length <= 1) return '0';
-      return currentScreen.substring(0, currentScreen.length - 1);
+      if (currentDisplay.length <= 1) return '0';
+      return currentDisplay.substring(0, currentDisplay.length - 1);
       // MS Pressed
     } else if (buttonId == ButtonId.ms) {
       previousButtonId = ButtonId.ms;
       Memory.setMemoryValue(num.parse(
-          removeEqualSignFromScreen(calculateMathExpr(currentScreen))));
+          removeEqualSignFromScreen(calculateMathExpr(currentDisplay))));
 
-      return currentScreen;
+      return currentDisplay;
       // MR Pressed
     } else if (buttonId == ButtonId.mr) {
-      if (currentScreen == memory.toString()) return currentScreen;
-      if (memory == 0) return currentScreen;
+      if (currentDisplay == memory.toString()) return currentDisplay;
+      if (memory == 0) return currentDisplay;
       // TODO: evaluate if the screen ends with a symbol, otherwise it should clear the screen first
-      if (currentScreen == '0') return memory.toString();
-      return currentScreen + memory.toString();
+      if (currentDisplay == '0') return memory.toString();
+      return currentDisplay + memory.toString();
       // MC pressed
     } else if (buttonId == ButtonId.mc) {
       Memory.setMemoryValue(0);
-      return currentScreen;
+      return currentDisplay;
       // Screen doesn't contain any math to be calculated
-    } else if (currentScreen != '0' &&
+    } else if (currentDisplay != '0' &&
         buttonId == ButtonId.squareRoot &&
-        !currentScreen.contains(
+        !currentDisplay.contains(
           RegExp('[*-+${ButtonId.divide}${ButtonId.squareRoot}]'),
         )) {
       // sqrt pressed
       if (buttonId == ButtonId.squareRoot) {
-        return currentScreen == '0' ? buttonId : buttonId + currentScreen;
+        return currentDisplay == '0' ? buttonId : buttonId + currentDisplay;
       }
       // this should never return
       return '?';
+    } else if (currentDisplay.length <= kCurrentDisplayLimit) {
+      // Limits the currentDisplay to kCurrentDisplayLimit characters
+      return currentDisplay == '0' ? buttonId : currentDisplay + buttonId;
+    } else {
+      return currentDisplay;
     }
-    return currentScreen == '0' ? buttonId : currentScreen + buttonId;
   }
 }
 
