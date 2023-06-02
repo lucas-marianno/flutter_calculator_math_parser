@@ -1,4 +1,4 @@
-import 'package:calculator2/widgets/buttons.dart';
+import 'package:calculator2/widgets/keyboard_default_button.dart';
 import '../constants.dart';
 import 'equal_logic.dart';
 import 'memory.dart';

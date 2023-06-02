@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             const Divider(),
             KeyboardBuilder(
               firstRowShorter: true,
-              keyboard: calculatorKeyboard(updateDisplay),
+              keyboard: Keyboards.calculatorKeyboard(updateDisplay),
             ),
           ],
         ),

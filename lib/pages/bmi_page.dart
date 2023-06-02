@@ -1,12 +1,11 @@
-import 'package:calculator2/routes.dart';
-import 'package:calculator2/widgets/buttons.dart';
+import 'package:calculator2/widgets/keyboard_default_button.dart';
 import 'package:calculator2/widgets/keyboard_builder.dart';
 import 'package:calculator2/widgets/keyboards.dart';
 import 'package:flutter/material.dart';
-import '../brain/bmi_calculator.dart';
+import '../brain/bmi_brain.dart';
 import '../brain/logic.dart';
 import '../widgets/popupmenu.dart';
-import '../widgets/bmi_display.dart';
+import '../widgets/bmi_widgets.dart';
 
 class BMIPage extends StatefulWidget {
   const BMIPage({super.key});
@@ -17,29 +16,26 @@ class BMIPage extends StatefulWidget {
 
 class _BMIPageState extends State<BMIPage> {
   // TODO: Feature: implement a way to select imperial or metric measurements
-  int _weight = 0;
-  int _height = 0;
+
   BMIMeasurementType _selectedScreen = BMIMeasurementType.weight;
 
   _updateBMIScreen(buttonId) {
     setState(() {
+      int _height = BMIBrain.getHeight();
+      int _weight = BMIBrain.getWeight();
       if (buttonId == ButtonId.ac) {
-        _height = 0;
-        _weight = 0;
+        BMIBrain.clear();
       } else if (buttonId == ButtonId.equal) {
-        //TODO: Feature: create a function that displays the bmi result in a alert (showDialog)
-        BMICalculator.setBMI(_height, _weight);
-        Navigator.pushNamed(context, bmiResultsPage);
-        _height = 0;
-        _weight = 0;
+        BMIBrain.setBMI(_height, _weight);
+        BMIBrain.displayResults(context);
       } else if (_selectedScreen == BMIMeasurementType.weight) {
-        _weight = '$_weight'.length < 3
+        BMIBrain.setWeight('$_weight'.length < 3
             ? int.parse(Logic.newScreenValue(buttonId, _weight.toString()))
-            : _weight;
+            : _weight);
       } else {
-        _height = '$_height'.length < 3
+        BMIBrain.setHeight('$_height'.length < 3
             ? int.parse(Logic.newScreenValue(buttonId, _height.toString()))
-            : _height;
+            : _height);
       }
     });
   }
@@ -60,11 +56,12 @@ class _BMIPageState extends State<BMIPage> {
       ),
       body: Column(
         children: [
-          BMIDisplay(_weight, _height, _selectedScreen, _toggleSelectedScreen),
+          BMIDisplay(BMIBrain.getWeight(), BMIBrain.getHeight(),
+              _selectedScreen, _toggleSelectedScreen),
           const Divider(),
           KeyboardBuilder(
             firstRowShorter: true,
-            keyboard: bmiKeyboard(_updateBMIScreen),
+            keyboard: Keyboards.bmiKeyboard(_updateBMIScreen),
           ),
         ],
       ),

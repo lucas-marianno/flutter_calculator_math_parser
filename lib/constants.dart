@@ -16,10 +16,17 @@ const Color kHighEmphasisButtonColor = Colors.deepPurple;
 const Color kBMIActiveScreenColor = Color.fromARGB(255, 162, 128, 255);
 const Color kBMIInactiveScreenColor = Colors.white;
 
-const Color kUnderweight = Colors.lightBlueAccent;
-const Color kNormalWeight = Colors.green;
-const Color kOverweight = Colors.orange;
-const Color kObese = Colors.red;
+const Color kUnderweightColor = Colors.lightBlueAccent;
+const Color kNormalWeightColor = Colors.green;
+const Color kOverweightColor = Colors.orange;
+const Color kObeseColor = Colors.red;
+
+// Labels
+
+const String kUnderweightLabel = 'Underweight';
+const String kNormalWeightLabel = '    Normal     ';
+const String kOverweightLabel = ' Overweight ';
+const String kObeseLabel = '     Obese     ';
 
 // Values
 const int kCurrentDisplayLimit = 30;
