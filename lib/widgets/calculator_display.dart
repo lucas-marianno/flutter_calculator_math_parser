@@ -1,14 +1,15 @@
+import 'package:calculator2/brain/memory.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator2/constants.dart';
 
 class CalculatorDisplay extends StatelessWidget {
   const CalculatorDisplay({
+    required this.mainDisplayValue,
+    required this.memoryDisplayValue,
     super.key,
-    required this.screenValue,
   });
-
-  final String screenValue;
-
+  final List<Widget> memoryDisplayValue;
+  final String mainDisplayValue;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -17,8 +18,8 @@ class CalculatorDisplay extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const CalculatorMemoryDisplay(),
-            CalculatorMainDisplay(screenValue: screenValue),
+            CalculatorMemoryDisplay(memoryDisplayValue),
+            CalculatorMainDisplay(mainDisplayValue),
           ],
         ),
       ),
@@ -26,29 +27,10 @@ class CalculatorDisplay extends StatelessWidget {
   }
 }
 
-class CalculatorMemoryDisplay extends StatelessWidget {
-  const CalculatorMemoryDisplay({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        //TODO: this is where the memory screen will go
-        child: Placeholder(),
-      ),
-    );
-  }
-}
-
 class CalculatorMainDisplay extends StatelessWidget {
-  const CalculatorMainDisplay({
-    super.key,
-    required this.screenValue,
-  });
+  const CalculatorMainDisplay(this.mainDisplayValue, {super.key});
 
-  final String screenValue;
+  final String mainDisplayValue;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +39,7 @@ class CalculatorMainDisplay extends StatelessWidget {
         alignment: Alignment.bottomRight,
         fit: BoxFit.contain,
         child: Text(
-          screenValue,
+          mainDisplayValue,
           style: kCalulatorMainDisplayTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -66,50 +48,39 @@ class CalculatorMainDisplay extends StatelessWidget {
   }
 }
 
-// TODO: after implementing the memory screen, use this to store the memory values
+class CalculatorMemoryDisplay extends StatelessWidget {
+  const CalculatorMemoryDisplay(this.memoryDisplayValue, {super.key});
 
-// class MemoryScreen {
-//   final Widget currentMemoryValue;
-//   final Function updateMemoryScreen;
-//
-//   const MemoryScreen(this.currentMemoryValue, this.updateMemoryScreen);
-//
-//   static Widget memoryValue() {
-//     return const Expanded(child: Text(''));
-//   }
-//
-//   static Widget addMemoryEntry(String entry) {
-//     return Expanded(
-//       child: FittedBox(
-//         fit: BoxFit.contain,
-//         alignment: Alignment.bottomRight,
-//         child: GestureDetector(
-//             onTap: () {
-//               print(entry.split(' = ')[0].runtimeType);
-//             },
-//             child: Text(entry, style: kMemEntryTextStyle)),
-//       ),
-//     );
-//   }
-// }
-//
-// class MemoryEntry extends StatelessWidget {
-//   // TODO: Implement a gesture detector AND function that replaces the value on screen by its value
-//   final String entry;
-//   const MemoryEntry(this.entry, {super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: FittedBox(
-//         fit: BoxFit.contain,
-//         alignment: Alignment.bottomRight,
-//         child: GestureDetector(
-//             onTap: () {
-//               print(entry.split(' = ')[0]);
-//             },
-//             child: Text(entry, style: kMemEntryTextStyle)),
-//       ),
-//     );
-//   }
-// }
+  final List<Widget> memoryDisplayValue;
+
+  @override
+  Widget build(BuildContext context) {
+    //TODO: this is where the memory screen will go
+    return Expanded(
+      child: FittedBox(
+        alignment: Alignment.bottomRight,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: Memory.getMathHistory(),
+        ),
+      ),
+    );
+  }
+}
+
+class CalculatorMemoryEntry extends StatelessWidget {
+  const CalculatorMemoryEntry(this.entry, this.setStateFunction, {super.key});
+  final String entry;
+  final Function setStateFunction;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => setStateFunction(entry.split(' = ')[0]),
+      child: Text(
+        entry,
+        style: kMemEntryTextStyle,
+      ),
+    );
+  }
+}

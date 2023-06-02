@@ -1,3 +1,4 @@
+import 'package:calculator2/brain/memory.dart';
 import 'package:calculator2/constants.dart';
 import 'package:calculator2/widgets/keyboard_builder.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String screenValue = '0';
-
-  updateScreen(buttonId) {
+  updateDisplay(buttonId) {
     setState(() {
-      screenValue = Logic.newScreenValue(buttonId, screenValue);
+      Memory.setFunction(updateDisplayFromMemory);
+      Memory.setDisplayValue(
+          Logic.newScreenValue(buttonId, Memory.getDisplayValue()));
+    });
+  }
+
+  updateDisplayFromMemory(newDisplayValue) {
+    setState(() {
+      Memory.setDisplayValue(newDisplayValue);
     });
   }
 
@@ -33,11 +40,14 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: kBackgroundColor,
         body: Column(
           children: [
-            CalculatorDisplay(screenValue: screenValue),
+            CalculatorDisplay(
+              memoryDisplayValue: Memory.getMathHistory(),
+              mainDisplayValue: Memory.getDisplayValue(),
+            ),
             const Divider(),
             KeyboardBuilder(
               firstRowShorter: true,
-              keyboard: calculatorKeyboard(updateScreen),
+              keyboard: calculatorKeyboard(updateDisplay),
             ),
           ],
         ),

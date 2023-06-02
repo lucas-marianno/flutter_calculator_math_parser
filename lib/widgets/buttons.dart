@@ -1,4 +1,4 @@
-import 'package:calculator2/brain/logic.dart';
+import 'package:calculator2/brain/memory.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../style.dart';
@@ -105,7 +105,7 @@ class DefaultButton extends StatelessWidget {
           }
           return TextButton(
             // Deactivates the memory buttons in case the memory is empty
-            onPressed: memory == 0 &&
+            onPressed: Memory.getMemoryValue() == 0 &&
                     (buttonId == ButtonId.mr || buttonId == ButtonId.mc)
                 ? null
                 : () => buttonFunction(buttonId),

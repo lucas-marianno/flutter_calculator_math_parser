@@ -1,42 +1,36 @@
 import 'package:calculator2/widgets/buttons.dart';
 import 'equal_logic.dart';
-
-//TODO: encapsulate the following variables, they should not be public
-String _previousButtonId = '';
-
-num memory = 0;
+import 'memory.dart';
 
 class Logic {
-  final String buttonId;
-  final String currentScreen;
-
-  Logic(this.buttonId, this.currentScreen);
-
   static String newScreenValue(String buttonId, String currentScreen) {
+    String previousButtonId = Memory.getPreviousButtonId();
+    num memory = Memory.getMemoryValue();
+
     currentScreen = removeEqualSignFromScreen(currentScreen);
 
     // if the last button pressed was '=' or 'ms' AND the current button is a
     // num, it will clear the currentScreen.
-    if ((_previousButtonId == ButtonId.equal ||
-            _previousButtonId == ButtonId.ms) &&
+    if ((previousButtonId == ButtonId.equal ||
+            previousButtonId == ButtonId.ms) &&
         '0123456789.'.contains(buttonId)) {
       currentScreen = '0';
     }
 
-    _previousButtonId = buttonId;
+    previousButtonId = buttonId;
     // TODO: this sequence of 'if statements' is confuse and verbose. This should be rewritten and abstracted into separate functions
 
     // EQUAL pressed
     if (buttonId == ButtonId.equal) {
-      //TODO: when equal is pressed, it should save the current screen expression + ' = ' + result to memory
+      Memory.addToMathHistory(
+          '$currentScreen ${calculateMathExpr(currentScreen)}');
       return calculateMathExpr(currentScreen);
       // C pressed
     } else if (buttonId == ButtonId.c) {
       return '0';
       // AC pressed
     } else if (buttonId == ButtonId.ac) {
-      memory = 0;
-      // TODO: clearMathHistory()
+      Memory.clear();
       return '0';
       // DEL pressed
     } else if (buttonId == ButtonId.delete) {
@@ -44,9 +38,10 @@ class Logic {
       return currentScreen.substring(0, currentScreen.length - 1);
       // MS Pressed
     } else if (buttonId == ButtonId.ms) {
-      _previousButtonId = ButtonId.ms;
-      memory = num.parse(
-          removeEqualSignFromScreen(calculateMathExpr(currentScreen)));
+      previousButtonId = ButtonId.ms;
+      Memory.setMemoryValue(num.parse(
+          removeEqualSignFromScreen(calculateMathExpr(currentScreen))));
+
       return currentScreen;
       // MR Pressed
     } else if (buttonId == ButtonId.mr) {
@@ -57,7 +52,7 @@ class Logic {
       return currentScreen + memory.toString();
       // MC pressed
     } else if (buttonId == ButtonId.mc) {
-      memory = 0;
+      Memory.setMemoryValue(0);
       return currentScreen;
       // Screen doesn't contain any math to be calculated
     } else if (currentScreen != '0' &&
