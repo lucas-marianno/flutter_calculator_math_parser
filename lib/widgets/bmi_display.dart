@@ -70,7 +70,7 @@ class BMIDisplayLine extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
-          //TODO: implement a dropdown menu to choose kg/lb | cm/ftin
+          //TODO: Feature: implement a dropdown menu to choose kg/lb | cm/ftin
           children: [
             Text(
               measurementType,

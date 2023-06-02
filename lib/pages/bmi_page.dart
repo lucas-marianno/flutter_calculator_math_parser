@@ -16,7 +16,7 @@ class BMIPage extends StatefulWidget {
 }
 
 class _BMIPageState extends State<BMIPage> {
-  // TODO: implement a way to select imperial or metric measurements
+  // TODO: Feature: implement a way to select imperial or metric measurements
   int _weight = 0;
   int _height = 0;
   BMIMeasurementType _selectedScreen = BMIMeasurementType.weight;
@@ -27,7 +27,7 @@ class _BMIPageState extends State<BMIPage> {
         _height = 0;
         _weight = 0;
       } else if (buttonId == ButtonId.equal) {
-        //TODO: create a function that displays the bmi result in a alert
+        //TODO: Feature: create a function that displays the bmi result in a alert (showDialog)
         BMICalculator.setBMI(_height, _weight);
         Navigator.pushNamed(context, bmiResultsPage);
         _height = 0;

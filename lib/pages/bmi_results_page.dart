@@ -2,10 +2,37 @@ import 'package:calculator2/constants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../brain/bmi_calculator.dart';
+import '../widgets/buttons.dart';
+
+class NewTestWidget extends StatelessWidget {
+  const NewTestWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultButton(
+      'dialog',
+      (useless) => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: BMIResults(),
+          content: BMIResultsInformation(),
+          actions: [
+            TextButton(onPressed: () {}, child: const Text('btn 1')),
+            TextButton(onPressed: () {}, child: const Text('btn 1')),
+          ],
+        ),
+      ),
+      emphasis: Emphasis.zero,
+    );
+  }
+}
 
 class BMIResultsPage extends StatelessWidget {
+  // TODO: Bugfix: BMIResultsPage bugs out when the app is ran on either lower resolution devices or large font size users.
+  // Possible solution: replace fixed size fonts by BoxFit(Text()) widgets.
   const BMIResultsPage({super.key});
 
   @override

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../routes.dart';
 
 class PopupMenu extends StatelessWidget {
-  // TODO: Replace this widget by a top navigation bar.
+  // TODO: Feature: Replace this widget by a top navigation bar.
+  // TODO: Bugfix: Ao ir pra tela BMI e voltar, a calculadora para de atualizar o display com as entradas da memória.
+  // Possivel causa: tem a ver com Navigator.pop antes do push | quebra o State atual pra ir pra outra tela
   const PopupMenu({
     super.key,
   });

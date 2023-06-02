@@ -3,6 +3,14 @@ import 'package:calculator2/widgets/buttons.dart';
 import 'package:calculator2/constants.dart';
 import 'logic.dart';
 
+// TODO: Feature: Implement Scientific Notation
+/// TODO: Bugfix: List of math errors found:
+///
+/// 12^ = RangeError (RangeError (index): Invalid value: Not in inclusive range 0..1: 2)
+/// -10^2 returns: -100 expected: 100
+/// 63666*5674615876423786782365478627836457823475827346 returns: 32.34563456345 expected: 'a lot bigger than that'
+/// 10^2^2 returns: 4 expected: 10000. A possible solution is to go from right to left in the loop
+///
 String calculateMathExpr(String s) {
   s = removeEqualSignFromScreen(s);
 
@@ -100,9 +108,6 @@ String addSub(String s) {
 String powRoot(String s) {
   //goes through a string and executes all squareroots and power within it
   //while preserving all other symbols such as parentheses and/or sum/sub
-
-  //TODO: 10^2^2 should return 10000 not 4. A possible solution is to go from right to left in the loop
-  //TODO: -10^2 should return 100 not -100.
 
   if (s == expressionError) return expressionError;
 

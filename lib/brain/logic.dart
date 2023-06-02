@@ -19,7 +19,7 @@ class Logic {
     }
 
     previousButtonId = buttonId;
-    // TODO: this sequence of 'if statements' is confuse and verbose. This should be rewritten and abstracted into separate functions
+    // TODO: Readability: this sequence of 'if statements' is confuse and verbose. This should be rewritten and abstracted into separate functions
 
     // EQUAL pressed
     if (buttonId == ButtonId.equal) {
@@ -48,7 +48,7 @@ class Logic {
     } else if (buttonId == ButtonId.mr) {
       if (currentDisplay == memory.toString()) return currentDisplay;
       if (memory == 0) return currentDisplay;
-      // TODO: evaluate if the screen ends with a symbol, otherwise it should clear the screen first
+      // TODO: Bugfix: evaluate if the screen ends with a symbol, otherwise it should clear the screen first
       if (currentDisplay == '0') return memory.toString();
       return currentDisplay + memory.toString();
       // MC pressed

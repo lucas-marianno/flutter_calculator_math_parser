@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../pages/bmi_results_page.dart';
 import 'buttons.dart';
 
 List<List<Widget>> calculatorKeyboard(Function function) => [
-      // TODO: create a '%' button
+      // TODO: Feature: create a '%' button
       [
         DefaultButton(ButtonId.mr, function, emphasis: Emphasis.zero),
         DefaultButton(ButtonId.mc, function, emphasis: Emphasis.zero),
@@ -39,7 +40,7 @@ List<List<Widget>> calculatorKeyboard(Function function) => [
         DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
       ],
       [
-        const Spacer(),
+        NewTestWidget(),
         DefaultButton(ButtonId.zero, function),
         DefaultButton(ButtonId.dot, function),
         DefaultButton(
@@ -73,12 +74,12 @@ List<List<Widget>> bmiKeyboard(Function function) => [
         DefaultButton(ButtonId.three, function),
       ],
       [
-        const Spacer(),
+        const NewTestWidget(),
         DefaultButton(ButtonId.zero, function),
         DefaultButton(
           ButtonId.equal,
           function,
           emphasis: Emphasis.high,
-        ),
+        )
       ],
     ];

@@ -82,6 +82,7 @@ class DefaultButton extends StatelessWidget {
   final int? flex;
 
   const DefaultButton(
+    // buttonFunction = Function(ButtonId.id)
     this.buttonId,
     this.buttonFunction, {
     super.key,

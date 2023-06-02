@@ -55,7 +55,6 @@ class CalculatorMemoryDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: this is where the memory screen will go
     return Expanded(
       child: FittedBox(
         alignment: Alignment.bottomRight,

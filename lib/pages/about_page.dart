@@ -10,7 +10,10 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: rewrite this entire page, this is horrible and verbose.
+    // TODO: Readability: rewrite AboutPage, this is horrible and verbose.
+    // ALSO:
+    // TODO: Bugfix: AboutPage bugs out when the app is ran on either lower resolution devices or large font size users.
+    // Possible solution: replace fixed size fonts by BoxFit(Text()) widgets.
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -97,6 +100,23 @@ class AboutPage extends StatelessWidget {
                         color: kTextColor,
                       ),
                       Text('lucas.pk16@outlook.com'),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  style: aboutPageButtonStyle(),
+                  onPressed: () => url_launcher.launchUrl(
+                      Uri.parse(
+                          'https://github.com/lucas-marianno/Math-Expression-Calculator-Flutter'),
+                      mode: LaunchMode.externalApplication),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.open_in_new,
+                        color: kTextColor,
+                      ),
+                      Text('Source code for this app'),
                     ],
                   ),
                 ),
