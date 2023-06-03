@@ -1,7 +1,6 @@
 import 'package:calculator2/brain/memory.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import '../style.dart';
 
 enum Emphasis { zero, low, high }
 
@@ -116,4 +115,14 @@ class DefaultButton extends StatelessWidget {
       ),
     );
   }
+}
+
+ButtonStyle defaultButtonStyle(Emphasis? emphasis) {
+  Color color() {
+    if (emphasis == Emphasis.high) return kHighEmphasisButtonColor;
+    if (emphasis == Emphasis.low) return kLowEmphasisButtonColor;
+    return kDefaultButtonColor;
+  }
+
+  return ButtonStyle(backgroundColor: MaterialStatePropertyAll(color()));
 }

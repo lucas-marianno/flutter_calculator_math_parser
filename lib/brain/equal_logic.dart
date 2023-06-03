@@ -8,9 +8,10 @@ import 'logic.dart';
 ///
 /// 12^ = RangeError (RangeError (index): Invalid value: Not in inclusive range 0..1: 2)
 /// -10^2 returns: -100 expected: 100
-/// 63666*5674615876423786782365478627836457823475827346 returns: 32.34563456345 expected: 'a lot bigger than that'
+///(-10)^2 returns: -100 expected: 100
 /// 10^2^2 returns: 4 expected: 10000. A possible solution is to go from right to left in the loop
-///
+///-10*-10*-10 returns -1000 expected 1000
+/// 63666*5674615876423786782365478627836457823475827346 returns: 32.34563456345 expected: 'a lot bigger than that'
 String calculateMathExpr(String s) {
   s = removeEqualSignFromScreen(s);
 
