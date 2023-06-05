@@ -1,3 +1,4 @@
+import 'package:calculator2/brain/equal_logic.dart';
 import 'package:flutter/material.dart';
 import 'keyboard_default_button.dart';
 
@@ -40,7 +41,10 @@ class Keyboards {
           DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
         ],
         [
-          const Spacer(),
+          Expanded(
+              child: TextButton(
+                  onPressed: () => debugCalculator(),
+                  child: const FittedBox(child: Text('debug')))),
           DefaultButton(ButtonId.zero, function),
           DefaultButton(ButtonId.dot, function),
           DefaultButton(

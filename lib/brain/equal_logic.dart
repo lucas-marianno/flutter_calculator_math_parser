@@ -6,13 +6,54 @@ import 'package:calculator2/constants.dart';
 
 // TODO: Refactoring: Refactor entire logic to work with List<dynamic> instead of String.
 
-/// TODO: Bugfix: List of math errors found:
-///
-/// -10^2 returns: -100 expected: 100
-///(-10)^2 returns: -100 expected: 100
-/// 10^2^2 returns: 4 expected: 10000. A possible solution is to go from right to left in the loop
-///-10*-10*-10 returns -1000 expected 1000
-/// 63666*5674615876423786782365478627836457823475827346 returns: 32.34563456345 expected: 'a lot bigger than that'
+// TODO: Bugfix: List of math errors found:
+
+void debugCalculator() {
+  Map<String, String> expected = {
+    '-12^2': '144',
+    '-10^2': '100',
+    '(-10)^2': '100',
+    '10^2^2': '10000',
+    '-10*-10*-10': '10000',
+    "(81)": '81',
+    '12*(25+1)': '312',
+    '2(1+2)': '6',
+    "1 + 1": '2',
+    "8/16": '0.5',
+    "3 -(-1)": '4',
+    "2 + -2": '0',
+    "10- 2- -5": '13',
+    "(((10)))": '10',
+    "3 * 5": '15',
+    "-7 * -(6 / 3)": '14',
+    '50+2*3': '56',
+    '(50+2)*3': '156',
+    '.5*3': '1.5',
+    '3*.5': '1.5',
+  };
+
+  //removeEqualSignFromExpr
+  expected.forEach((key, value) {
+    key = key.replaceAll('/', ButtonId.divide);
+    String ans = removeEqualSignFromExpr(calculateMathExpr(key));
+    if (ans != value) {
+      print('\x1B[31mFAILED\x1B[0m at  $key');
+      print('expected:  $value');
+      print('got:       $ans');
+    } else {
+      print('\x1B[32mPASSED\x1B[0m at  $key');
+    }
+  });
+}
+
+String calculateMathExpr(String s) {
+  s = removeEqualSignFromExpr(s);
+
+  if (!isValidExpression(s)) return kExpressionError;
+
+  // gets rid of trailing .0s and returns it
+  return '= ${evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '')}';
+}
 
 String removeEqualSignFromExpr(String s) {
   // if the first character is '=', removes the first and second character ' '.
@@ -43,15 +84,6 @@ bool isValidExpression(String s) {
   }
 
   return true;
-}
-
-String calculateMathExpr(String s) {
-  s = removeEqualSignFromExpr(s);
-
-  if (!isValidExpression(s)) return kExpressionError;
-
-  // gets rid of trailing .0s and returns it
-  return '= ${evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '')}';
 }
 
 String evaluateParentheses(String s) {
@@ -124,8 +156,9 @@ String addSub(String s) {
 }
 
 String powRoot(String s) {
-  //goes through a string and executes all squareroots and power within it
-  //while preserving all other symbols such as parentheses and/or sum/sub
+  // s will never have unresolved parentheses
+  // goes through a string and executes all squareroots and power within it
+  // while preserving all other symbols such as mult/div | sum/sub
 
   if (s == kExpressionError) return kExpressionError;
 
@@ -133,6 +166,7 @@ String powRoot(String s) {
   if (!s.contains('\u221a') && !s.contains(ButtonId.power)) return s;
 
   List expr = cleaner(s);
+
   List result = [];
 
   for (int i = 0; i < expr.length; i++) {
@@ -208,8 +242,6 @@ List cleaner(String s) {
       .split('')
       .map((e) => e = '0123456789.'.contains(e) ? e : ' $e ')
       .join();
-
-  print(s.replaceAll('  ', ' ').trim().split(' '));
 
   return s.replaceAll('  ', ' ').trim().split(' ');
 }
