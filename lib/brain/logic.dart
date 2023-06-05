@@ -17,8 +17,6 @@ class Logic {
         '0123456789.'.contains(buttonId)) {
       currentDisplay = '0';
     }
-    // if currentDisplay is invalid, clears it.
-    if (!isValidExpression(currentDisplay)) currentDisplay = '0';
 
     // stores the current buttonId to previous previousButtonId.
     previousButtonId = buttonId;

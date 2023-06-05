@@ -3,6 +3,9 @@ import 'package:calculator2/widgets/keyboard_default_button.dart';
 import 'package:calculator2/constants.dart';
 
 // TODO: Feature: Implement Scientific Notation
+
+// TODO: Refactoring: Refactor entire logic to work with List<dynamic> instead of String.
+
 /// TODO: Bugfix: List of math errors found:
 ///
 /// -10^2 returns: -100 expected: 100
