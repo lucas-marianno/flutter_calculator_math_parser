@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../brain/bmi_brain.dart';
 import '../constants.dart';
 
+// TODO: rename this enum, its confusing sometimes
 enum BMIMeasurementType { weight, height }
 
 class BMICategoryInfo extends StatelessWidget {

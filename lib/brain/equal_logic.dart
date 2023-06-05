@@ -1,32 +1,51 @@
 import 'dart:math';
 import 'package:calculator2/widgets/keyboard_default_button.dart';
 import 'package:calculator2/constants.dart';
-import 'logic.dart';
 
 // TODO: Feature: Implement Scientific Notation
 /// TODO: Bugfix: List of math errors found:
 ///
-/// 12^ = RangeError (RangeError (index): Invalid value: Not in inclusive range 0..1: 2)
 /// -10^2 returns: -100 expected: 100
 ///(-10)^2 returns: -100 expected: 100
 /// 10^2^2 returns: 4 expected: 10000. A possible solution is to go from right to left in the loop
 ///-10*-10*-10 returns -1000 expected 1000
 /// 63666*5674615876423786782365478627836457823475827346 returns: 32.34563456345 expected: 'a lot bigger than that'
-String calculateMathExpr(String s) {
-  s = removeEqualSignFromScreen(s);
 
-  // if input doesn't contain digits, returns error
-  if (!s.contains(RegExp(r'\d'))) return expressionError;
+String removeEqualSignFromExpr(String s) {
+  // if the first character is '=', removes the first and second character ' '.
+  return s[0] == '=' ? s = s.substring(2) : s;
+}
 
-  // cleans the expression for trivial errors before computing
+bool isValidExpression(String s) {
+  if (s == kExpressionError) return false;
+  // if input doesn't contain digits, returns error.
+  if (!s.contains(RegExp(r'\d'))) return false;
+
+  // if input ends with '^', returns error.
+  if (s.contains(RegExp(r'\^$'))) return false;
+
+  // cleans the expression for trivial errors before evaluating
   s = cleaner(s).join();
 
   // if input contains repeated operators, returns error
   if (s.contains(RegExp('[${ButtonId.divide}^*+]{2,}')) ||
       s.contains('--') ||
       s.contains(ButtonId.squareRoot + ButtonId.squareRoot)) {
-    return expressionError;
+    return false;
   }
+
+  // Returns error if the amount of '(' and ')' is not the same
+  if ('('.allMatches(s).length != ')'.allMatches(s).length) {
+    return false;
+  }
+
+  return true;
+}
+
+String calculateMathExpr(String s) {
+  s = removeEqualSignFromExpr(s);
+
+  if (!isValidExpression(s)) return kExpressionError;
 
   // gets rid of trailing .0s and returns it
   return '= ${evaluateParentheses(s).replaceAll(RegExp(r'\.0+$'), '')}';
@@ -35,11 +54,6 @@ String calculateMathExpr(String s) {
 String evaluateParentheses(String s) {
   // Skips this function if no parentheses are found
   if (!s.contains('(')) return addSub(multDiv(powRoot(s)));
-
-  // Returns error if the amount of '(' and ')' is not the same
-  if ('('.allMatches(s).length != ')'.allMatches(s).length) {
-    return expressionError;
-  }
 
   // Resolves all implicit multiplications.
   s = implicitMultiplications(s);
@@ -85,7 +99,7 @@ String addSub(String s) {
   //goes through a string and either adds or subtracts the next value
   //returns the sum of all operations
 
-  if (s == expressionError) return expressionError;
+  if (s == kExpressionError) return kExpressionError;
 
   //skips this function if there's no adition or subtraction
   if (!s.contains('-') && !s.contains('+')) return s;
@@ -110,7 +124,7 @@ String powRoot(String s) {
   //goes through a string and executes all squareroots and power within it
   //while preserving all other symbols such as parentheses and/or sum/sub
 
-  if (s == expressionError) return expressionError;
+  if (s == kExpressionError) return kExpressionError;
 
   //skips this function if there's no pow or sqrt
   if (!s.contains('\u221a') && !s.contains(ButtonId.power)) return s;
@@ -126,7 +140,8 @@ String powRoot(String s) {
       if (expr[i] == ButtonId.power) {
         result.last = pow(num.parse(expr[i - 1]), tempNum);
       } else {
-        if (tempNum < 0) return expressionError;
+        // sqrt(0) is invalid
+        if (tempNum < 0) return kExpressionError;
         if (i > 0 && isNum(result.last)) result.add('*');
 
         result.add(sqrt(tempNum));
@@ -143,7 +158,7 @@ String multDiv(String s) {
   //goes through a string and executes all multiplications and divisions within it
   //while preserving all other symbols such as parentheses and/or sum/sub
 
-  if (s == expressionError) return expressionError;
+  if (s == kExpressionError) return kExpressionError;
 
   //skips this function if there's no division or multiplication
   if (!s.contains(ButtonId.divide) && !s.contains(ButtonId.multiply)) return s;
@@ -158,7 +173,8 @@ String multDiv(String s) {
           : num.parse(expr[i + 1]);
 
       if (expr[i] == ButtonId.divide) {
-        if (tempNum == 0) return expressionError;
+        // division by 0 error.
+        if (tempNum == 0) return kExpressionError;
         result.last = (num.parse(result.last) / tempNum).toString();
       } else {
         result.last = (num.parse(result.last) * tempNum).toString();
@@ -172,8 +188,8 @@ String multDiv(String s) {
 }
 
 List cleaner(String s) {
-  //removes all unecessary and/or redundant characters in string
-  //returns a list with all separated elements
+  // removes all unecessary and/or redundant characters in string
+  // returns a list with all separated elements
 
   // if the string ends with a '+', replaces it with '*2'
   s = s.endsWith('+') ? s.replaceRange(s.length - 1, null, '*2') : s;
@@ -189,6 +205,8 @@ List cleaner(String s) {
       .split('')
       .map((e) => e = '0123456789.'.contains(e) ? e : ' $e ')
       .join();
+
+  print(s.replaceAll('  ', ' ').trim().split(' '));
 
   return s.replaceAll('  ', ' ').trim().split(' ');
 }

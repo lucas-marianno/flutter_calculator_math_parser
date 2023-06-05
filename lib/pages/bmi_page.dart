@@ -17,32 +17,35 @@ class BMIPage extends StatefulWidget {
 class _BMIPageState extends State<BMIPage> {
   // TODO: Feature: implement a way to select imperial or metric measurements
 
-  BMIMeasurementType _selectedScreen = BMIMeasurementType.weight;
+  BMIMeasurementType _selectedDisplay = BMIMeasurementType.weight;
+  int selectedDisplayValue = 0;
 
   _updateBMIScreen(buttonId) {
     setState(() {
-      int _height = BMIBrain.getHeight();
-      int _weight = BMIBrain.getWeight();
+      selectedDisplayValue = _selectedDisplay == BMIMeasurementType.weight
+          ? BMIBrain.getWeight()
+          : BMIBrain.getHeight();
+
       if (buttonId == ButtonId.ac) {
         BMIBrain.clear();
       } else if (buttonId == ButtonId.equal) {
-        BMIBrain.setBMI(_height, _weight);
+        BMIBrain.setBMI();
         BMIBrain.displayResults(context);
-      } else if (_selectedScreen == BMIMeasurementType.weight) {
-        BMIBrain.setWeight('$_weight'.length < 3
-            ? int.parse(Logic.newScreenValue(buttonId, _weight.toString()))
-            : _weight);
+      }
+      String newvalue =
+          Logic.newScreenValue(buttonId, selectedDisplayValue.toString());
+
+      if (_selectedDisplay == BMIMeasurementType.weight) {
+        BMIBrain.setWeight(int.parse(newvalue));
       } else {
-        BMIBrain.setHeight('$_height'.length < 3
-            ? int.parse(Logic.newScreenValue(buttonId, _height.toString()))
-            : _height);
+        BMIBrain.setHeight(int.parse(newvalue));
       }
     });
   }
 
   _toggleSelectedScreen(BMIMeasurementType type) {
     setState(() {
-      _selectedScreen = type;
+      _selectedDisplay = type;
     });
   }
 
@@ -57,7 +60,7 @@ class _BMIPageState extends State<BMIPage> {
       body: Column(
         children: [
           BMIDisplay(BMIBrain.getWeight(), BMIBrain.getHeight(),
-              _selectedScreen, _toggleSelectedScreen),
+              _selectedDisplay, _toggleSelectedScreen),
           const Divider(),
           KeyboardBuilder(
             firstRowShorter: true,

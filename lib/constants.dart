@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Math Constants
-const String expressionError = 'invalid expression';
+const String kExpressionError = 'invalid expression';
 
 // Color Constants
 const Color kBackgroundColor = Color(0xff171717);
