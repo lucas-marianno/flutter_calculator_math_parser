@@ -24,6 +24,7 @@ void debugCalculator() {
     "-7*-(6/3)": '14',
     '50+2*3': '56',
     '(50+2)*3': '156',
+    // double
     '.5*3': '1.5',
     '3*.5': '1.5',
     '2*-5': '-10',
@@ -71,73 +72,85 @@ void debugCalculator() {
       print(separated(key));
     }
   });
+
+  // String a = '10-2--5';
+  // print(a);
+  // print(separated(a));
 }
 
 List<dynamic> separated(String s) {
   // Takes a string, separates digits and non-digit characters, handles
   // negative numbers, and returns a list containing the separated elements.
 
-  List<dynamic> ans = [];
   String temp = '';
-  for (var i = 0; i < s.split('').length; i++) {
-    if (RegExp(r'\d').hasMatch(s[i])) {
-      temp += s[i];
+  List<dynamic> ans = [];
+  // TODO: make this work
+  // for (var i = 0; i < s.split('').length; i++) {
+  //   print('-------------------------------: ${s[i]}');
+  //   print(temp);
+  //   print(ans);
+  //   if ('0123456789.'.contains(s[i])) {
+  //     temp += s[i];
+  //   } else {
+  //     if (ans.length >= 2) {
+  //       if (ans.last == '-' && ans[ans.length - 2] is num) {
+  //         ans.removeLast();
+  //         ans.add(num.parse('-$temp'));
+  //         temp = '';
+  //       } else {
+  //         ans.add(num.parse(temp));
+  //         temp = '';
+  //       }
+  //     } else if (ans.length >= 1) {
+  //       if (ans.last == '-') {
+  //         ans.removeLast();
+  //         ans.add(num.parse('-$temp'));
+  //         temp = '';
+  //       }
+  //     }
+  //     ans.add(s[i]);
+  //   }
+  // }
+  // if (temp.isNotEmpty) {
+  //   if (ans.last == '-') {
+  //     ans.removeLast();
+  //     ans.add(num.parse('-$temp'));
+  //   } else {
+  //     ans.add(num.parse(temp));
+  //   }
+  // }
+  for (var char in s.split('')) {
+    // if char is a digit
+    if (RegExp(r'\d').hasMatch(char)) {
+      temp += char;
     } else {
-      ans.add(s[i]);
       if (temp.isNotEmpty) {
-        if (ans.isNotEmpty) {
-          if (ans.last == '-') {
-            ans.removeLast();
-            ans.add(num.parse('-$temp'));
-            temp = '';
-          }
-        } else {
-          ans.add(num.parse(temp));
-          temp = '';
+        ans.add(num.parse(temp));
+        temp = '';
+      }
+      ans.add(char);
+    }
+  }
+  if (temp.isNotEmpty) ans.add(num.parse(temp));
+
+  // finds negative numbers that might have gotten split in the process and merges them
+  for (int i = 0; i < ans.length; i++) {
+    // if the cur4rent element is a number, and the previous element is '-'
+    if (i >= 2) {
+      if (ans[i] is num && ans[i - 1] == '-') {
+        // if the anteprevious element is NOT a number
+        if (ans[i - 2] is! num) {
+          ans[i] = -ans[i];
+          ans.removeAt(i - 1);
         }
+      }
+    } else if (i >= 1) {
+      if (ans[i] is num && ans[i - 1] == '-') {
+        ans[i] = ans[i] * -1;
+        ans.removeAt(i - 1);
       }
     }
   }
-  if (temp.isNotEmpty) {
-    if (ans.last == '-') {
-      ans.removeLast();
-      ans.add(num.parse('-$temp'));
-    } else {
-      ans.add(num.parse(temp));
-    }
-  }
-  // for (var char in s.split('')) {
-  //   // if char is a digit
-  //   if (RegExp(r'\d').hasMatch(char)) {
-  //     temp += char;
-  //   } else {
-  //     if (temp.isNotEmpty) {
-  //       ans.add(num.parse(temp));
-  //       temp = '';
-  //     }
-  //     ans.add(char);
-  //   }
-  // }
-  //if (temp.isNotEmpty) ans.add(num.parse(temp));
-  //
-  // finds negative numbers that might have gotten split in the process and merges them
-  // for (int i = 0; i < ans.length; i++) {
-  //   // if the cur4rent element is a number, and the previous element is '-'
-  //   if (i >= 2) {
-  //     if (ans[i] is num && ans[i - 1] == '-') {
-  //       // if the anteprevious element is NOT a number
-  //       if (ans[i - 2] is! num) {
-  //         ans[i] = -ans[i];
-  //         ans.removeAt(i - 1);
-  //       }
-  //     }
-  //   } else if (i >= 1) {
-  //     if (ans[i] is num && ans[i - 1] == '-') {
-  //       ans[i] = ans[i] * -1;
-  //       ans.removeAt(i - 1);
-  //     }
-  //   }
-  // }
 
   return ans;
 }
