@@ -61,6 +61,7 @@ class Logic {
       default:
         // else: inserts buttonId after currentDisplay
         if (currentDisplay.length <= kCurrentDisplayLimit) {
+          // TODO: Feature: Replace display character limit by a scrollable screen
           // Limits the currentDisplay to kCurrentDisplayLimit characters
           return currentDisplay == '0' ? buttonId : currentDisplay + buttonId;
         } else {

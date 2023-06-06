@@ -9,41 +9,137 @@ import 'package:calculator2/constants.dart';
 // TODO: Bugfix: List of math errors found:
 
 void debugCalculator() {
-  Map<String, String> expected = {
-    '-12^2': '144',
-    '-10^2': '100',
-    '(-10)^2': '100',
-    '10^2^2': '10000',
-    '-10*-10*-10': '10000',
+  Map<String, String> tests = {
+    //+-/*() ¹²³£¢¬¬¬¬¬¬
     "(81)": '81',
     '12*(25+1)': '312',
     '2(1+2)': '6',
-    "1 + 1": '2',
+    "1+1": '2',
     "8/16": '0.5',
-    "3 -(-1)": '4',
-    "2 + -2": '0',
-    "10- 2- -5": '13',
+    "3-(-1)": '4',
+    "2+-2": '0',
+    "10-2--5": '13',
     "(((10)))": '10',
-    "3 * 5": '15',
-    "-7 * -(6 / 3)": '14',
+    "3*5": '15',
+    "-7*-(6/3)": '14',
     '50+2*3': '56',
     '(50+2)*3': '156',
     '.5*3': '1.5',
     '3*.5': '1.5',
+    '2*-5': '-10',
+    '1-(-2)*-2': '-3',
+    '1--2*-2': '-3',
+    '-10*-10': '100',
+    '-10*-10*-10': '-1000',
+    '(((((((((1+5642)*3656)/44546)-669005)*09096)+7134)-(((((8-4569)/456)+12721)*17569882)-17897893))*11344)/13245235)+16345345':
+        '-180121098.42022455',
+    // pow  = / = \u00f7
+    '2^2': '4',
+    '5^(-2)': '0.04',
+    '-10^-2': '0,01',
+    '(9-2)^(2*1)': '49',
+    '4^2*4^5/4^4': '64',
+    '-12^2': '144',
+    '-10^2': '100',
+    '(-10)^2': '100',
+    '10^2^2': '10000',
+    '10-12^2': '-134',
+    '(10-12)^2': '4',
+    '1-(10-12)^2': '-3',
+    // sqrt = ¬ = \u221a
+    '¬81': '9',
+    '¬9': '3',
   };
 
   //removeEqualSignFromExpr
-  expected.forEach((key, value) {
-    key = key.replaceAll('/', ButtonId.divide);
-    String ans = removeEqualSignFromExpr(calculateMathExpr(key));
-    if (ans != value) {
-      print('\x1B[31mFAILED\x1B[0m at  $key');
-      print('expected:  $value');
-      print('got:       $ans');
-    } else {
-      print('\x1B[32mPASSED\x1B[0m at  $key');
+  // tests.forEach((key, value) {
+  //   key = key.replaceAll('/', ButtonId.divide);
+  //   key = key.replaceAll('¬', ButtonId.squareRoot);
+  //   String ans = removeEqualSignFromExpr(calculateMathExpr(key));
+  //   if (ans != value) {
+  //     print('\x1B[31mFAILED\x1B[0m at  $key');
+  //     print('expected:  $value');
+  //     print('got:       $ans');
+  //   } else {
+  //     print('\x1B[32mPASSED\x1B[0m at  $key');
+  //   }
+  // });
+
+  tests.forEach((key, value) {
+    if (key.contains('-')) {
+      print(key);
+      print(separated(key));
     }
   });
+}
+
+List<dynamic> separated(String s) {
+  // Takes a string, separates digits and non-digit characters, handles
+  // negative numbers, and returns a list containing the separated elements.
+
+  List<dynamic> ans = [];
+  String temp = '';
+  for (var i = 0; i < s.split('').length; i++) {
+    if (RegExp(r'\d').hasMatch(s[i])) {
+      temp += s[i];
+    } else {
+      ans.add(s[i]);
+      if (temp.isNotEmpty) {
+        if (ans.isNotEmpty) {
+          if (ans.last == '-') {
+            ans.removeLast();
+            ans.add(num.parse('-$temp'));
+            temp = '';
+          }
+        } else {
+          ans.add(num.parse(temp));
+          temp = '';
+        }
+      }
+    }
+  }
+  if (temp.isNotEmpty) {
+    if (ans.last == '-') {
+      ans.removeLast();
+      ans.add(num.parse('-$temp'));
+    } else {
+      ans.add(num.parse(temp));
+    }
+  }
+  // for (var char in s.split('')) {
+  //   // if char is a digit
+  //   if (RegExp(r'\d').hasMatch(char)) {
+  //     temp += char;
+  //   } else {
+  //     if (temp.isNotEmpty) {
+  //       ans.add(num.parse(temp));
+  //       temp = '';
+  //     }
+  //     ans.add(char);
+  //   }
+  // }
+  //if (temp.isNotEmpty) ans.add(num.parse(temp));
+  //
+  // finds negative numbers that might have gotten split in the process and merges them
+  // for (int i = 0; i < ans.length; i++) {
+  //   // if the cur4rent element is a number, and the previous element is '-'
+  //   if (i >= 2) {
+  //     if (ans[i] is num && ans[i - 1] == '-') {
+  //       // if the anteprevious element is NOT a number
+  //       if (ans[i - 2] is! num) {
+  //         ans[i] = -ans[i];
+  //         ans.removeAt(i - 1);
+  //       }
+  //     }
+  //   } else if (i >= 1) {
+  //     if (ans[i] is num && ans[i - 1] == '-') {
+  //       ans[i] = ans[i] * -1;
+  //       ans.removeAt(i - 1);
+  //     }
+  //   }
+  // }
+
+  return ans;
 }
 
 String calculateMathExpr(String s) {
@@ -165,15 +261,26 @@ String powRoot(String s) {
   //skips this function if there's no pow or sqrt
   if (!s.contains('\u221a') && !s.contains(ButtonId.power)) return s;
 
-  List expr = cleaner(s);
+  //List expr = cleaner(s);
+  List expr = s.split('');
+
+  print('------------------------ $expr');
 
   List result = [];
 
   for (int i = 0; i < expr.length; i++) {
     if (expr[i] == ButtonId.power || expr[i] == ButtonId.squareRoot) {
+      // if x^-y:
       num tempNum = expr[i + 1] == '-'
           ? num.parse(expr[i + 2]) * -1
           : num.parse(expr[i + 1]);
+      // if -x^y:
+      print('i: $i');
+      if (i >= 2) {
+        if (expr[i - 2] == '-') {
+          //TODO
+        }
+      }
       if (expr[i] == ButtonId.power) {
         result.last = pow(num.parse(expr[i - 1]), tempNum);
       } else {
