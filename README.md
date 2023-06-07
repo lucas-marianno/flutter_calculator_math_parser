@@ -1,26 +1,39 @@
 # Math Expression Calculator
 
-The Math Expression Calculator has been designed to evaluate mathematical expressions containing Square Root, Power, basic operators and even parentheses.
+The Math Expression Calculator is, at its core, a [Mathematical Expression Parser](https://www.google.com/search?q=mathematical+expression+parser).
 
-The calculator is smart snough to recognize implicit multiplications and order of operations.
+The parser can evaluate expressions containing Square Root, Power, Multiplication, Division, Subtraction, and Addition.
+
+The parser has full support for parentheses, including nesting.
+
+The parser recognizes [Implicit Multiplications](https://www.google.com/search?q=implicit+multiplication) and follows the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations).
 
 ## FEATURES:
 You can input complex math expressions.
 
-Users to retrieve previous math expressions by clicking on them.
+Users can retrieve previously used math expressions by clicking on them.
 
 Users can store and retrieve results using memory controls.
 
 Users can easily calculate their Body Mass Index.
+
+Upcoming features:
+
+- App Language Selection (English, Portuguese, Spanish).
+- App Customization (Switch Dark/Light Mode, select accent color).
+- 1st and 2nd-degree Equation Parser.
+- Interest Converter (daily -> monthly -> annual, and vice-versa).
+- Unit Converter (Mass, Length, Speed, etc).
 
 ## About this project:
 
 The primary objective of this project is to provide a foundation for a career as a Flutter Developer.
 
 The project serves the following purposes:
-- To implement coding techniques, ideas, and concepts acquired during the course of learning.
-- To monitor my progress in the development of the application.
-- To track improvements in Flutter, Dart and general coding skills.
+
+- Implement coding techniques, ideas, and concepts acquired during the course of learning.
+- Monitor my progress in the development of the application.
+- Track improvements in Flutter, Dart, and general coding skills.
 
 ### Phases of development (TODO list):
 
