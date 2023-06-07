@@ -67,4 +67,4 @@ The project serves the following purposes:
 **PHASE 6:**
   - Deploy project to PlayStore.
 
-![alt text](design_references/printScreen.jpg)
+![alt text](design_references/screenshot.jpg)
