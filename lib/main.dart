@@ -2,7 +2,6 @@ import 'package:calculator2/routes.dart';
 import 'package:calculator2/theme.dart';
 import 'package:flutter/material.dart';
 
-// TODO: Update the readme.md file and add new screen captures on the github page
 // TODO: Upgrade to Material3
 
 void main() {

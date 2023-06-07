@@ -1,10 +1,8 @@
-import 'package:calculator2/brain/math_expression_parser.dart';
 import 'package:flutter/material.dart';
 import 'keyboard_default_button.dart';
 
 class Keyboards {
   static List<List<Widget>> calculatorKeyboard(Function function) => [
-        // TODO: Feature: create a '%' button
         [
           DefaultButton(ButtonId.mr, function, emphasis: Emphasis.zero),
           DefaultButton(ButtonId.mc, function, emphasis: Emphasis.zero),
@@ -41,10 +39,8 @@ class Keyboards {
           DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
         ],
         [
-          Expanded(
-              child: TextButton(
-                  onPressed: () => debugCalculator(),
-                  child: const FittedBox(child: Text('debug')))),
+          //Expanded(child: TextButton(onPressed: () => debugCalculator(),child: const FittedBox(child: Text('debug')))),
+          const Spacer(),
           DefaultButton(ButtonId.zero, function),
           DefaultButton(ButtonId.dot, function),
           DefaultButton(

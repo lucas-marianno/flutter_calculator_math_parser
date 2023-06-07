@@ -31,6 +31,7 @@ class ButtonId {
       mr = 'MR',
       ms = 'MS',
       mc = 'MC';
+
   ButtonId();
 }
 
