@@ -1,5 +1,6 @@
 # Math Expression Calculator
 
+
 The Math Expression Calculator is, at its core, a [Mathematical Expression Parser](https://www.google.com/search?q=mathematical+expression+parser).
 
 The parser can evaluate expressions containing Square Root, Power, Multiplication, Division, Subtraction, and Addition.
@@ -8,7 +9,9 @@ The parser has full support for parentheses, including nesting.
 
 The parser recognizes [Implicit Multiplications](https://www.google.com/search?q=implicit+multiplication) and follows the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations).
 
-## FEATURES:
+
+## Features:
+
 You can input complex math expressions.
 
 Users can retrieve previously used math expressions by clicking on them.
@@ -25,7 +28,12 @@ Upcoming features:
 - Interest Converter (daily -> monthly -> annual, and vice-versa).
 - Unit Converter (Mass, Length, Speed, etc).
 
+
+![alt text](design_references/screenshot.jpg)
+
+
 ## About this project:
+
 
 The primary objective of this project is to provide a foundation for a career as a Flutter Developer.
 
@@ -36,6 +44,7 @@ The project serves the following purposes:
 - Track improvements in Flutter, Dart, and general coding skills.
 
 ### Phases of development (TODO list):
+
 
 **PHASE 1:**
   - Introduce a WrapAround mode to enlarge digits on display when necessary. COMPLETED!
@@ -67,4 +76,4 @@ The project serves the following purposes:
 **PHASE 6:**
   - Deploy project to PlayStore.
 
-![alt text](design_references/screenshot.jpg)
+
