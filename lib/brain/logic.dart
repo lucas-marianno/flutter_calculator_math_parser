@@ -1,6 +1,6 @@
 import 'package:calculator2/widgets/keyboard_default_button.dart';
 import '../constants.dart';
-import 'equal_logic.dart';
+import 'math_expression_parser.dart';
 import 'memory.dart';
 
 class Logic {
@@ -24,8 +24,8 @@ class Logic {
     switch (buttonId) {
       case ButtonId.equal:
         Memory.addToMathHistory(
-            '$currentDisplay ${calculateMathExpr(currentDisplay)}');
-        return calculateMathExpr(currentDisplay);
+            '$currentDisplay ${mathExpressionParser(currentDisplay)}');
+        return mathExpressionParser(currentDisplay);
       case ButtonId.c:
         return '0';
       case ButtonId.ac:
@@ -37,7 +37,7 @@ class Logic {
       case ButtonId.ms:
         previousButtonId = ButtonId.ms;
         Memory.setMemoryValue(num.parse(
-            removeEqualSignFromExpr(calculateMathExpr(currentDisplay))));
+            removeEqualSignFromExpr(mathExpressionParser(currentDisplay))));
         return currentDisplay;
       case ButtonId.mc:
         Memory.setMemoryValue(0);
@@ -49,13 +49,15 @@ class Logic {
         if (currentDisplay.contains(RegExp(r'\d$'))) return memory.toString();
         return currentDisplay + memory.toString();
       case ButtonId.squareRoot:
-        // If the display is zero AND there's only digits on display, inserts
+        // If the display is NOT zero AND there's only digits on display, inserts
         // sqrt before the current display.
         if (currentDisplay != '0' &&
             !currentDisplay.contains(
               RegExp('[*-+${ButtonId.divide}${ButtonId.squareRoot}]'),
             )) {
           return buttonId + currentDisplay;
+        } else if (currentDisplay == '0') {
+          return buttonId;
         }
         return currentDisplay + buttonId;
       default:

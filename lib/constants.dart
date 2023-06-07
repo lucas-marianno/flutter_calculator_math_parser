@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 // Math Constants
+const String kDiv0 = 'division by zero';
 const String kExpressionError = 'invalid expression';
+const String kSqrtNegative = 'error sqrt(-n)';
 
 // Color Constants
 const Color kBackgroundColor = Color(0xff171717);

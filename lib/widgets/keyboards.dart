@@ -1,4 +1,4 @@
-import 'package:calculator2/brain/equal_logic.dart';
+import 'package:calculator2/brain/math_expression_parser.dart';
 import 'package:flutter/material.dart';
 import 'keyboard_default_button.dart';
 
