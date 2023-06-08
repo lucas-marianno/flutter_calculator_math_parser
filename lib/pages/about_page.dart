@@ -1,8 +1,9 @@
-import 'package:calculator2/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
+
+import '../constants.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});

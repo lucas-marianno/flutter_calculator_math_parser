@@ -1,14 +1,19 @@
-import 'package:calculator2/pages/about_page.dart';
-import 'package:calculator2/pages/bmi_page.dart';
-import 'package:calculator2/pages/calculator_page.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expression_parser/main.dart';
+import 'package:math_expression_parser/pages/about_page.dart';
+import 'package:math_expression_parser/pages/bmi_page.dart';
+import 'package:math_expression_parser/pages/calculator_page.dart';
 
-String calculatorPage = '/calculatorPage';
-String aboutPage = '/aboutPage';
-String bmiPage = '/bmiScreen';
+class Pages {
+  static const String mainPage = '/main',
+      calculatorPage = '/calculatorPage',
+      aboutPage = '/aboutPage',
+      bmiPage = '/bmiScreen';
+}
 
 Map<String, Widget Function(BuildContext)> routes = {
-  calculatorPage: (context) => const HomePage(),
-  aboutPage: (context) => const AboutPage(),
-  bmiPage: (context) => const BMIPage(),
+  Pages.mainPage: (context) => const MainPage(),
+  Pages.calculatorPage: (context) => const HomePage(),
+  Pages.aboutPage: (context) => const AboutPage(),
+  Pages.bmiPage: (context) => const BMIPage(),
 };

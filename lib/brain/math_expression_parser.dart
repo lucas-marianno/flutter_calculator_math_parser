@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:calculator2/widgets/keyboard_default_button.dart';
-import 'package:calculator2/constants.dart';
+import '../constants.dart';
+import '../widgets/keyboard_default_button.dart';
 
 // TODO: Feature: Implement Scientific Notation
 

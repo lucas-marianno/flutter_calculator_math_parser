@@ -20,18 +20,18 @@ class PopupMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton(
       onSelected: (value) {
-        if (value == aboutPage) {
+        if (value == Pages.aboutPage) {
           Navigator.pushNamed(context, value);
         } else {
           Navigator.popAndPushNamed(context, value);
         }
       },
-      itemBuilder: (context) => [
-        PopupMenuItem(value: calculatorPage, child: const Text('Calculator')),
-        PopupMenuItem(value: bmiPage, child: const Text('BMI Calculator')),
+      itemBuilder: (context) => const [
+        PopupMenuItem(value: Pages.calculatorPage, child: Text('Calculator')),
+        PopupMenuItem(value: Pages.bmiPage, child: Text('BMI Calculator')),
         PopupMenuItem(
-          value: aboutPage,
-          child: const Row(
+          value: Pages.aboutPage,
+          child: Row(
             children: [Text('About  '), Icon(Icons.info_outline)],
           ),
         ),

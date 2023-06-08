@@ -1,5 +1,5 @@
-import 'package:calculator2/constants.dart';
 import 'package:flutter/material.dart';
+import '../constants.dart';
 import '../widgets/bmi_widgets.dart';
 
 class BMIBrain {

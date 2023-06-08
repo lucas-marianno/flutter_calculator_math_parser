@@ -1,6 +1,6 @@
-import 'package:calculator2/brain/memory.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator2/constants.dart';
+import '../brain/memory.dart';
+import '../constants.dart';
 
 class CalculatorDisplay extends StatelessWidget {
   const CalculatorDisplay({

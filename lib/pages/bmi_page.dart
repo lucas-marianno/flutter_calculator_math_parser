@@ -1,9 +1,9 @@
-import 'package:calculator2/widgets/keyboard_default_button.dart';
-import 'package:calculator2/widgets/keyboard_builder.dart';
-import 'package:calculator2/widgets/keyboards.dart';
 import 'package:flutter/material.dart';
 import '../brain/bmi_brain.dart';
 import '../brain/logic.dart';
+import '../widgets/keyboard_builder.dart';
+import '../widgets/keyboard_default_button.dart';
+import '../widgets/keyboards.dart';
 import '../widgets/popupmenu.dart';
 import '../widgets/bmi_widgets.dart';
 

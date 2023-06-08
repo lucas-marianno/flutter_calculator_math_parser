@@ -1,5 +1,5 @@
-import 'package:calculator2/brain/memory.dart';
 import 'package:flutter/material.dart';
+import '../brain/memory.dart';
 import '../constants.dart';
 
 enum Emphasis { zero, low, high }
