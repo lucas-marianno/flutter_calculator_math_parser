@@ -30,7 +30,8 @@ class ButtonId {
       power = '^',
       mr = 'MR',
       ms = 'MS',
-      mc = 'MC';
+      mc = 'MC',
+      go = 'GO';
 
   ButtonId();
 }
@@ -71,7 +72,11 @@ class ButtonLabel extends StatelessWidget {
       }
     }
 
-    return FittedBox(child: label);
+    return FittedBox(
+        child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: label,
+    ));
   }
 }
 
@@ -82,7 +87,6 @@ class DefaultButton extends StatelessWidget {
   final int? flex;
 
   const DefaultButton(
-    // buttonFunction = Function(ButtonId.id)
     this.buttonId,
     this.buttonFunction, {
     super.key,
@@ -125,5 +129,9 @@ ButtonStyle defaultButtonStyle(Emphasis? emphasis) {
     return kDefaultButtonColor;
   }
 
-  return ButtonStyle(backgroundColor: MaterialStatePropertyAll(color()));
+  return ButtonStyle(
+    backgroundColor: MaterialStatePropertyAll(color()),
+    foregroundColor: const MaterialStatePropertyAll(kTextColor),
+    textStyle: const MaterialStatePropertyAll(kButtonTextStyle),
+  );
 }

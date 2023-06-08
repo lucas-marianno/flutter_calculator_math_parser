@@ -13,7 +13,7 @@ class Pages {
 
 Map<String, Widget Function(BuildContext)> routes = {
   Pages.mainPage: (context) => const MainPage(),
-  Pages.calculatorPage: (context) => const HomePage(),
+  Pages.calculatorPage: (context) => const CalculatorPage(),
   Pages.aboutPage: (context) => const AboutPage(),
   Pages.bmiPage: (context) => const BMIPage(),
 };

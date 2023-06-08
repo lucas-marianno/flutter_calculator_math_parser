@@ -4,7 +4,7 @@ import 'math_expression_parser.dart';
 import 'memory.dart';
 
 class Logic {
-  static String newScreenValue(String buttonId, String currentDisplay) {
+  static String newDisplayValue(String buttonId, String currentDisplay) {
     String previousButtonId = Memory.getPreviousButtonId();
     num memory = Memory.getMemoryValue();
 
@@ -22,6 +22,8 @@ class Logic {
     previousButtonId = buttonId;
 
     switch (buttonId) {
+      case ButtonId.go:
+        return removeEqualSignFromExpr(mathExpressionParser(currentDisplay));
       case ButtonId.equal:
         Memory.addToMathHistory(
             '$currentDisplay ${mathExpressionParser(currentDisplay)}');

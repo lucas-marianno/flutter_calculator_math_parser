@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:math_expression_parser/pages/about_page.dart';
+import 'package:math_expression_parser/constants.dart';
 import 'package:math_expression_parser/pages/bmi_page.dart';
 import 'package:math_expression_parser/pages/calculator_page.dart';
 import 'package:math_expression_parser/routes.dart';
 import 'package:math_expression_parser/theme.dart';
+import 'package:math_expression_parser/widgets/popupmenu.dart';
 
 // TODO: Upgrade to Material3
 
@@ -20,7 +21,7 @@ class CalculatorApp extends StatelessWidget {
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: themeData,
+      theme: material2themeData,
       initialRoute: Pages.mainPage,
       routes: routes,
     );
@@ -38,22 +39,26 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: const TabBar(
+            isScrollable: false,
+            indicatorColor: kHighEmphasisButtonColor,
+            indicatorSize: TabBarIndicatorSize.label,
+            labelColor: kHighEmphasisButtonColor,
+            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(icon: Icon(Icons.calculate)),
               Tab(icon: Icon(Icons.monitor_weight)),
-              Tab(icon: Icon(Icons.info_outline)),
             ],
           ),
+          actions: const [PopupMenu()],
         ),
         body: const TabBarView(
           children: [
-            HomePage(),
+            CalculatorPage(),
             BMIPage(),
-            AboutPage(),
           ],
         ),
       ),

@@ -13,7 +13,7 @@ const Color kTextColor = Colors.white;
 
 const Color kLowEmphasisButtonColor = Color(0xff202020);
 const Color kDefaultButtonColor = Color(0xff282828);
-const Color kHighEmphasisButtonColor = Colors.deepPurple;
+const Color kHighEmphasisButtonColor = Colors.deepPurpleAccent;
 
 const Color kBMIActiveScreenColor = Color.fromARGB(255, 162, 128, 255);
 const Color kBMIInactiveScreenColor = Colors.white;

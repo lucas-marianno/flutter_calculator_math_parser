@@ -4,7 +4,6 @@ import '../brain/logic.dart';
 import '../widgets/keyboard_builder.dart';
 import '../widgets/keyboard_default_button.dart';
 import '../widgets/keyboards.dart';
-import '../widgets/popupmenu.dart';
 import '../widgets/bmi_widgets.dart';
 
 class BMIPage extends StatefulWidget {
@@ -28,17 +27,18 @@ class _BMIPageState extends State<BMIPage> {
 
       if (buttonId == ButtonId.ac) {
         BMIBrain.clear();
-      } else if (buttonId == ButtonId.equal) {
+      } else if (buttonId == ButtonId.go) {
         BMIBrain.setBMI();
         BMIBrain.displayResults(context);
-      }
-      String newvalue =
-          Logic.newScreenValue(buttonId, selectedDisplayValue.toString());
-
-      if (_selectedDisplay == BMIMeasurementType.weight) {
-        BMIBrain.setWeight(int.parse(newvalue));
       } else {
-        BMIBrain.setHeight(int.parse(newvalue));
+        String displayValue =
+            Logic.newDisplayValue(buttonId, selectedDisplayValue.toString());
+
+        if (_selectedDisplay == BMIMeasurementType.weight) {
+          BMIBrain.setWeight(int.parse(displayValue));
+        } else {
+          BMIBrain.setHeight(int.parse(displayValue));
+        }
       }
     });
   }
@@ -52,11 +52,6 @@ class _BMIPageState extends State<BMIPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('BMI'),
-        actions: const [PopupMenu()],
-      ),
       body: Column(
         children: [
           BMIDisplay(BMIBrain.getWeight(), BMIBrain.getHeight(),

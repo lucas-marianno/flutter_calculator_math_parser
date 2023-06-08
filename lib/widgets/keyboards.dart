@@ -77,7 +77,7 @@ class Keyboards {
           const Spacer(),
           DefaultButton(ButtonId.zero, function),
           DefaultButton(
-            ButtonId.equal,
+            ButtonId.go,
             function,
             emphasis: Emphasis.high,
           )
