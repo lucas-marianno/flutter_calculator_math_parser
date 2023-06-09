@@ -6,8 +6,6 @@ import 'package:math_expression_parser/routes.dart';
 import 'package:math_expression_parser/theme.dart';
 import 'package:math_expression_parser/widgets/popupmenu.dart';
 
-// TODO: Upgrade to Material3
-
 void main() {
   runApp(const CalculatorApp());
 }

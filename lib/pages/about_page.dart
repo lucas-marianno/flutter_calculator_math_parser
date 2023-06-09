@@ -11,6 +11,7 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Readability: rewrite AboutPage, this is horrible and verbose.
+    // TODO: Replace this page with a .md reader
 
     return Scaffold(
       appBar: AppBar(),
