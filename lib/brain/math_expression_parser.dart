@@ -5,119 +5,20 @@ import 'logic.dart';
 // TODO: Feature: Implement Scientific Notation
 
 class Parser {
+  Parser(this.expression);
+
+  final String expression;
+
 // Public Functions:
 
-  static void debugCalculator() {
-    // Map<String, String> testsAddSub = {
-    //   '': '0',
-    //   '7': '7',
-    //   "1+1": '2',
-    //   "1.5+1": '2.5',
-    //   "2+-2": '0',
-    //   "10-2--5": '13',
-    //   '45.0+5.0': '50',
-    //   "-10.22999999-2.4--5.1": '-7.52999999',
-    //   '-12+23342+4533-345-11+987-1+345': '28838',
-    // };
-    // Map<String, String> testsMultDiv = {
-    //   '4/0': 'Infinity',
-    //   "8/16": '0.5',
-    //   "3*5": '15',
-    //   '.5*3': '1.5',
-    //   '3*.5': '1.5',
-    //   '2*-5': '-10',
-    //   '1--2*-2': '-3',
-    //   '-10*-10': '100',
-    //   '-10*-10*-10': '-1000',
-    //   '50+2*3': '56',
-    //   '2*2*2*2*2': '32',
-    //   '5/6/3/34/6/7': '0.00019452225334578278',
-    // };
-    // Map<String, String> testsPowSqrt = {
-    //   '2^2': '4',
-    //   '10^2': '100',
-    //   '-10^2': '100',
-    //   '10^-2': '0.01',
-    //   '-10^-2': '0.01',
-    //   '4^2*4^5/4^4': '64',
-    //   '-12^2': '144',
-    //   '10^2^2': '10000',
-    //   '10-12^2': '-134',
-    //   '¬81': '9',
-    //   '¬9': '3',
-    //   '¬-9': 'NaN',
-    //   '¬9^2': '9',
-    //   '¬2^2': '2',
-    // };
-
-    // Map<String, String> testsParenthesis = {
-    //   "(6/3)": '2',
-    //   "1+(6/3)": '3',
-    //   "(6/3)+1": '3',
-    //   '(12-10)-1': '1',
-    //   "(81)": '81',
-    //   '12*(25+1)': '312',
-    //   '2(1+2)': '6',
-    //   "3-(-1)": '4',
-    //   "(((10)))": '10',
-    //   "-7*-(6/3)": '14',
-    //   '(50+2)*3': '156',
-    //   // double
-    //   '1-(-2)*-2': '-3',
-    //   '(((((((((1+5642)*3656)/44546)-669005)*09096)+7134)-(((((8-4569)/456)+12721)*17569882)-17897893))*11344)/13245235)+16345345':
-    //       '-180121098.42022455',
-    //   // pow  = / = \u00f7
-    //   '5^(-2)': '0.04',
-    //   '(9-2)^(2*1)': '49',
-    //   '(-10)^2': '100',
-    //   '(10-12)^2': '4',
-    //   '1-(10-12)^2': '-3',
-    //   // sqrt = ¬ = \u221a
-    // };
-
-    // Map<String, String> testsAll = {};
-    // testsAll.addAll(testsAddSub);
-    // testsAll.addAll(testsMultDiv);
-    // testsAll.addAll(testsPowSqrt);
-    // testsAll.addAll(testsParenthesis);
-
-    // testsAll.forEach((key, value) {
-    //   key = key.replaceAll('/', ButtonId.divide);
-    //   key = key.replaceAll('¬', ButtonId.squareRoot);
-    //   key = implicitMultiplications(key);
-    //   String ans =
-    //       addSubNew(multDivNew(powSqrtNew(parenthesisNew(separated(key)))))
-    //           .toString();
-    //   if (ans != value) {
-    //     print('\x1B[31mFAILED\x1B[0m at  $key');
-    //     print('expected:  $value');
-    //     print('got:       $ans');
-    //   } else {
-    //     print('\x1B[32mPASSED\x1B[0m at  $key');
-    //   }
-    // });
-
-    // testsParenthesis.forEach((key, value) {
-    //   key = key.replaceAll('/', ButtonId.divide);
-    //   key = key.replaceAll('¬', ButtonId.squareRoot);
-    //   key = implicitMultiplications(key);
-    //   print(key);
-    //   print(cleaner(key));
-    // });
-
-    // String a = '10-2--5';
-    // print(a);
-    // print(separated(a));
-  }
-
-  static String evaluateExpression(String s) {
+  String evaluateExpression() {
+    String s = expression;
     s = Logic.removeEqualSignFromExpr(s);
-    s = _cleaner(s);
-    s = _implicitMultiplications(s);
+    s = cleaner(s);
+    s = implicitMultiplications(s);
 
     if (!_isValidExpression(s)) return kExpressionError;
-    String newS =
-        _addSub(_multDiv(_powSqrt(_parenthesis(_separated(s))))).toString();
+    String newS = evaluateExpression(s);
     if (newS == 'Infinity') return '= $kDiv0';
     if (newS == 'NaN') return '= $kSqrtNegative';
     return '= $newS';
@@ -154,7 +55,7 @@ class Parser {
     return ans;
   }
 
-  static String _cleaner(String s) {
+  static String cleaner(String s) {
     // removes all unecessary and/or redundant characters in string
     // returns cleaned string.
 
@@ -176,7 +77,7 @@ class Parser {
     if (s.contains(RegExp(r'\^$'))) return false;
 
     // cleans the expression for trivial errors before evaluating
-    s = _cleaner(s);
+    s = cleaner(s);
 
     // if input contains repeated operands
     if (s.contains(RegExp('[${ButtonId.divide}^*+]{2,}')) ||
@@ -193,7 +94,7 @@ class Parser {
     return true;
   }
 
-  static String _implicitMultiplications(String s) {
+  static String implicitMultiplications(String s) {
     // Resolves all implicit multiplications.
     // Example: (2)3 = (2)*3 | 2(3) = 2*(3) | (2)(3) = (2)*(3)
     // Replaces all '(' preceded with a digit with '*('
@@ -225,14 +126,14 @@ class Parser {
     final List<dynamic> inner =
         expr.sublist(lastOpenedParIndex + 1, closeParIndex);
 
-    final List<dynamic> replacement = [_addSub(_multDiv(_powSqrt(inner)))];
+    final List<dynamic> replacement = [_addSub(multDiv(powSqrt(inner)))];
 
     expr.replaceRange(lastOpenedParIndex, closeParIndex + 1, replacement);
 
     return expr;
   }
 
-  static List<dynamic> _multDiv(List<dynamic> expr) {
+  static List<dynamic> multDiv(List<dynamic> expr) {
     // Skips this functions if no pow or sqrt are found.
     if (!expr.contains(ButtonId.multiply) && !expr.contains(ButtonId.divide)) {
       return expr;
@@ -259,7 +160,7 @@ class Parser {
     return temp;
   }
 
-  static List<dynamic> _parenthesis(List<dynamic> expr) {
+  static List<dynamic> parenthesis(List<dynamic> expr) {
     // Skips this function if no parentheses are found
     if (!expr.contains('(')) return expr;
 
@@ -270,13 +171,13 @@ class Parser {
     List<dynamic> newExpr = _innermostExpressionNew(expr);
 
     if (newExpr.contains('(')) {
-      newExpr = _parenthesis(newExpr);
+      newExpr = parenthesis(newExpr);
     }
     // when the expression has no more parenthesis, reorganizes and returns it.
-    return _separated(newExpr.join(''));
+    return separated(newExpr.join(''));
   }
 
-  static List<dynamic> _powSqrt(List<dynamic> expr) {
+  static List<dynamic> powSqrt(List<dynamic> expr) {
     // Skips this functions if no pow or sqrt are found.
     if (!expr.contains(ButtonId.squareRoot) && !expr.contains(ButtonId.power)) {
       return expr;
@@ -304,7 +205,7 @@ class Parser {
     return temp;
   }
 
-  static List<dynamic> _separated(String s) {
+  static List<dynamic> separated(String s) {
     // Takes a string, separates digits and non-digit characters, handles
     // negative numbers, and returns a list containing the separated elements.
 

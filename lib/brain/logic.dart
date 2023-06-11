@@ -2,7 +2,7 @@ import '../constants.dart';
 import 'math_expression_parser.dart';
 import 'memory.dart';
 
-class Logic extends Parser {
+class Logic {
   static String removeEqualSignFromExpr(String s) {
     // if the first character is '=', removes the first and second character ' '.
     return s[0] == '=' ? s = s.substring(2) : s;

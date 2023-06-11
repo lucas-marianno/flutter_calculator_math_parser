@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expression_parser/brain/debug.dart';
 import '../constants.dart';
 import 'keyboard_default_button.dart';
 
@@ -40,8 +41,7 @@ class Keyboards {
           DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
         ],
         [
-          //Expanded(child: TextButton(onPressed: () => debugCalculator(),child: const FittedBox(child: Text('debug')))),
-          const Spacer(),
+          const DebugButton(),
           DefaultButton(ButtonId.zero, function),
           DefaultButton(ButtonId.dot, function),
           DefaultButton(

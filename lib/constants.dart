@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+// debugMode
+const bool kDebugMode = false;
+
 // enums
 enum Emphasis { zero, low, high }
 
