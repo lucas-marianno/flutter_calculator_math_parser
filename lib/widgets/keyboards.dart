@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:math_expression_parser/brain/debug.dart';
 import '../constants.dart';
+import 'debug_button.dart';
 import 'keyboard_default_button.dart';
 
 class Keyboards {

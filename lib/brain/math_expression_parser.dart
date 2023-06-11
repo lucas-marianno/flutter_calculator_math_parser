@@ -5,26 +5,23 @@ import 'logic.dart';
 // TODO: Feature: Implement Scientific Notation
 
 class Parser {
-  Parser(this.expression);
+  // Public Functions:
 
-  final String expression;
-
-// Public Functions:
-
-  String evaluateExpression() {
-    String s = expression;
+  static String evaluateExpression(String s) {
     s = Logic.removeEqualSignFromExpr(s);
-    s = cleaner(s);
-    s = implicitMultiplications(s);
+    s = _cleaner(s);
+    s = _implicitMultiplications(s);
 
     if (!_isValidExpression(s)) return kExpressionError;
-    String newS = evaluateExpression(s);
+    String newS =
+        _tryToInt(_addSub(_multDiv(_powSqrt(_parenthesis(_separated(s))))))
+            .toString();
     if (newS == 'Infinity') return '= $kDiv0';
     if (newS == 'NaN') return '= $kSqrtNegative';
     return '= $newS';
   }
 
-// Private Functions:
+  // Private Functions:
 
   static num _addSub(List<dynamic> expr) {
     // Skips this functions if no pow or sqrt are found.
@@ -49,13 +46,10 @@ class Parser {
         }
       }
     }
-
-    // gets rid of trailing .0s and returns it
-    ans = num.parse(ans.toString().replaceAll(RegExp(r'\.0+$'), ''));
     return ans;
   }
 
-  static String cleaner(String s) {
+  static String _cleaner(String s) {
     // removes all unecessary and/or redundant characters in string
     // returns cleaned string.
 
@@ -77,7 +71,7 @@ class Parser {
     if (s.contains(RegExp(r'\^$'))) return false;
 
     // cleans the expression for trivial errors before evaluating
-    s = cleaner(s);
+    s = _cleaner(s);
 
     // if input contains repeated operands
     if (s.contains(RegExp('[${ButtonId.divide}^*+]{2,}')) ||
@@ -94,7 +88,7 @@ class Parser {
     return true;
   }
 
-  static String implicitMultiplications(String s) {
+  static String _implicitMultiplications(String s) {
     // Resolves all implicit multiplications.
     // Example: (2)3 = (2)*3 | 2(3) = 2*(3) | (2)(3) = (2)*(3)
     // Replaces all '(' preceded with a digit with '*('
@@ -126,14 +120,14 @@ class Parser {
     final List<dynamic> inner =
         expr.sublist(lastOpenedParIndex + 1, closeParIndex);
 
-    final List<dynamic> replacement = [_addSub(multDiv(powSqrt(inner)))];
+    final List<dynamic> replacement = [_addSub(_multDiv(_powSqrt(inner)))];
 
     expr.replaceRange(lastOpenedParIndex, closeParIndex + 1, replacement);
 
     return expr;
   }
 
-  static List<dynamic> multDiv(List<dynamic> expr) {
+  static List<dynamic> _multDiv(List<dynamic> expr) {
     // Skips this functions if no pow or sqrt are found.
     if (!expr.contains(ButtonId.multiply) && !expr.contains(ButtonId.divide)) {
       return expr;
@@ -160,7 +154,7 @@ class Parser {
     return temp;
   }
 
-  static List<dynamic> parenthesis(List<dynamic> expr) {
+  static List<dynamic> _parenthesis(List<dynamic> expr) {
     // Skips this function if no parentheses are found
     if (!expr.contains('(')) return expr;
 
@@ -171,13 +165,13 @@ class Parser {
     List<dynamic> newExpr = _innermostExpressionNew(expr);
 
     if (newExpr.contains('(')) {
-      newExpr = parenthesis(newExpr);
+      newExpr = _parenthesis(newExpr);
     }
     // when the expression has no more parenthesis, reorganizes and returns it.
-    return separated(newExpr.join(''));
+    return _separated(newExpr.join(''));
   }
 
-  static List<dynamic> powSqrt(List<dynamic> expr) {
+  static List<dynamic> _powSqrt(List<dynamic> expr) {
     // Skips this functions if no pow or sqrt are found.
     if (!expr.contains(ButtonId.squareRoot) && !expr.contains(ButtonId.power)) {
       return expr;
@@ -205,7 +199,12 @@ class Parser {
     return temp;
   }
 
-  static List<dynamic> separated(String s) {
+  static num _tryToInt(num expr) {
+    // gets rid of trailing .0s and returns it
+    return num.parse(expr.toString().replaceAll(RegExp(r'\.0+$'), ''));
+  }
+
+  static List<dynamic> _separated(String s) {
     // Takes a string, separates digits and non-digit characters, handles
     // negative numbers, and returns a list containing the separated elements.
 
