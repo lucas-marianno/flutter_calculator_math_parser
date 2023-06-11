@@ -2,40 +2,6 @@ import 'package:flutter/material.dart';
 import '../brain/memory.dart';
 import '../constants.dart';
 
-enum Emphasis { zero, low, high }
-
-class ButtonId {
-  static const String zero = '0',
-      one = '1',
-      two = '2',
-      three = '3',
-      four = '4',
-      five = '5',
-      six = '6',
-      seven = '7',
-      eight = '8',
-      nine = '9',
-      equal = '=',
-      add = '+',
-      subtract = '-',
-      multiply = '*',
-      divide = '\u00f7',
-      openParentheses = '(',
-      closeParentheses = ')',
-      dot = '.',
-      squareRoot = '\u221a',
-      c = 'C',
-      ac = 'AC',
-      delete = '<-',
-      power = '^',
-      mr = 'MR',
-      ms = 'MS',
-      mc = 'MC',
-      go = 'GO';
-
-  ButtonId();
-}
-
 class ButtonLabel extends StatelessWidget {
   final String buttonId;
   const ButtonLabel(this.buttonId, {super.key});

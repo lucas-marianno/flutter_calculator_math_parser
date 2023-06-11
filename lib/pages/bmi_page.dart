@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../brain/bmi_brain.dart';
 import '../brain/logic.dart';
+import '../constants.dart';
 import '../widgets/keyboard_builder.dart';
-import '../widgets/keyboard_default_button.dart';
 import '../widgets/keyboards.dart';
 import '../widgets/bmi_widgets.dart';
 
@@ -16,12 +16,12 @@ class BMIPage extends StatefulWidget {
 class _BMIPageState extends State<BMIPage> {
   // TODO: Feature: implement a way to select imperial or metric measurements
 
-  BMIMeasurementType _selectedDisplay = BMIMeasurementType.weight;
+  MeasurementType _selectedDisplay = MeasurementType.weight;
   int selectedDisplayValue = 0;
 
   _updateBMIScreen(buttonId) {
     setState(() {
-      selectedDisplayValue = _selectedDisplay == BMIMeasurementType.weight
+      selectedDisplayValue = _selectedDisplay == MeasurementType.weight
           ? BMIBrain.getWeight()
           : BMIBrain.getHeight();
 
@@ -34,7 +34,7 @@ class _BMIPageState extends State<BMIPage> {
         String displayValue =
             Logic.newDisplayValue(buttonId, selectedDisplayValue.toString());
 
-        if (_selectedDisplay == BMIMeasurementType.weight) {
+        if (_selectedDisplay == MeasurementType.weight) {
           BMIBrain.setWeight(int.parse(displayValue));
         } else {
           BMIBrain.setHeight(int.parse(displayValue));
@@ -43,7 +43,7 @@ class _BMIPageState extends State<BMIPage> {
     });
   }
 
-  _toggleSelectedScreen(BMIMeasurementType type) {
+  _toggleSelectedScreen(MeasurementType type) {
     setState(() {
       _selectedDisplay = type;
     });

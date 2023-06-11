@@ -4,9 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../brain/bmi_brain.dart';
 import '../constants.dart';
 
-// TODO: rename this enum, its confusing sometimes
-enum BMIMeasurementType { weight, height }
-
 class BMICategoryInfo extends StatelessWidget {
   const BMICategoryInfo({
     required this.label,
@@ -37,7 +34,7 @@ class BMICategoryInfo extends StatelessWidget {
 class BMIDisplay extends StatelessWidget {
   final int weight;
   final int height;
-  final BMIMeasurementType selectedMeasurement;
+  final MeasurementType selectedMeasurement;
   final Function screenToggler;
 
   const BMIDisplay(
@@ -57,10 +54,10 @@ class BMIDisplay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            BMIDisplayLine(BMIMeasurementType.weight, weight,
-                selectedMeasurement, screenToggler),
-            BMIDisplayLine(BMIMeasurementType.height, height,
-                selectedMeasurement, screenToggler),
+            BMIDisplayLine(MeasurementType.weight, weight, selectedMeasurement,
+                screenToggler),
+            BMIDisplayLine(MeasurementType.height, height, selectedMeasurement,
+                screenToggler),
           ],
         ),
       ),
@@ -69,9 +66,9 @@ class BMIDisplay extends StatelessWidget {
 }
 
 class BMIDisplayLine extends StatelessWidget {
-  final BMIMeasurementType type;
+  final MeasurementType type;
   final int value;
-  final BMIMeasurementType selectedMeasurement;
+  final MeasurementType selectedMeasurement;
   final Function screenToggler;
   const BMIDisplayLine(
     this.type,
@@ -89,7 +86,7 @@ class BMIDisplayLine extends StatelessWidget {
         ? kBMIActiveScreenColor
         : kBMIInactiveScreenColor;
 
-    if (type == BMIMeasurementType.weight) {
+    if (type == MeasurementType.weight) {
       measurementType = 'Weight';
       measurmentUnity = 'Kilograms';
     } else {

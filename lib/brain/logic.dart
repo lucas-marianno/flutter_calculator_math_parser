@@ -1,33 +1,33 @@
 import '../constants.dart';
-import '../widgets/keyboard_default_button.dart';
 import 'math_expression_parser.dart';
 import 'memory.dart';
 
-class Logic {
+class Logic extends Parser {
+  static String removeEqualSignFromExpr(String s) {
+    // if the first character is '=', removes the first and second character ' '.
+    return s[0] == '=' ? s = s.substring(2) : s;
+  }
+
+  static String parse(String s) => Parser.evaluateExpression(s);
+
   static String newDisplayValue(String buttonId, String currentDisplay) {
     String previousButtonId = Memory.getPreviousButtonId();
     num memory = Memory.getMemoryValue();
 
     currentDisplay = removeEqualSignFromExpr(currentDisplay);
 
-    // if the last button pressed was '=' or 'ms' AND the current button is a
-    // num, it will clear the currentScreen.
-    if ((previousButtonId == ButtonId.equal ||
-            previousButtonId == ButtonId.ms) &&
-        '0123456789.'.contains(buttonId)) {
-      currentDisplay = '0';
-    }
+    // TODO: feature: after a pow '^' the number should be elevated until an
+    // operand or par is pressed
 
     // stores the current buttonId to previous previousButtonId.
-    previousButtonId = buttonId;
+    Memory.setPreviousButtonId(buttonId);
 
     switch (buttonId) {
       case ButtonId.go:
-        return removeEqualSignFromExpr(mathExpressionParser(currentDisplay));
+        return removeEqualSignFromExpr(parse(currentDisplay));
       case ButtonId.equal:
-        Memory.addToMathHistory(
-            '$currentDisplay ${mathExpressionParser(currentDisplay)}');
-        return mathExpressionParser(currentDisplay);
+        Memory.addToMathHistory('$currentDisplay ${parse(currentDisplay)}');
+        return parse(currentDisplay);
       case ButtonId.c:
         return '0';
       case ButtonId.ac:
@@ -37,9 +37,8 @@ class Logic {
         if (currentDisplay.length <= 1) return '0';
         return currentDisplay.substring(0, currentDisplay.length - 1);
       case ButtonId.ms:
-        previousButtonId = ButtonId.ms;
-        Memory.setMemoryValue(num.parse(
-            removeEqualSignFromExpr(mathExpressionParser(currentDisplay))));
+        Memory.setMemoryValue(
+            num.parse(removeEqualSignFromExpr(parse(currentDisplay))));
         return currentDisplay;
       case ButtonId.mc:
         Memory.setMemoryValue(0);
@@ -51,8 +50,8 @@ class Logic {
         if (currentDisplay.contains(RegExp(r'\d$'))) return memory.toString();
         return currentDisplay + memory.toString();
       case ButtonId.squareRoot:
-        // If the display is NOT zero AND there's only digits on display, inserts
-        // sqrt before the current display.
+        // If the display is NOT zero AND display DOES NOT contain operands, then:
+        // inserts sqrt before the current display.
         if (currentDisplay != '0' &&
             !currentDisplay.contains(
               RegExp('[*-+${ButtonId.divide}${ButtonId.squareRoot}]'),
@@ -63,7 +62,13 @@ class Logic {
         }
         return currentDisplay + buttonId;
       default:
-        // else: inserts buttonId after currentDisplay
+        if ((previousButtonId == ButtonId.equal ||
+                previousButtonId == ButtonId.ms) &&
+            '01234567890.'.contains(buttonId)) {
+          // if the last button pressed was '=' or 'ms' AND the current button is a
+          // num, it will clear the currentDisplay before adding a new digit.
+          currentDisplay = '0';
+        }
         if (currentDisplay.length <= kCurrentDisplayLimit) {
           // TODO: Feature: Replace display character limit by a scrollable screen
           // Limits the currentDisplay to kCurrentDisplayLimit characters

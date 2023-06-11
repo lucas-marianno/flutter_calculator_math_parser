@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
-// Math Constants
+// enums
+enum Emphasis { zero, low, high }
+
+enum MeasurementType { weight, height }
+
+enum MeasurementUnity { imperial, metric }
+
+// Math
 const String kDiv0 = 'division by zero';
 const String kExpressionError = 'invalid expression';
 const String kSqrtNegative = 'error sqrt(-n)';
 
-// Color Constants
+// Colors
 const Color kBackgroundColor = Color(0xff171717);
 const Color kInactiveTextColor = Colors.grey;
 const Color kShadowColor = Color(0xff171717);
@@ -24,7 +31,6 @@ const Color kOverweightColor = Colors.orange;
 const Color kObeseColor = Colors.red;
 
 // Labels
-
 const String kUnderweightLabel = 'Underweight';
 const String kNormalWeightLabel = '    Normal     ';
 const String kOverweightLabel = ' Overweight ';
@@ -42,12 +48,12 @@ const double kScreenLargeTextSize = 75;
 const double kGap = 20;
 const double kLetterSpacing = 4;
 
-// Shadow Constants
+// Shadows
 const List<Shadow> kShadow = [
   Shadow(color: kShadowColor, offset: Offset(.5, .5), blurRadius: 5),
 ];
 
-// TextStyle Constants
+// TextStyles
 const TextStyle kButtonTextStyle = TextStyle(fontSize: kKeyTextSize);
 
 const TextStyle kBMIScreenTextStyle = TextStyle(fontSize: kKeyTextSize * 0.75);
@@ -77,3 +83,35 @@ const TextStyle kHyperlinkTextStyle = TextStyle(
     color: Color.fromARGB(255, 144, 202, 249),
     fontStyle: FontStyle.italic,
     decoration: TextDecoration.underline);
+
+// Classes
+class ButtonId {
+  static const String zero = '0',
+      one = '1',
+      two = '2',
+      three = '3',
+      four = '4',
+      five = '5',
+      six = '6',
+      seven = '7',
+      eight = '8',
+      nine = '9',
+      equal = '=',
+      add = '+',
+      subtract = '-',
+      multiply = '*',
+      divide = '\u00f7',
+      openParentheses = '(',
+      closeParentheses = ')',
+      dot = '.',
+      squareRoot = '\u221a',
+      c = 'C',
+      ac = 'AC',
+      delete = '<-',
+      power = '^',
+      mr = 'MR',
+      ms = 'MS',
+      mc = 'MC',
+      go = 'GO';
+  ButtonId();
+}
