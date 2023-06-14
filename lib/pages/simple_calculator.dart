@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+
 import '../brain/logic.dart';
 import '../brain/memory.dart';
 import '../widgets/calculator_display.dart';
 import '../widgets/keyboard_builder.dart';
 import '../widgets/keyboards.dart';
 
-// TODO: Feature: Implement the hability to select text on any of the app displays, and copy it.
-// TODO: Feature: Implement a cursor on any of the displays, allowing users to edit text.
-
-class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key});
+class SimpleCalculator extends StatefulWidget {
+  const SimpleCalculator({super.key});
 
   @override
-  State<CalculatorPage> createState() => _CalculatorPageState();
+  State<SimpleCalculator> createState() => _SimpleCalculatorState();
 }
 
-class _CalculatorPageState extends State<CalculatorPage> {
+class _SimpleCalculatorState extends State<SimpleCalculator> {
   updateDisplay(buttonId) {
     setState(() {
       Memory.setFunction(updateDisplayFromMemory);
@@ -41,7 +39,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               mainDisplayValue: Memory.getDisplayValue(),
             ),
             const Divider(),
-            FullKeyboardModular(updateDisplay)
+            NumericKeyboardModular(updateDisplay)
             // KeyboardBuilder(
             //   firstRowShorter: true,
             //   keyboard: Keyboards.calculatorKeyboard(updateDisplay, context: context),
@@ -53,8 +51,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 }
 
-class FullKeyboardModular extends StatelessWidget {
-  const FullKeyboardModular(this.function, {super.key});
+class NumericKeyboardModular extends StatelessWidget {
+  const NumericKeyboardModular(this.function, {super.key});
   final Function function;
 
   @override
@@ -75,7 +73,7 @@ class FullKeyboardModular extends StatelessWidget {
             flex: 2,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: Keyboards.rowfunc(function),
+              children: Keyboards.simpleRowfunc(function),
             ),
           ),
           Expanded(
@@ -88,7 +86,11 @@ class FullKeyboardModular extends StatelessWidget {
                   heroTag: 'numeric',
                   keyboard: Keyboards.numericKeyboard(function, context: context),
                 ),
-                KeyboardBuilder(flex: 2, keyboard: Keyboards.operators(function))
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: Keyboards.simpleOperators(function),
+                ))
               ],
             ),
           ),

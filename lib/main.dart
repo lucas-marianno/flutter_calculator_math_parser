@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/constants.dart';
 import 'package:math_expression_parser/pages/bmi_page.dart';
-import 'package:math_expression_parser/pages/calculator_page.dart';
+
+import 'package:math_expression_parser/pages/simple_calculator.dart';
 import 'package:math_expression_parser/routes.dart';
 import 'package:math_expression_parser/theme.dart';
 import 'package:math_expression_parser/widgets/popupmenu.dart';
@@ -22,6 +23,7 @@ class CalculatorApp extends StatelessWidget {
       theme: material2themeData,
       initialRoute: Pages.mainPage,
       routes: routes,
+      //home: SimpleCalculator(),
     );
   }
 }
@@ -55,7 +57,8 @@ class _MainPageState extends State<MainPage> {
         ),
         body: const TabBarView(
           children: [
-            CalculatorPage(),
+            SimpleCalculator(),
+            //CalculatorPage(),
             BMIPage(),
           ],
         ),

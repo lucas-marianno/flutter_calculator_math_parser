@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-// class Keyboard {
-//   final Function callbackFunction;
-//   final List<List<Widget>> keyboardKeys;
-
-//   const Keyboard(this.callbackFunction, this.keyboardKeys);
-// }
-
 class KeyboardBuilder extends StatelessWidget {
   /// The keyboard will be built in the form of <Column<Row<Widget>>
   final bool? firstRowShorter;
   final List<List<Widget>> keyboard;
+  final int? flex;
+  final String? heroTag;
+
   const KeyboardBuilder({
     super.key,
     this.firstRowShorter,
+    this.flex,
+    this.heroTag,
     required this.keyboard,
   });
 
@@ -37,13 +35,32 @@ class KeyboardBuilder extends StatelessWidget {
         ),
       ));
     }
-
-    return Expanded(
-      flex: 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: tempColumn,
-      ),
-    );
+    // return Expanded(
+    //   flex: flex ?? 2,
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: tempColumn,
+    //   ),
+    // );
+    if (heroTag == null) {
+      return Expanded(
+        flex: flex ?? 2,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: tempColumn,
+        ),
+      );
+    } else {
+      return Expanded(
+        flex: flex ?? 2,
+        child: Hero(
+          tag: heroTag!,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: tempColumn,
+          ),
+        ),
+      );
+    }
   }
 }
