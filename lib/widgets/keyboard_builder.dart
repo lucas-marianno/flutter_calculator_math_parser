@@ -35,13 +35,14 @@ class KeyboardBuilder extends StatelessWidget {
         ),
       ));
     }
-    // return Expanded(
-    //   flex: flex ?? 2,
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: tempColumn,
-    //   ),
-    // );
+    // TODO: solve this shit
+    return Expanded(
+      flex: flex ?? 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: tempColumn,
+      ),
+    );
     if (heroTag == null) {
       return Expanded(
         flex: flex ?? 2,
