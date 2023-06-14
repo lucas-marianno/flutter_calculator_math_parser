@@ -81,10 +81,14 @@ class NumericKeyboardModular extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                KeyboardBuilder(
+                Expanded(
                   flex: 3,
-                  heroTag: 'numeric',
-                  keyboard: Keyboards.numericKeyboard(function, context: context),
+                  child: Hero(
+                    tag: 'numeric',
+                    child: KeyboardBuilder(
+                      keyboard: Keyboards.numericKeyboard(function, context: context),
+                    ),
+                  ),
                 ),
                 Expanded(
                     child: Column(

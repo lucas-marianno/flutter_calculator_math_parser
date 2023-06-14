@@ -5,13 +5,11 @@ class KeyboardBuilder extends StatelessWidget {
   final bool? firstRowShorter;
   final List<List<Widget>> keyboard;
   final int? flex;
-  final String? heroTag;
 
   const KeyboardBuilder({
     super.key,
     this.firstRowShorter,
     this.flex,
-    this.heroTag,
     required this.keyboard,
   });
 
@@ -43,25 +41,25 @@ class KeyboardBuilder extends StatelessWidget {
         children: tempColumn,
       ),
     );
-    if (heroTag == null) {
-      return Expanded(
-        flex: flex ?? 2,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: tempColumn,
-        ),
-      );
-    } else {
-      return Expanded(
-        flex: flex ?? 2,
-        child: Hero(
-          tag: heroTag!,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: tempColumn,
-          ),
-        ),
-      );
-    }
+    // if (heroTag == null) {
+    //   return Expanded(
+    //     flex: flex ?? 2,
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: tempColumn,
+    //     ),
+    //   );
+    // } else {
+    //   return Expanded(
+    //     flex: flex ?? 2,
+    //     child: Hero(
+    //       tag: heroTag!,
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: tempColumn,
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 }
