@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // debugMode
-const bool kDebugMode = true;
+const bool kDebugMode = false;
 
 // enums
 enum Emphasis { zero, low, high }
@@ -61,14 +61,11 @@ const TextStyle kButtonTextStyle = TextStyle(fontSize: kKeyTextSize);
 
 const TextStyle kBMIScreenTextStyle = TextStyle(fontSize: kKeyTextSize * 0.75);
 
-const TextStyle kCalulatorMainDisplayTextStyle =
-    TextStyle(color: kTextColor, shadows: kShadow);
+const TextStyle kCalulatorMainDisplayTextStyle = TextStyle(color: kTextColor, shadows: kShadow);
 
-const TextStyle kFunctionButtonTextStyle =
-    TextStyle(fontSize: kKeyTextSize * 0.75);
+const TextStyle kFunctionButtonTextStyle = TextStyle(fontSize: kKeyTextSize * 0.75);
 
-const TextStyle kMemEntryTextStyle =
-    TextStyle(color: kInactiveTextColor, shadows: kShadow);
+const TextStyle kMemEntryTextStyle = TextStyle(color: kInactiveTextColor, shadows: kShadow);
 
 const TextStyle kBoldTextStyle = TextStyle(
   fontSize: kKeyTextSize * 2,

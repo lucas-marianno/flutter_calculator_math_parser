@@ -41,62 +41,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
               mainDisplayValue: Memory.getDisplayValue(),
             ),
             const Divider(),
-            FullKeyboardModular(updateDisplay)
-            // KeyboardBuilder(
-            //   firstRowShorter: true,
-            //   keyboard: Keyboards.calculatorKeyboard(updateDisplay, context: context),
-            // ),
+            KeyboardBuilder(
+              firstRowShorter: true,
+              keyboard: Keyboards.calculatorKeyboard(updateDisplay, context: context),
+            ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class FullKeyboardModular extends StatelessWidget {
-  const FullKeyboardModular(this.function, {super.key});
-  final Function function;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: Keyboards.mem(function),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: Keyboards.rowfunc(function),
-            ),
-          ),
-          Expanded(
-            flex: 8,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Hero(
-                    tag: 'numeric',
-                    child: KeyboardBuilder(
-                      keyboard: Keyboards.numericKeyboard(function, context: context),
-                    ),
-                  ),
-                ),
-                KeyboardBuilder(flex: 2, keyboard: Keyboards.operators(function))
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
