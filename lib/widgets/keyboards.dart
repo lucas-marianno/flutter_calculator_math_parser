@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
-import 'debug_button.dart';
 import 'keyboard_default_button.dart';
 
 class Keyboards {
@@ -39,7 +38,7 @@ class Keyboards {
           DefaultButton(ButtonId.subtract, function, emphasis: Emphasis.low),
         ],
         [
-          const DebugButton(),
+          const Spacer(),
           DefaultButton(ButtonId.zero, function),
           DefaultButton(ButtonId.dot, function),
           DefaultButton(

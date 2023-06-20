@@ -3,31 +3,32 @@ import 'math_expression_parser.dart';
 import 'memory.dart';
 
 class Logic {
+  //static bool _isSuperScript = false;
+
   static String removeEqualSignFromExpr(String s) {
     // if the first character is '=', removes the first and second character ' '.
     return s[0] == '=' ? s = s.substring(2) : s;
   }
 
-  static String parse(String s) => Parser.evaluateExpression(s);
-
   static String newDisplayValue(String buttonId, String currentDisplay) {
     String previousButtonId = Memory.getPreviousButtonId();
     num memory = Memory.getMemoryValue();
-
     currentDisplay = removeEqualSignFromExpr(currentDisplay);
 
-    // TODO: feature: after a pow '^' the number should be elevated until an
-    // operand or par is pressed
-
-    // stores the current buttonId to previous previousButtonId.
     Memory.setPreviousButtonId(buttonId);
+
+    // TODO: feature: after a pow '^' the number should be elevated (on display only) until an operand or par is pressed
 
     switch (buttonId) {
       case ButtonId.go:
-        return removeEqualSignFromExpr(parse(currentDisplay));
+        return removeEqualSignFromExpr(Parser.evaluateExpression(currentDisplay));
       case ButtonId.equal:
-        Memory.addToMathHistory('$currentDisplay ${parse(currentDisplay)}');
-        return parse(currentDisplay);
+        Memory.addToMathHistory('$currentDisplay ${Parser.evaluateExpression(
+          currentDisplay,
+        )}');
+        return Parser.evaluateExpression(
+          currentDisplay,
+        );
       case ButtonId.c:
         return '0';
       case ButtonId.ac:
@@ -38,7 +39,14 @@ class Logic {
         return currentDisplay.substring(0, currentDisplay.length - 1);
       case ButtonId.ms:
         Memory.setMemoryValue(
-            num.parse(removeEqualSignFromExpr(parse(currentDisplay))));
+          num.parse(
+            removeEqualSignFromExpr(
+              Parser.evaluateExpression(
+                currentDisplay,
+              ),
+            ),
+          ),
+        );
         return currentDisplay;
       case ButtonId.mc:
         Memory.setMemoryValue(0);
@@ -61,9 +69,10 @@ class Logic {
           return buttonId;
         }
         return currentDisplay + buttonId;
+      case ButtonId.power:
+        return currentDisplay + buttonId + ButtonId.openParentheses;
       default:
-        if ((previousButtonId == ButtonId.equal ||
-                previousButtonId == ButtonId.ms) &&
+        if ((previousButtonId == ButtonId.equal || previousButtonId == ButtonId.ms) &&
             '01234567890.'.contains(buttonId)) {
           // if the last button pressed was '=' or 'ms' AND the current button is a
           // num, it will clear the currentDisplay before adding a new digit.

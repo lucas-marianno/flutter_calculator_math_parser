@@ -13,9 +13,7 @@ class Parser {
     s = _implicitMultiplications(s);
 
     if (!_isValidExpression(s)) return kExpressionError;
-    String newS =
-        _tryToInt(_addSub(_multDiv(_powSqrt(_parenthesis(_separated(s))))))
-            .toString();
+    String newS = _tryToInt(_addSub(_multDiv(_powSqrt(_parenthesis(_separated(s)))))).toString();
     if (newS == 'Infinity') return '= $kDiv0';
     if (newS == 'NaN') return '= $kSqrtNegative';
     return '= $newS';
@@ -92,12 +90,10 @@ class Parser {
     // Resolves all implicit multiplications.
     // Example: (2)3 = (2)*3 | 2(3) = 2*(3) | (2)(3) = (2)*(3)
     // Replaces all '(' preceded with a digit with '*('
-    s = s.replaceAllMapped(
-        RegExp(r'\d\('), (m) => '${s.substring(m.start, m.end - 1)}*(');
+    s = s.replaceAllMapped(RegExp(r'\d\('), (m) => '${s.substring(m.start, m.end - 1)}*(');
 
     // Replaces all ')' followed by a digit with ')*'
-    s = s.replaceAllMapped(
-        RegExp(r'\)\d'), (m) => ')*${s.substring(m.start + 1, m.end)}');
+    s = s.replaceAllMapped(RegExp(r'\)\d'), (m) => ')*${s.substring(m.start + 1, m.end)}');
 
     s = s.replaceAll(')(', ')*(');
 
@@ -110,15 +106,14 @@ class Parser {
     int lastOpenedParIndex = 0;
     int closeParIndex = 0;
     for (int i = 0; i < expr.length; i++) {
-      if (expr[i] == '(') {
+      if (expr[i] == ButtonId.openParentheses) {
         lastOpenedParIndex = i;
-      } else if (expr[i] == ')') {
+      } else if (expr[i] == ButtonId.closeParentheses) {
         closeParIndex = i;
         break;
       }
     }
-    final List<dynamic> inner =
-        expr.sublist(lastOpenedParIndex + 1, closeParIndex);
+    final List<dynamic> inner = expr.sublist(lastOpenedParIndex + 1, closeParIndex);
 
     final List<dynamic> replacement = [_addSub(_multDiv(_powSqrt(inner)))];
 
@@ -228,10 +223,7 @@ class Parser {
       // finds negative numbers that might have gotten split in the process and merges them
       if (i >= 2) {
         // if the evaluated element index is 2 or more,
-        if (ans[i] is num &&
-            ans[i - 1] == '-' &&
-            ans[i - 2] is! num &&
-            ans[i - 2] != ')') {
+        if (ans[i] is num && ans[i - 1] == '-' && ans[i - 2] is! num && ans[i - 2] != ')') {
           // AND current element is a number,
           // AND the previous element is '-'
           // AND the anteprevious element is NOT a number NOR ')'

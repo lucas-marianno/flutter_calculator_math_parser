@@ -33,7 +33,7 @@ class KeyboardBuilder extends StatelessWidget {
         ),
       ));
     }
-    // TODO: solve this shit
+
     return Expanded(
       flex: flex ?? 2,
       child: Column(
@@ -41,25 +41,5 @@ class KeyboardBuilder extends StatelessWidget {
         children: tempColumn,
       ),
     );
-    // if (heroTag == null) {
-    //   return Expanded(
-    //     flex: flex ?? 2,
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: tempColumn,
-    //     ),
-    //   );
-    // } else {
-    //   return Expanded(
-    //     flex: flex ?? 2,
-    //     child: Hero(
-    //       tag: heroTag!,
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: tempColumn,
-    //       ),
-    //     ),
-    //   );
-    // }
   }
 }

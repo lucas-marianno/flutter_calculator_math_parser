@@ -2,7 +2,7 @@
 
 import 'package:math_expression_parser/brain/logic.dart';
 import 'package:math_expression_parser/brain/math_expression_parser.dart';
-import '../constants.dart';
+import '../lib/constants.dart';
 
 class Debug {
   static debugCalculator() {

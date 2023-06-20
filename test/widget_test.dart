@@ -5,25 +5,24 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:math_expression_parser/main.dart';
+// ignore_for_file: avoid_print
+
+import 'debug.dart';
+import 'package:math_expression_parser/constants.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const CalculatorApp());
+  // TODO: Learn more about testing and replace the function values for simulated taps and gestures on screen.
+  if (kDebugMode) {
+    Debug.debugCalculator();
+    superscriptTest();
+  } else {
+    print('kDebugMode == false');
+  }
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+superscriptTest() {
+  kToSuperScript.entries;
+  for (MapEntry entry in kToSuperScript.entries) {
+    print('${kToSuperScript[entry.key]}  =  ${kFromSuperScript[kToSuperScript[entry.key]]}');
+  }
 }

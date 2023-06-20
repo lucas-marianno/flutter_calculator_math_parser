@@ -10,8 +10,7 @@ class Memory {
 
   static void addToMathHistory(String mathExpressionAndResult) {
     _mathHistory.length >= 6 ? _mathHistory.removeAt(0) : null;
-    _mathHistory.add(
-        CalculatorMemoryEntry(mathExpressionAndResult, _calculatorSetState));
+    _mathHistory.add(CalculatorMemoryEntry(mathExpressionAndResult, _calculatorSetState));
   }
 
   static void clear() {
