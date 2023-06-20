@@ -24,13 +24,16 @@ class ReadmeMD extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: rootBundle.loadString('assets/readme.md'),
+      future: rootBundle.loadString('README.md'),
       builder: (context, AsyncSnapshot<String> snapshot) {
         if (snapshot.hasData) {
           return Markdown(
             selectable: true,
             data: snapshot.data!,
             controller: ScrollController(),
+            imageBuilder: (uri, title, alt) {
+              return Image.asset(uri.toString());
+            },
             styleSheet: MarkdownStyleSheet(
               blockSpacing: 12,
               textScaleFactor: 1.15,

@@ -4,36 +4,31 @@
 
 The Math Expression Calculator is, at its core, a [Mathematical Expression Parser](https://www.google.com/search?q=mathematical+expression+parser).
 
-
-The parser can evaluate expressions containing Square Root, Power, Multiplication, Division, Subtraction, and Addition.
-
-
-The parser has full support for parentheses, including nesting.
-
-
-The parser recognizes [Implicit Multiplications](https://www.google.com/search?q=implicit+multiplication) and follows the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations).
 ## 
 
 ## Features:
+- [x] You can input complex math expressions.
+- [x] The parser can evaluate expressions containing Square Root, Power, Multiplication, Division, Subtraction, and Addition.
+- [x] The parser has full support for parentheses, including nesting.
+- [x] The parser recognizes [Implicit Multiplications](https://www.google.com/search?q=implicit+multiplication)
+- [x] The parser follows the [Order of Operations](https://en.wikipedia.org/wiki/Order_of_operations).
+- [X] Used mathematical expression are displayed in history.
+- [x] Users can retrieve previously used math expressions by clicking on them.
+- [x] Users can store and retrieve results using 'MS', 'MC' and 'MR' controls.
+- [x] Users can easily calculate their [Body Mass Index.](https://en.wikipedia.org/wiki/Body_mass_index)
+- [x] Responsive Design
+- [ ] Scientific Notation
+- [ ] Language Selection (English, Portuguese, Spanish).
+- [ ] Customization (Switch Dark/Light Mode, select accent color).
+- [ ] Equation Parser (1st and 2nd-degree).
+- [ ] Interest Converter (daily -> monthly -> annual, and vice-versa).
+- [ ] Unit Converter (Mass, Length, Speed, etc).
+- [ ] OnScreen cursor.
+- [ ] Real-time Refactoring.
+- [ ] Theme customization (primary color and dark mode).
+- [ ] Integration with other apps or services, such as cloud storage, database, google account sign in, etc. (this will not have any practical effects, it will serve only as a study project).
+- [ ] Deploy project to PlayStore.
 
-
-- You can input complex math expressions.
-
-- Users can retrieve previously used math expressions by clicking on them.
-
-- Users can store and retrieve results using memory controls.
-
-- Users can easily calculate their Body Mass Index.
-
-##
-
-## Upcoming features:
-
-- App Language Selection (English, Portuguese, Spanish).
-- App Customization (Switch Dark/Light Mode, select accent color).
-- 1st and 2nd-degree Equation Parser.
-- Interest Converter (daily -> monthly -> annual, and vice-versa).
-- Unit Converter (Mass, Length, Speed, etc).
 
 ## 
 
@@ -55,36 +50,3 @@ This entire project was idealized and developed by Lucas Mariano, an enthusiast 
 ##
 
 ![alt text](design_references/screenshot.jpg)
-
-##
-
-### Phases of development (TODO list):
-
-
-**PHASE 1:**
-  - [X] Introduce a WrapAround mode to enlarge digits on display when necessary.
-  - [X] Implement a feature to show the entire equation in history.
-  - [ ] Develop a Scientific Notation function for displaying large numbers.
-
-**PHASE 2:**
-  - [ ] Incorporate interactive functionality to the display text:
-    - [ ] Implement a cursor.
-    - [ ] Refactor the expression in real-time.
-    - [X] Allow users to recall previous calculations from history.
-
-**PHASE 3:**
-  - [ ] Add a percentage and interest converter (annual -> monthly -> daily).
-  - [ ] Add a unit converter, such as length, weight, and temperature.
-
-**PHASE 4:**
-  - Enable users to customize the app by:
-    - [ ] Choosing a primary color.
-    - [ ] Choosing a dark or bright theme.
-
-**PHASE 5:**
-  - [ ] Integration with other apps or services, such as cloud storage, database, google account sign in, etc. (this will not have any practical functions, it will serve only as a study project).
-
-**PHASE 6:**
-  - [ ] Deploy project to PlayStore.
-
-
