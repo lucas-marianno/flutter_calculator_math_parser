@@ -22,6 +22,7 @@ class CalculatorApp extends StatelessWidget {
       theme: material2themeData,
       initialRoute: Pages.mainPage,
       routes: routes,
+      //home: MdPage(),
     );
   }
 }

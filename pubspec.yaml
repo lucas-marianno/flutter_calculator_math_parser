@@ -14,7 +14,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-  flutter_markdown: ^0.6.14
+  flutter_markdown: ^0.6.15
   google_fonts: ^5.0.0
   url_launcher: ^6.1.10
   flutter_launcher_icons: ^0.13.1
@@ -44,5 +44,6 @@ flutter:
   assets:
     - assets/
     - design_references/
+    - README.md
     
 
