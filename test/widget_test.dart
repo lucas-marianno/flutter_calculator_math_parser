@@ -7,14 +7,11 @@
 
 // ignore_for_file: avoid_print
 
-import 'debug.dart';
-import 'package:math_expression_parser/constants.dart';
-
 void main() {
   // TODO: Learn more about testing and replace the function values for simulated taps and gestures on screen.
-  if (kDebugMode) {
-    Debug.debugCalculator();
-  } else {
-    print('kDebugMode == false');
-  }
+  // if (kDebugMode) {
+  //   Debug.debugCalculator();
+  // } else {
+  //   print('kDebugMode == false');
+  // }
 }
