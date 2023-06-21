@@ -8,12 +8,12 @@ class Parser {
   // Public Functions:
 
   static String evaluateExpression(String s) {
-    s = Logic.removeEqualSignFromExpr(s);
     s = _cleaner(s);
-    s = _implicitMultiplications(s);
 
     if (!_isValidExpression(s)) return kExpressionError;
+
     String newS = _tryToInt(_addSub(_multDiv(_powSqrt(_parenthesis(_separated(s)))))).toString();
+
     if (newS == 'Infinity') return '= $kDiv0';
     if (newS == 'NaN') return '= $kSqrtNegative';
     return '= $newS';
@@ -47,21 +47,52 @@ class Parser {
     return ans;
   }
 
+  static _autoParentheses(String s) {
+    int nOfOpenPar = 0;
+    int nOfClosePar = 0;
+    int lastOpenParIndex = 0;
+    int lastCloseParIndex = 0;
+
+    for (int i = 0; i < s.length; i++) {
+      if (s[i] == ButtonId.openParentheses) {
+        nOfOpenPar++;
+        lastOpenParIndex = i;
+      } else if (s[i] == ButtonId.closeParentheses) {
+        nOfClosePar++;
+        lastCloseParIndex = i;
+      }
+    }
+    if (nOfClosePar == nOfOpenPar) {
+      return s;
+    } else if (lastOpenParIndex > lastCloseParIndex) {
+      return s + ButtonId.closeParentheses;
+    } else {
+      return kExpressionError;
+    }
+  }
+
   static String _cleaner(String s) {
     // removes all unecessary and/or redundant characters in string
     // returns cleaned string.
 
+    s = Logic.removeEqualSignFromExpr(s);
+
     s[0] == '(' ? s = '0+$s' : s;
-    return s
+    s = s
         .replaceAll('()', '')
         .replaceAll('--', '+')
         .replaceAll('-+ ', '-')
         .replaceAll('+-', '-')
         .replaceAll('**', '^');
+
+    s = _autoParentheses(s);
+    s = _implicitMultiplications(s);
+    return s;
   }
 
   static bool _isValidExpression(String s) {
     if (s == kExpressionError) return false;
+
     // if input doesn't contain digits
     if (!s.contains(RegExp(r'\d'))) return false;
 
@@ -100,7 +131,7 @@ class Parser {
     return s;
   }
 
-  static List<dynamic> _innermostExpressionNew(List<dynamic> expr) {
+  static List<dynamic> _innermostExpression(List<dynamic> expr) {
     // it only receives valid inputs
     // Locates the first math expr between () without any () within it
     int lastOpenedParIndex = 0;
@@ -157,7 +188,7 @@ class Parser {
     // resolves the first innermost expression, replaces its range with its result,
     // returns a newExpr with the first innermost expression resolved,
     // iterates recursively until there are no more parenthesis in the expression.
-    List<dynamic> newExpr = _innermostExpressionNew(expr);
+    List<dynamic> newExpr = _innermostExpression(expr);
 
     if (newExpr.contains('(')) {
       newExpr = _parenthesis(newExpr);
@@ -192,11 +223,6 @@ class Parser {
     }
 
     return temp;
-  }
-
-  static num _tryToInt(num expr) {
-    // gets rid of trailing .0s and returns it
-    return num.parse(expr.toString().replaceAll(RegExp(r'\.0+$'), ''));
   }
 
   static List<dynamic> _separated(String s) {
@@ -243,5 +269,10 @@ class Parser {
     }
 
     return ans;
+  }
+
+  static num _tryToInt(num expr) {
+    // gets rid of trailing .0s and returns it
+    return num.parse(expr.toString().replaceAll(RegExp(r'\.0+$'), ''));
   }
 }

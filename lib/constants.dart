@@ -113,12 +113,40 @@ class ButtonId {
       ms = 'MS',
       mc = 'MC',
       go = 'GO';
-  ButtonId();
 }
 
 // Maps
+const Map<String, Widget> kButtonLabel = {
+  ButtonId.zero: Text('0'),
+  ButtonId.one: Text('1'),
+  ButtonId.two: Text('2'),
+  ButtonId.three: Text('3'),
+  ButtonId.four: Text('4'),
+  ButtonId.five: Text('5'),
+  ButtonId.six: Text('6'),
+  ButtonId.seven: Text('7'),
+  ButtonId.eight: Text('8'),
+  ButtonId.nine: Text('9'),
+  ButtonId.equal: Text('='),
+  ButtonId.add: Icon(Icons.add),
+  ButtonId.subtract: Icon(Icons.remove),
+  ButtonId.multiply: Icon(Icons.close),
+  ButtonId.divide: Text('\u00f7'),
+  ButtonId.openParentheses: Text('('),
+  ButtonId.closeParentheses: Text(')'),
+  ButtonId.dot: Text('.'),
+  ButtonId.squareRoot: Text('\u221a'),
+  ButtonId.c: Text('C'),
+  ButtonId.ac: Text('AC'),
+  ButtonId.delete: Icon(Icons.backspace_outlined),
+  ButtonId.power: Text('x\u02b8'),
+  ButtonId.mr: Text('MR'),
+  ButtonId.ms: Text('MS'),
+  ButtonId.mc: Text('MC'),
+  ButtonId.go: Text('GO'),
+};
+
 const Map<String, String> kToSuperScript = {
-  // superscript
   '0': '\u2070',
   '1': '\u00B9',
   '2': '\u00B2',
@@ -137,7 +165,6 @@ const Map<String, String> kToSuperScript = {
 };
 
 const Map<String, String> kFromSuperScript = {
-  // superscript
   '\u2070': '0',
   '\u00B9': '1',
   '\u00B2': '2',

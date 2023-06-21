@@ -21,9 +21,8 @@ class _BMIPageState extends State<BMIPage> {
 
   _updateBMIScreen(buttonId) {
     setState(() {
-      selectedDisplayValue = _selectedDisplay == MeasurementType.weight
-          ? BMIBrain.getWeight()
-          : BMIBrain.getHeight();
+      selectedDisplayValue =
+          _selectedDisplay == MeasurementType.weight ? BMIBrain.getWeight() : BMIBrain.getHeight();
 
       if (buttonId == ButtonId.ac) {
         BMIBrain.clear();
@@ -31,8 +30,7 @@ class _BMIPageState extends State<BMIPage> {
         BMIBrain.setBMI();
         BMIBrain.displayResults(context);
       } else {
-        String displayValue =
-            Logic.newDisplayValue(buttonId, selectedDisplayValue.toString());
+        String displayValue = Logic.newDisplayValue(buttonId, selectedDisplayValue.toString());
 
         if (_selectedDisplay == MeasurementType.weight) {
           BMIBrain.setWeight(int.parse(displayValue));
@@ -54,8 +52,8 @@ class _BMIPageState extends State<BMIPage> {
     return Scaffold(
       body: Column(
         children: [
-          BMIDisplay(BMIBrain.getWeight(), BMIBrain.getHeight(),
-              _selectedDisplay, _toggleSelectedScreen),
+          BMIDisplay(
+              BMIBrain.getWeight(), BMIBrain.getHeight(), _selectedDisplay, _toggleSelectedScreen),
           const Divider(),
           KeyboardBuilder(
             firstRowShorter: true,

@@ -14,15 +14,7 @@ void main() {
   // TODO: Learn more about testing and replace the function values for simulated taps and gestures on screen.
   if (kDebugMode) {
     Debug.debugCalculator();
-    superscriptTest();
   } else {
     print('kDebugMode == false');
-  }
-}
-
-superscriptTest() {
-  kToSuperScript.entries;
-  for (MapEntry entry in kToSuperScript.entries) {
-    print('${kToSuperScript[entry.key]}  =  ${kFromSuperScript[kToSuperScript[entry.key]]}');
   }
 }

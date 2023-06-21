@@ -73,11 +73,16 @@ class Debug {
         // sqrt = ¬ = \u221a
       };
 
+      Map<String, String> testAutoParentheses = {
+        '4^(2': '16',
+      };
+
       Map<String, String> testsAll = {};
       testsAll.addAll(testsAddSub);
       testsAll.addAll(testsMultDiv);
       testsAll.addAll(testsPowSqrt);
       testsAll.addAll(testsParenthesis);
+      testsAll.addAll(testAutoParentheses);
 
       testsAll.forEach((key, value) {
         key = key.replaceAll('/', ButtonId.divide);
