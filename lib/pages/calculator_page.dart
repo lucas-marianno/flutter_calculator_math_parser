@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../brain/logic.dart';
 import '../brain/memory.dart';
-import '../constants.dart';
 import '../widgets/calculator_display.dart';
 import '../widgets/keyboard_builder.dart';
 import '../widgets/keyboards.dart';
@@ -39,7 +38,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           children: [
             CalculatorDisplay(
               memoryDisplayValue: Memory.getMathHistory(),
-              mainDisplayValue: beautify(Memory.getDisplayValue()),
+              mainDisplayValue: Memory.getDisplayValue(),
             ),
             const Divider(),
             KeyboardBuilder(
@@ -51,48 +50,4 @@ class _CalculatorPageState extends State<CalculatorPage> {
       ),
     );
   }
-}
-
-String beautify(String s) {
-  return s;
-  // TODO: reactivate this after implementing auto parentheses
-  // String ans = '';
-  // bool isSuperScript = false;
-
-  // for (int i = 0; i < s.length; i++) {
-  //   if (s[i] == ButtonId.power) {
-  //     isSuperScript = isSuperScript ? false : true;
-  //   } else {
-  //     ans += isSuperScript ? _toSuperScript(s[i]) : s[i];
-  //   }
-  // }
-
-  // return ans;
-}
-
-String _toSuperScript(String n) {
-  String ans = '';
-  n.split('').forEach((e) {
-    if (kToSuperScript.containsKey(e)) {
-      ans += kToSuperScript[e]!;
-    } else {
-      ans += e;
-    }
-  });
-
-  return ans;
-}
-
-String _removeSuperScript(String n) {
-  print(n);
-  String ans = '';
-  n.split('').forEach((e) {
-    if (kFromSuperScript.containsKey(e)) {
-      ans += kFromSuperScript[e]!;
-    } else {
-      ans += e;
-    }
-  });
-  print(ans);
-  return ans;
 }

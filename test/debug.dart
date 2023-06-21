@@ -2,7 +2,7 @@
 
 import 'package:math_expression_parser/brain/logic.dart';
 import 'package:math_expression_parser/brain/math_expression_parser.dart';
-import '../lib/constants.dart';
+import 'package:math_expression_parser/constants.dart';
 
 class Debug {
   static debugCalculator() {
@@ -84,21 +84,23 @@ class Debug {
       testsAll.addAll(testsParenthesis);
       testsAll.addAll(testAutoParentheses);
 
-      testsAll.forEach((key, value) {
-        key = key.replaceAll('/', ButtonId.divide);
-        key = key.replaceAll('¬', ButtonId.squareRoot);
+      testsAll.forEach(
+        (key, value) {
+          key = key.replaceAll('/', ButtonId.divide);
+          key = key.replaceAll('¬', ButtonId.squareRoot);
 
-        //key = Parser.implicitMultiplications(key);
-        String ans = Parser.evaluateExpression(key);
-        ans = Logic.removeEqualSignFromExpr(ans);
-        if (ans != value) {
-          print('\x1B[31mFAILED\x1B[0m at  $key');
-          print('expected:  $value');
-          print('got:       $ans');
-        } else {
-          print('\x1B[32mPASSED\x1B[0m at  $key');
-        }
-      });
+          //key = Parser.implicitMultiplications(key);
+          String ans = Parser.evaluateExpression(key);
+          ans = Logic.removeEqualSignFromExpr(ans);
+          if (ans != value) {
+            print('\x1B[31mFAILED\x1B[0m at  $key');
+            print('expected:  $value');
+            print('got:       $ans');
+          } else {
+            print('\x1B[32mPASSED\x1B[0m at  $key');
+          }
+        },
+      );
     }
   }
 }

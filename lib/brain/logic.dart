@@ -17,8 +17,6 @@ class Logic {
 
     Memory.setPreviousButtonId(buttonId);
 
-    // TODO: feature: after a pow '^' the number should be elevated (on display only) until an operand or par is pressed
-
     switch (buttonId) {
       case ButtonId.go:
         return removeEqualSignFromExpr(Parser.evaluateExpression(currentDisplay));
