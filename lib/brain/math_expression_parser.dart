@@ -22,13 +22,13 @@ class Parser {
   // Private Functions:
 
   static num _addSub(List<dynamic> expr) {
-    // Skips this functions if no pow or sqrt are found.
+    // it can only receive expressions containing '+' | '-'
+    // the input must always be valid
+
     if (!expr.contains(ButtonId.add) && !expr.contains(ButtonId.subtract)) {
       return num.parse(expr.join());
     }
 
-    // it can only receive expressions containing '+' | '-'
-    // the input will always be valid
     num ans = 0;
 
     for (int i = 0; i < expr.length; i++) {
@@ -47,7 +47,8 @@ class Parser {
     return ans;
   }
 
-  static _autoParentheses(String s) {
+  static String _autoParentheses(String s) {
+    // TODO: refactor this function so that '(((10' returns '(((10)))'
     int nOfOpenPar = 0;
     int nOfClosePar = 0;
     int lastOpenParIndex = 0;
@@ -72,9 +73,6 @@ class Parser {
   }
 
   static String _cleaner(String s) {
-    // removes all unecessary and/or redundant characters in string
-    // returns cleaned string.
-
     s = Logic.removeEqualSignFromExpr(s);
 
     s[0] == '(' ? s = '0+$s' : s;
@@ -154,14 +152,13 @@ class Parser {
   }
 
   static List<dynamic> _multDiv(List<dynamic> expr) {
-    // Skips this functions if no pow or sqrt are found.
+    // it can only receive expressions containing '+' | '-' | '/' | '*'
+    // goes through a string and executes all mults and divs within it
+    // the input must always be valid
+
     if (!expr.contains(ButtonId.multiply) && !expr.contains(ButtonId.divide)) {
       return expr;
     }
-    // it can only receive expressions containing '+' | '-' | '/' | '*'
-    // goes through a string and executes all mults and divs within it
-    // while preserving '+' | '-'
-    // the input will always be valid
 
     List temp = [];
 
@@ -181,13 +178,13 @@ class Parser {
   }
 
   static List<dynamic> _parenthesis(List<dynamic> expr) {
-    // Skips this function if no parentheses are found
-    if (!expr.contains('(')) return expr;
-
     // Locates the first math expr between () without any () within it,
     // resolves the first innermost expression, replaces its range with its result,
     // returns a newExpr with the first innermost expression resolved,
     // iterates recursively until there are no more parenthesis in the expression.
+
+    if (!expr.contains('(')) return expr;
+
     List<dynamic> newExpr = _innermostExpression(expr);
 
     if (newExpr.contains('(')) {
@@ -198,15 +195,14 @@ class Parser {
   }
 
   static List<dynamic> _powSqrt(List<dynamic> expr) {
-    // Skips this functions if no pow or sqrt are found.
-    if (!expr.contains(ButtonId.squareRoot) && !expr.contains(ButtonId.power)) {
-      return expr;
-    }
-
     // it can only receive expressions containing '+' | '-' | '/' | '*' |'¬' | '^'
     // goes through a string and executes all pows and sqrt within it
     // while preserving '+' | '-' | '/' | '*'
-    // the input will always be valid
+    // the input must always be valid
+
+    if (!expr.contains(ButtonId.squareRoot) && !expr.contains(ButtonId.power)) {
+      return expr;
+    }
 
     List temp = [];
 
@@ -245,27 +241,26 @@ class Parser {
     }
     if (temp.isNotEmpty) ans.add(num.parse(temp));
 
-    for (int i = 0; i < ans.length; i++) {
+    for (int i = 1; i < ans.length; i++) {
       // finds negative numbers that might have gotten split in the process and merges them
-      if (i >= 2) {
-        // if the evaluated element index is 2 or more,
-        if (ans[i] is num && ans[i - 1] == '-' && ans[i - 2] is! num && ans[i - 2] != ')') {
-          // AND current element is a number,
-          // AND the previous element is '-'
-          // AND the anteprevious element is NOT a number NOR ')'
-          ans[i] = -ans[i];
-          ans.removeAt(i - 1);
-        }
-      } else if (i >= 1) {
-        // if the evaluated element index is 1 or more,
-        if (ans[i] is num && ans[i - 1] == '-') {
-          // AND current element is a number,
-          // AND the previous element is '-'
+
+      final bool elementIsNum = ans[i] is num;
+      final bool previousElementIsMinus = ans[i - 1] == '-';
+
+      if (elementIsNum && previousElementIsMinus) {
+        if (i >= 2) {
+          final bool antepenultimateIsNum = ans[i - 2] is num;
+          final bool antepenultimateIsClosePar = ans[i - 2] == ')';
+
+          if (!antepenultimateIsNum && !antepenultimateIsClosePar) {
+            ans[i] = -ans[i];
+            ans.removeAt(i - 1);
+          }
+        } else {
           ans[i] = ans[i] * -1;
           ans.removeAt(i - 1);
         }
       }
-      // if the evaluated element index is 0: does nothing to it.
     }
 
     return ans;
