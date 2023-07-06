@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/constants.dart';
-import 'package:math_expression_parser/pages/bmi_page.dart';
+import 'package:math_expression_parser/pages/applet_selection_page.dart';
 import 'package:math_expression_parser/pages/calculator_page.dart';
 import 'package:math_expression_parser/routes.dart';
 import 'package:math_expression_parser/theme.dart';
@@ -22,7 +22,6 @@ class CalculatorApp extends StatelessWidget {
       theme: material2themeData,
       initialRoute: Pages.mainPage,
       routes: routes,
-      // home: const SandboxPage(),
     );
   }
 }
@@ -49,7 +48,7 @@ class _MainPageState extends State<MainPage> {
             unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(icon: Icon(Icons.calculate)),
-              Tab(icon: Icon(Icons.monitor_weight)),
+              Tab(icon: Icon(Icons.functions)),
             ],
           ),
           actions: const [PopupMenu()],
@@ -57,7 +56,7 @@ class _MainPageState extends State<MainPage> {
         body: const TabBarView(
           children: [
             CalculatorPage(),
-            BMIPage(),
+            AppletSelection(),
           ],
         ),
       ),

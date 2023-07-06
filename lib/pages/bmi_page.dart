@@ -50,6 +50,7 @@ class _BMIPageState extends State<BMIPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
         children: [
           BMIDisplay(
