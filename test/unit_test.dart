@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:math_expression_parser/brain/logic.dart';
-import 'package:math_expression_parser/brain/math_expression_parser.dart';
+import 'package:math_expression_parser/brain/input_handler.dart';
+import 'package:math_expression_parser/applets/calculator/math_expression_parser.dart';
 import 'package:math_expression_parser/constants.dart';
 
 import 'debug.dart';
@@ -11,7 +11,7 @@ void main() {
       test('Testing for $key', () {
         key = key.replaceAll('/', ButtonId.divide);
         key = key.replaceAll('¬', ButtonId.squareRoot);
-        String ans = Logic.removeEqualSignFromExpr(Parser.evaluateExpression(key));
+        String ans = InputHandler.removeEqualSignFromExpr(Parser.evaluateExpression(key));
 
         expect(ans, value);
       });

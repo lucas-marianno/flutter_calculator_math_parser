@@ -1,10 +1,8 @@
 import '../constants.dart';
-import 'math_expression_parser.dart';
+import '../applets/calculator/math_expression_parser.dart';
 import 'memory.dart';
 
-class Logic {
-  //static bool _isSuperScript = false;
-
+class InputHandler {
   static String removeEqualSignFromExpr(String s) {
     // if the first character is '=', removes the first and second character ' '.
     return s[0] == '=' ? s = s.substring(2) : s;
@@ -56,24 +54,22 @@ class Logic {
         if (currentDisplay.contains(RegExp(r'\d$'))) return memory.toString();
         return currentDisplay + memory.toString();
       case ButtonId.squareRoot:
-        // If the display is NOT zero AND display DOES NOT contain operands, then:
-        // inserts sqrt before the current display.
-        if (currentDisplay != '0' &&
-            !currentDisplay.contains(
-              RegExp('[*-+${ButtonId.divide}${ButtonId.squareRoot}]'),
-            )) {
+        final bool isDisplayZero = currentDisplay == '0';
+        final bool displayContainsOperators = currentDisplay.contains(
+          RegExp('[*-+${ButtonId.divide}${ButtonId.squareRoot}]'),
+        );
+        if (!isDisplayZero && !displayContainsOperators) {
           return buttonId + currentDisplay;
-        } else if (currentDisplay == '0') {
+        } else if (isDisplayZero) {
           return buttonId;
         }
         return currentDisplay + buttonId;
       case ButtonId.power:
         return currentDisplay + buttonId + ButtonId.openParentheses;
       default:
-        if ((previousButtonId == ButtonId.equal || previousButtonId == ButtonId.ms) &&
-            '01234567890.'.contains(buttonId)) {
-          // if the last button pressed was '=' or 'ms' AND the current button is a
-          // num, it will clear the currentDisplay before adding a new digit.
+        final bool isPreviousButtonEqualOrMS =
+            (previousButtonId == ButtonId.equal || previousButtonId == ButtonId.ms);
+        if (isPreviousButtonEqualOrMS && '01234567890.'.contains(buttonId)) {
           currentDisplay = '0';
         }
         if (currentDisplay.length <= kCurrentDisplayLimit) {

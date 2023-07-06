@@ -1,4 +1,4 @@
-import 'package:math_expression_parser/brain/math_expression_parser.dart';
+import 'package:math_expression_parser/applets/calculator/math_expression_parser.dart';
 import 'package:math_expression_parser/constants.dart';
 
 class Debug extends Parser {

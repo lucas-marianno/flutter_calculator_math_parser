@@ -16,13 +16,13 @@ class ButtonLabel extends StatelessWidget {
   }
 }
 
-class DefaultButton extends StatelessWidget {
+class DefaultKeyboardButton extends StatelessWidget {
   final String buttonId;
   final Function buttonFunction;
   final Emphasis? emphasis;
   final int? flex;
 
-  const DefaultButton(
+  const DefaultKeyboardButton(
     this.buttonId,
     this.buttonFunction, {
     super.key,

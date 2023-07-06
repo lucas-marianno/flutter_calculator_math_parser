@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../brain/bmi_brain.dart';
-import '../constants.dart';
+import 'bmi_brain.dart';
+import '../../constants.dart';
 
 class BMICategoryInfo extends StatelessWidget {
   const BMICategoryInfo({
@@ -54,10 +54,8 @@ class BMIDisplay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            BMIDisplayLine(MeasurementType.weight, weight, selectedMeasurement,
-                screenToggler),
-            BMIDisplayLine(MeasurementType.height, height, selectedMeasurement,
-                screenToggler),
+            BMIDisplayLine(MeasurementType.weight, weight, selectedMeasurement, screenToggler),
+            BMIDisplayLine(MeasurementType.height, height, selectedMeasurement, screenToggler),
           ],
         ),
       ),
@@ -82,9 +80,8 @@ class BMIDisplayLine extends StatelessWidget {
   Widget build(BuildContext context) {
     String measurementType = '';
     String measurmentUnity = '';
-    Color screenColor = selectedMeasurement == type
-        ? kBMIActiveScreenColor
-        : kBMIInactiveScreenColor;
+    Color screenColor =
+        selectedMeasurement == type ? kBMIActiveScreenColor : kBMIInactiveScreenColor;
 
     if (type == MeasurementType.weight) {
       measurementType = 'Weight';
@@ -188,8 +185,7 @@ class BMIResultsContent extends StatelessWidget {
                   style: kHyperlinkTextStyle,
                   recognizer: TapGestureRecognizer()
                     ..onTap = () => launchUrl(
-                        Uri.parse(
-                            'https://en.wikipedia.org/wiki/Body_mass_index'),
+                        Uri.parse('https://en.wikipedia.org/wiki/Body_mass_index'),
                         mode: LaunchMode.externalApplication),
                 ),
                 const TextSpan(text: '.'),

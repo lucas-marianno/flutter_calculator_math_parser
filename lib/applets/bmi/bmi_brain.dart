@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../widgets/bmi_widgets.dart';
+import '../../constants.dart';
+import 'bmi_widgets.dart';
 
 class BMIBrain {
   static void clear() {

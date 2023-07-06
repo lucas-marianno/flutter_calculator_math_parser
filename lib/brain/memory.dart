@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/calculator_display.dart';
+import '../applets/calculator/calculator_display.dart';
 
 class Memory {
   static String getDisplayValue() => _displayValue;

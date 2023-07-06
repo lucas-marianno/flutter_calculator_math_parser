@@ -1,6 +1,6 @@
 import 'dart:math';
-import '../constants.dart';
-import 'logic.dart';
+import '../../constants.dart';
+import '../../brain/input_handler.dart';
 
 // TODO: Feature: Implement Scientific Notation
 
@@ -73,7 +73,7 @@ class Parser {
   }
 
   static String _cleaner(String s) {
-    s = Logic.removeEqualSignFromExpr(s);
+    s = InputHandler.removeEqualSignFromExpr(s);
 
     s[0] == '(' ? s = '0+$s' : s;
     s = s

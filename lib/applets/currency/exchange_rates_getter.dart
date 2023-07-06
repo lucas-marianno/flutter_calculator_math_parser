@@ -1,19 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-// Future<Map<String, double>> getExchangeRates() async {
-//   Map<String, double> rates = {};
-//   http.Response response = await http.get(Uri.parse('https://open.er-api.com/v6/latest/USD'));
-//   const success = 200;
-//   if (response.statusCode == success) {
-//     final data = await jsonDecode(response.body);
-//     for (var key in data['rates'].keys) {
-//       rates.addAll({key: double.parse(data['rates'][key].toString())});
-//     }
-//   }
-//   return rates;
-// }
-
 class ExchangeRates {
   ExchangeRates();
   Map<String, double> rates = {}..addAll(mockRatesDebug);
@@ -21,22 +8,26 @@ class ExchangeRates {
   DateTime? lastUpdated;
 
   Future<void> updateExchangeRates() async {
-    http.Response response = await http.get(Uri.parse('https://open.er-api.com/v6/latest/USD'));
+    try {
+      http.Response response = await http.get(Uri.parse('https://open.er-api.com/v6/latest/USD'));
 
-    const success = 200;
-    if (response.statusCode == success) {
-      rates.clear();
+      const success = 200;
+      if (response.statusCode == success) {
+        rates.clear();
 
-      final data = await jsonDecode(response.body);
+        final data = await jsonDecode(response.body);
 
-      for (var key in data['rates'].keys) {
-        rates.addAll({key: double.parse(data['rates'][key].toString())});
+        for (var key in data['rates'].keys) {
+          rates.addAll({key: double.parse(data['rates'][key].toString())});
+        }
+        hasUpdatedRates = true;
+
+        lastUpdated = DateTime.now();
+      } else {
+        hasUpdatedRates = false;
       }
-      hasUpdatedRates = true;
-
-      lastUpdated = DateTime.now();
-    } else {
-      hasUpdatedRates = false;
+    } catch (e) {
+      print(e);
     }
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../brain/bmi_brain.dart';
-import '../brain/logic.dart';
-import '../constants.dart';
-import '../widgets/keyboard_builder.dart';
-import '../widgets/keyboards.dart';
-import '../widgets/bmi_widgets.dart';
+import 'bmi_brain.dart';
+import '../../brain/input_handler.dart';
+import '../../constants.dart';
+import '../../widgets/keyboard_builder.dart';
+import 'bmi_keyboard.dart';
+import 'bmi_widgets.dart';
 
 class BMIPage extends StatefulWidget {
   const BMIPage({super.key});
@@ -30,7 +30,8 @@ class _BMIPageState extends State<BMIPage> {
         BMIBrain.setBMI();
         BMIBrain.displayResults(context);
       } else {
-        String displayValue = Logic.newDisplayValue(buttonId, selectedDisplayValue.toString());
+        String displayValue =
+            InputHandler.newDisplayValue(buttonId, selectedDisplayValue.toString());
 
         if (_selectedDisplay == MeasurementType.weight) {
           BMIBrain.setWeight(int.parse(displayValue));
@@ -58,7 +59,7 @@ class _BMIPageState extends State<BMIPage> {
           const Divider(),
           KeyboardBuilder(
             firstRowShorter: true,
-            keyboard: Keyboards.bmiKeyboard(_updateBMIScreen),
+            keyboard: bmiKeyboard(_updateBMIScreen),
           ),
         ],
       ),

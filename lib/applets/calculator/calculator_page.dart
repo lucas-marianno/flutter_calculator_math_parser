@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../brain/logic.dart';
-import '../brain/memory.dart';
-import '../widgets/calculator_display.dart';
-import '../widgets/keyboard_builder.dart';
-import '../widgets/keyboards.dart';
+import 'package:math_expression_parser/applets/calculator/calculator_keyboard.dart';
+import '../../brain/input_handler.dart';
+import '../../brain/memory.dart';
+import 'calculator_display.dart';
+import '../../widgets/keyboard_builder.dart';
 
 // TODO: Feature: Implement the hability to select text on any of the app displays, and copy it.
 // TODO: Feature: Implement a cursor on any of the displays, allowing users to edit text.
@@ -19,7 +19,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   updateDisplay(buttonId) {
     setState(() {
       Memory.setFunction(updateDisplayFromMemory);
-      Memory.setDisplayValue(Logic.newDisplayValue(buttonId, Memory.getDisplayValue()));
+      Memory.setDisplayValue(InputHandler.newDisplayValue(buttonId, Memory.getDisplayValue()));
     });
   }
 
@@ -43,7 +43,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             const Divider(),
             KeyboardBuilder(
               firstRowShorter: true,
-              keyboard: Keyboards.calculatorKeyboard(updateDisplay, context: context),
+              keyboard: calculatorKeyboard(updateDisplay, context: context),
             ),
           ],
         ),

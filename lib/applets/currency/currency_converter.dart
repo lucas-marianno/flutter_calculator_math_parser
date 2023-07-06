@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../services/currency_exchange_rates_getter.dart';
+import 'exchange_rates_getter.dart';
 
 class CurrencyConverterLoading extends StatelessWidget {
   const CurrencyConverterLoading({super.key});
