@@ -30,6 +30,14 @@ class ExchangeRates {
       print(e);
     }
   }
+
+  ExchangeRates mock() {
+    ExchangeRates mock = ExchangeRates();
+    mock.rates = mockRatesShortest;
+    mock.hasUpdatedRates = false;
+    mock.lastUpdated = null;
+    return mock;
+  }
 }
 
 const Map<String, double> mockRatesDebug = {

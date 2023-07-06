@@ -26,7 +26,7 @@ class _AppletSelectionState extends State<AppletSelection> {
             child: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.currency_exchange, size: 90),
+                Icon(Icons.currency_exchange, size: 80),
                 SizedBox(
                   height: 20,
                   child: FittedBox(child: Text('Currency Converter')),
@@ -41,7 +41,7 @@ class _AppletSelectionState extends State<AppletSelection> {
             child: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.monitor_weight, size: 90),
+                Icon(Icons.monitor_weight, size: 80),
                 SizedBox(
                   height: 20,
                   child: FittedBox(child: Text('BMI Calculator')),
@@ -56,7 +56,7 @@ class _AppletSelectionState extends State<AppletSelection> {
             child: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.info, size: 90),
+                Icon(Icons.info, size: 80),
                 SizedBox(
                   height: 20,
                   child: FittedBox(child: Text('About this App')),

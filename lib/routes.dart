@@ -4,7 +4,7 @@ import 'package:math_expression_parser/pages/about_page.dart';
 import 'package:math_expression_parser/pages/applet_selection_page.dart';
 import 'package:math_expression_parser/applets/bmi/bmi_page.dart';
 import 'package:math_expression_parser/applets/calculator/calculator_page.dart';
-import 'package:math_expression_parser/applets/currency/currency_converter.dart';
+import 'applets/currency/loading_screen.dart';
 
 class Pages {
   static const String mainPage = '/main',
