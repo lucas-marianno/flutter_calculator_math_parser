@@ -17,36 +17,24 @@ class BMIBrain {
     }
   }
 
-  static void setHeight(int h) {
-    String value = h.toString();
+  static void setHeightWeight(int n, MeasurementType measurementType) {
+    String value = n.toString();
     // Limits the display to 3 characters
     value = value.length > 3 ? value.substring(0, 3) : value;
-    _height = int.parse(value);
-  }
 
-  static void setWeight(int w) {
-    String value = w.toString();
-    // Limits the display to 3 characters
-    value = value.length > 3 ? value.substring(0, 3) : value;
-    _weight = int.parse(value);
+    if (measurementType == MeasurementType.height) {
+      _height = int.parse(value);
+    } else if (measurementType == MeasurementType.weight) {
+      _weight = int.parse(value);
+    }
   }
 
   static void displayResults(context) {
     showDialog(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: const BMIResultsTitle(),
-        content: const BMIResultsContent(),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              BMIBrain.clear();
-            },
-            child: const Text('Recalculate'),
-          ),
-        ],
+      builder: (context) => const AlertDialog(
+        title: BMIResultsTitle(),
+        content: BMIResultsContent(),
       ),
     );
   }
@@ -70,6 +58,6 @@ class BMIBrain {
   }
 
   static double _bmi = 0;
-  static int _weight = 0;
-  static int _height = 0;
+  static int _weight = 70;
+  static int _height = 170;
 }

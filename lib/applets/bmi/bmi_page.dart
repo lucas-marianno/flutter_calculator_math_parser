@@ -33,11 +33,7 @@ class _BMIPageState extends State<BMIPage> {
         String displayValue =
             InputHandler.newDisplayValue(buttonId, selectedDisplayValue.toString());
 
-        if (_selectedDisplay == MeasurementType.weight) {
-          BMIBrain.setWeight(int.parse(displayValue));
-        } else {
-          BMIBrain.setHeight(int.parse(displayValue));
-        }
+        BMIBrain.setHeightWeight(int.parse(displayValue), _selectedDisplay);
       }
     });
   }

@@ -108,6 +108,14 @@ class BMIDisplayLine extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () => screenToggler(type),
+            onVerticalDragUpdate: (details) {
+              if (details.delta.direction > 0) {
+                BMIBrain.setHeightWeight(value - 1, type);
+              } else if (details.delta.direction < 0) {
+                BMIBrain.setHeightWeight(value + 1, type);
+              }
+              screenToggler(type);
+            },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
