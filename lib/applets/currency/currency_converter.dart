@@ -28,7 +28,7 @@ class CurrencyConverter extends StatelessWidget {
                 child: Text(
                   exchangeRates.hasUpdatedRates
                       ? 'Exchange rates last updated in ${exchangeRates.lastUpdated}'
-                      : 'mock exchange rates',
+                      : '',
                 ),
               ),
             ),

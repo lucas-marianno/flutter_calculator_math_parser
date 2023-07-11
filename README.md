@@ -1,5 +1,7 @@
 # Math Expression Calculator
 
+A Flutter Application that includes a Scientific Calculator, Mathematical Expressions Parser, BMI Calculator, Currency Converter, with real time exchange rates, favorites tab and more!
+
 ##
 
 The Math Expression Calculator is, at its core, a [Mathematical Expression Parser](https://www.google.com/search?q=mathematical+expression+parser).
@@ -17,6 +19,7 @@ The Math Expression Calculator is, at its core, a [Mathematical Expression Parse
 - [x] Users can store and retrieve results using 'MS', 'MC' and 'MR' controls.
 - [x] Users can easily calculate their [Body Mass Index.](https://en.wikipedia.org/wiki/Body_mass_index)
 - [x] Responsive Design
+- [x] Real-time Currency Converter
 - [ ] Scientific Notation
 - [ ] Language Selection (English, Portuguese, Spanish).
 - [ ] Customization (Switch Dark/Light Mode, select accent color).
@@ -49,4 +52,4 @@ This entire project was idealized and developed by Lucas Mariano, an enthusiast 
 
 ##
 
-![alt text](design_references/screenshot.jpg)
+![alt text](screenshots/all_dark.jpg)

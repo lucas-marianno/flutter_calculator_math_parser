@@ -16,14 +16,14 @@ const String kExpressionError = 'invalid expression';
 const String kSqrtNegative = 'error sqrt(-n)';
 
 // Colors
-const Color kBackgroundColor = Color(0xff171717);
+const Color kBackgroundColor = Color(0xff171717); // 23 23 23
 const Color kInactiveTextColor = Colors.grey;
 const Color kShadowColor = Color(0xff171717);
 const Color kTextColor = Colors.white;
 
 const Color kLowEmphasisButtonColor = Color(0xff202020);
 const Color kDefaultButtonColor = Color(0xff282828);
-const Color kHighEmphasisButtonColor = Colors.deepPurpleAccent;
+const Color kHighEmphasisButtonColor = Colors.deepPurpleAccent; // 124 77 255
 
 const Color kBMIActiveScreenColor = Color.fromARGB(255, 162, 128, 255);
 const Color kBMIInactiveScreenColor = Colors.white;
