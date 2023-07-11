@@ -4,7 +4,7 @@ import '../../brain/input_handler.dart';
 
 // TODO: Feature: Implement Scientific Notation
 
-class Parser {
+class Parser with ParserUtilities {
   // Public Functions:
 
   static String evaluateExpression(String s) {
@@ -73,7 +73,7 @@ class Parser {
   }
 
   static String _cleaner(String s) {
-    s = InputHandler.removeEqualSignFromExpr(s);
+    s = ParserUtilities.removeEqualSignFromExpr(s);
 
     s[0] == '(' ? s = '0+$s' : s;
     s = s
@@ -229,7 +229,7 @@ class Parser {
     List<dynamic> ans = [];
 
     for (var char in s.split('')) {
-      if ('0123456789.'.contains(char)) {
+      if (ParserUtilities.isDigit(char)) {
         temp += char;
       } else {
         if (temp.isNotEmpty) {

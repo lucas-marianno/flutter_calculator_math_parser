@@ -2,22 +2,28 @@ import '../constants.dart';
 import '../applets/calculator/math_expression_parser.dart';
 import 'memory.dart';
 
-class InputHandler {
+mixin ParserUtilities {
   static String removeEqualSignFromExpr(String s) {
     // if the first character is '=', removes the first and second character ' '.
     return s[0] == '=' ? s = s.substring(2) : s;
   }
 
+  static bool isDigit(String s) {
+    return '01234567890.'.contains(s);
+  }
+}
+
+class InputHandler with ParserUtilities {
   static String newDisplayValue(String buttonId, String currentDisplay) {
     String previousButtonId = Memory.getPreviousButtonId();
     num memory = Memory.getMemoryValue();
-    currentDisplay = removeEqualSignFromExpr(currentDisplay);
+    currentDisplay = ParserUtilities.removeEqualSignFromExpr(currentDisplay);
 
     Memory.setPreviousButtonId(buttonId);
 
     switch (buttonId) {
       case ButtonId.go:
-        return removeEqualSignFromExpr(Parser.evaluateExpression(currentDisplay));
+        return ParserUtilities.removeEqualSignFromExpr(Parser.evaluateExpression(currentDisplay));
       case ButtonId.equal:
         Memory.addToMathHistory('$currentDisplay ${Parser.evaluateExpression(
           currentDisplay,
@@ -36,7 +42,7 @@ class InputHandler {
       case ButtonId.ms:
         Memory.setMemoryValue(
           num.parse(
-            removeEqualSignFromExpr(
+            ParserUtilities.removeEqualSignFromExpr(
               Parser.evaluateExpression(
                 currentDisplay,
               ),
@@ -69,7 +75,7 @@ class InputHandler {
       default:
         final bool isPreviousButtonEqualOrMS =
             (previousButtonId == ButtonId.equal || previousButtonId == ButtonId.ms);
-        if (isPreviousButtonEqualOrMS && '01234567890.'.contains(buttonId)) {
+        if (isPreviousButtonEqualOrMS && ParserUtilities.isDigit(buttonId)) {
           currentDisplay = '0';
         }
         if (currentDisplay.length <= kCurrentDisplayLimit) {
