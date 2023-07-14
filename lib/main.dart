@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 import 'package:math_expression_parser/constants.dart';
 import 'package:math_expression_parser/pages/applet_selection_page.dart';
 import 'package:math_expression_parser/applets/calculator/calculator_page.dart';
@@ -6,7 +7,9 @@ import 'package:math_expression_parser/routes.dart';
 import 'package:math_expression_parser/theme.dart';
 import 'package:math_expression_parser/widgets/popupmenu.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeSharedPreferences();
   runApp(const CalculatorApp());
 }
 

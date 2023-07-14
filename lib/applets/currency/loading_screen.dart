@@ -10,16 +10,13 @@ class CurrencyConverterLoading extends StatelessWidget {
     ExchangeRates exchangeRates = ExchangeRates();
 
     void update() async {
-      await exchangeRates.updateExchangeRates();
-      // await Future.delayed(const Duration(seconds: 2));
+      await exchangeRates.initializeExchangeRates();
 
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => CurrencyMain(
-            exchangeRates: exchangeRates,
-          ),
+          builder: (context) => CurrencyMain(exchangeRates: exchangeRates),
         ),
       );
     }

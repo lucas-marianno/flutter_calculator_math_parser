@@ -1,27 +1,35 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 
 class ExchangeRates {
   ExchangeRates();
   Map<String, double> rates = {}..addAll(mockRatesDebug);
+  Map<String, double> favRates = {};
+  List<String> favorites = Favorites().getFavoritesList();
   bool hasUpdatedRates = false;
   DateTime? lastUpdated;
 
-  Future<void> updateExchangeRates() async {
+  Future<void> initializeExchangeRates() async {
     try {
       http.Response response = await http.get(Uri.parse('https://open.er-api.com/v6/latest/USD'));
 
       const success = 200;
       if (response.statusCode == success) {
         rates.clear();
+        favRates.clear();
 
         final data = await jsonDecode(response.body);
 
         for (var key in data['rates'].keys) {
           rates.addAll({key: double.parse(data['rates'][key].toString())});
         }
-        hasUpdatedRates = true;
 
+        for (String currency in favorites) {
+          favRates.addAll({currency: rates[currency]!});
+        }
+
+        hasUpdatedRates = true;
         lastUpdated = DateTime.now();
       } else {
         hasUpdatedRates = false;
@@ -29,6 +37,19 @@ class ExchangeRates {
     } catch (e) {
       print(e);
     }
+  }
+
+  ExchangeRates favs() {
+    Map<String, double> nf = {};
+    for (var f in Favorites().getFavoritesList()) {
+      nf.addAll({f: rates[f]!});
+    }
+
+    ExchangeRates favs = ExchangeRates();
+    favs.hasUpdatedRates = hasUpdatedRates;
+    favs.rates = nf;
+    favs.lastUpdated = lastUpdated;
+    return favs;
   }
 
   ExchangeRates mock() {

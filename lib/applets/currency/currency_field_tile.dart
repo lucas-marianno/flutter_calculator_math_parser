@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 
 class CurrencyFieldTile extends StatefulWidget {
   const CurrencyFieldTile({
@@ -50,6 +51,14 @@ class _CurrencyFieldTileState extends State<CurrencyFieldTile> {
       showCursor: isActive,
       controller: controller,
       decoration: InputDecoration(
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                Favorites().toggleFavorite(widget.label);
+              });
+            },
+            icon: Icon(Favorites().contains(widget.label) ? Icons.star : Icons.star_border),
+          ),
           prefixText: '\$ ',
           label: Text(widget.label),
           floatingLabelBehavior: FloatingLabelBehavior.always,

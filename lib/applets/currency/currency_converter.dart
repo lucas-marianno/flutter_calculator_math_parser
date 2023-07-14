@@ -16,11 +16,15 @@ class CurrencyConverter extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-                child: SingleChildScrollView(
-                    child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-              child: CurrencyFieldColumn(exchangeRates: exchangeRates.rates),
-            ))),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+                  child: CurrencyFieldColumn(
+                    exchangeRates: exchangeRates.rates,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(
               height: 30,
               width: double.infinity,
