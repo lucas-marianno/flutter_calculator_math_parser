@@ -50,13 +50,12 @@ class _CurrencyFieldColumnState extends State<CurrencyFieldColumn> {
 
   @override
   void initState() {
+    super.initState();
     setState(() {
       widget.exchangeRates.forEach((key, value) {
         ratesList.add([key, value]);
       });
     });
-
-    super.initState();
   }
 
   @override

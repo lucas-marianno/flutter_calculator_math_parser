@@ -14,7 +14,14 @@ class Favorites {
   bool contains(String currency) => _favorites.contains(currency);
 
   List<String> getFavoritesList() {
-    _favorites.sort();
+    //TODO: this throuws an error
+
+    try {
+      _favorites.sort();
+    } catch (e) {
+      null;
+    }
+
     return _favorites;
   }
 

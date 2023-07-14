@@ -30,9 +30,7 @@ class CurrencyConverter extends StatelessWidget {
               width: double.infinity,
               child: Center(
                 child: Text(
-                  exchangeRates.hasUpdatedRates
-                      ? 'Exchange rates last updated in ${exchangeRates.lastUpdated}'
-                      : '',
+                  'Exchange rates last updated in ${exchangeRates.lastUpdated}',
                 ),
               ),
             ),

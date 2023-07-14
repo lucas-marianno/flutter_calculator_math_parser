@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/applets/currency/currency_converter.dart';
 import 'package:math_expression_parser/applets/currency/exchange_rates_getter.dart';
-
 import '../../constants.dart';
 
 class CurrencyMain extends StatefulWidget {
