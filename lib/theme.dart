@@ -35,6 +35,7 @@ ThemeData material2themeData = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: kTextColor,
+      padding: EdgeInsets.zero,
       textStyle: kFunctionButtonTextStyle,
     ),
   ),

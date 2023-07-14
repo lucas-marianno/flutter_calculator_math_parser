@@ -45,6 +45,9 @@ class DefaultKeyboardButton extends StatelessWidget {
             );
           }
           return TextButton(
+            style: const ButtonStyle(
+                textStyle: MaterialStatePropertyAll(kFunctionButtonTextStyle),
+                padding: MaterialStatePropertyAll(EdgeInsets.zero)),
             // Deactivates the memory buttons in case the memory is empty
             onPressed:
                 Memory.getMemoryValue() == 0 && (buttonId == ButtonId.mr || buttonId == ButtonId.mc)

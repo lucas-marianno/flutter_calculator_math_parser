@@ -46,6 +46,7 @@ flutter:
   assets:
     - assets/
     - screenshots/
+    - screenshots/edited/all_dark.jpg
     - README.md
     
 

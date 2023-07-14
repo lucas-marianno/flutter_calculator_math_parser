@@ -52,4 +52,4 @@ This entire project was idealized and developed by Lucas Mariano, an enthusiast 
 
 ##
 
-![alt text](screenshots/Edited/all_dark.jpg)
+![alt text](screenshots/edited/all_dark.jpg)
