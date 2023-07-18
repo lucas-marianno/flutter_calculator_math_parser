@@ -11,7 +11,6 @@ class AppletSelection extends StatefulWidget {
 class _AppletSelectionState extends State<AppletSelection> {
   @override
   Widget build(BuildContext context) {
-    // TODO: replace with a gridview of the various pages with icons to navigate to
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
       child: GridView.count(

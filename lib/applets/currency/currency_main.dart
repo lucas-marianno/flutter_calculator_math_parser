@@ -28,10 +28,12 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
     if (tabController.index == 1) return;
     if (tabController.indexIsChanging) return;
 
-    /// TODO: Investigate this further and fix it.
+    /// TODO: Investigate this further and fix it (maybe?)
     /// This is a horrible way of achieving the goal of reloading the page.
-    /// for some reason, [setState] isn't rebuilding everything, probably due to
-    /// [CurrencyFieldTile] be a StatefulWidget.
+    /// for some unknown reason, [setState] isn't rebuilding everything.
+    /// Also: this method causes a crash if called during rebuild (e.g. swipe down gesture during
+    /// tab transition). But fortunately, it only happens when in debug, the released version
+    /// apk works flawlessly
 
     Navigator.pushReplacement(
       context,
