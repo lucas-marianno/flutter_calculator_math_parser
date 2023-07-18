@@ -48,7 +48,6 @@ class Parser with ParserUtilities {
   }
 
   static String _autoParentheses(String s) {
-    // TODO: refactor this function so that '(((10' returns '(((10)))'
     int nOfOpenPar = 0;
     int nOfClosePar = 0;
     int lastOpenParIndex = 0;

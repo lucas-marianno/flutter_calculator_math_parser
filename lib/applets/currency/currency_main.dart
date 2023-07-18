@@ -63,15 +63,12 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
   }
 
   afterBuild() {
-    // print('hi');
     isBuilding = false;
-    print(isBuilding);
   }
 
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 200), () => afterBuild());
-    print(isBuilding);
     return DefaultTabController(
       length: 2,
       child: Scaffold(

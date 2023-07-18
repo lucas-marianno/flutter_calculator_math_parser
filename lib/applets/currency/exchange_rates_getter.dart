@@ -50,6 +50,7 @@ class ExchangeRates {
       rates = _parseStringToMap(sharedPreferences.getString('exchangeRates'));
       favRates = _parseStringToMap(sharedPreferences.getString('favRates'));
 
+      // ignore: avoid_print
       print(e);
     }
   }
