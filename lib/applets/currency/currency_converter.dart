@@ -3,9 +3,14 @@ import 'package:math_expression_parser/applets/currency/currency_field_tile.dart
 import 'exchange_rates_getter.dart';
 
 class CurrencyConverter extends StatefulWidget {
-  const CurrencyConverter({super.key, required this.exchangeRates});
+  const CurrencyConverter({
+    super.key,
+    required this.exchangeRates,
+    required this.refreshCallBackFunction,
+  });
 
   final ExchangeRates exchangeRates;
+  final Future<void> Function() refreshCallBackFunction;
 
   @override
   State<CurrencyConverter> createState() => _CurrencyConverterState();
@@ -47,22 +52,25 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
       );
     }
 
-    return ListView.builder(
-      itemCount: exchangeRatesMap.entries.length,
-      itemBuilder: (context, index) {
-        final String label = exchangeRatesMap.entries.toList()[index].key;
-        final double currencyRatio = exchangeRatesMap[label]!;
+    return RefreshIndicator(
+      onRefresh: () => widget.refreshCallBackFunction(),
+      child: ListView.builder(
+        itemCount: exchangeRatesMap.entries.length,
+        itemBuilder: (context, index) {
+          final String label = exchangeRatesMap.entries.toList()[index].key;
+          final double currencyRatio = exchangeRatesMap[label]!;
 
-        return CurrencyFieldTile(
-          label: label,
-          currencyRatio: currencyRatio,
-          thisFieldIndex: index,
-          activeIndex: selectedField,
-          setActiveFieldIndex: setSelectedField,
-          valueInUSD: valueInUSD,
-          setValueInUSD: setValueInUSD,
-        );
-      },
+          return CurrencyFieldTile(
+            label: label,
+            currencyRatio: currencyRatio,
+            thisFieldIndex: index,
+            activeIndex: selectedField,
+            setActiveFieldIndex: setSelectedField,
+            valueInUSD: valueInUSD,
+            setValueInUSD: setValueInUSD,
+          );
+        },
+      ),
     );
   }
 }

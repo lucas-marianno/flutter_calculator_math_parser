@@ -46,54 +46,61 @@ class _CurrencyFieldTileState extends State<CurrencyFieldTile> {
       controller.selection = selection;
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-      child: TextField(
-        style: const TextStyle(fontSize: 30),
-        showCursor: isActive,
-        controller: controller,
-        decoration: InputDecoration(
-          suffixIcon: IconButton(
-            onPressed: () {
-              setState(() => Favorites().toggleFavorite(widget.label));
+    return Hero(
+      tag: widget.label,
+      child: Material(
+        type: MaterialType.transparency,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
+          child: TextField(
+            style: const TextStyle(fontSize: 30),
+            showCursor: isActive,
+            controller: controller,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                onPressed: () async {
+                  await Favorites().toggleFavorite(widget.label);
+                  setState(() {});
+                },
+                icon: Icon(Favorites().contains(widget.label) ? Icons.star : Icons.star_border),
+              ),
+              prefixText: '\$ ',
+              label: Text(widget.label),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              hintText: hint,
+              labelStyle: const TextStyle(fontSize: 25),
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              fieldValue = controller.text;
+              selection = controller.selection;
+              try {
+                widget.setValueInUSD(num.parse(fieldValue) / widget.currencyRatio);
+              } catch (e) {
+                null;
+              }
             },
-            icon: Icon(Favorites().contains(widget.label) ? Icons.star : Icons.star_border),
+            onTap: () {
+              if (isInactive) {
+                fieldValue = hint;
+                selection = TextSelection(baseOffset: 0, extentOffset: hint.length);
+                widget.setActiveFieldIndex(widget.thisFieldIndex);
+              } else {
+                selection = controller.selection;
+              }
+            },
+            onTapOutside: (_) {
+              widget.setActiveFieldIndex(null);
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(
+                RegExp(r'\d|\.|-'),
+                replacementString: '',
+              ),
+            ],
           ),
-          prefixText: '\$ ',
-          label: Text(widget.label),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: hint,
-          labelStyle: const TextStyle(fontSize: 25),
         ),
-        keyboardType: TextInputType.number,
-        onChanged: (value) {
-          fieldValue = controller.text;
-          selection = controller.selection;
-          try {
-            widget.setValueInUSD(num.parse(fieldValue) / widget.currencyRatio);
-          } catch (e) {
-            null;
-          }
-        },
-        onTap: () {
-          if (isInactive) {
-            fieldValue = hint;
-            selection = TextSelection(baseOffset: 0, extentOffset: hint.length);
-            widget.setActiveFieldIndex(widget.thisFieldIndex);
-          } else {
-            selection = controller.selection;
-          }
-        },
-        onTapOutside: (_) {
-          widget.setActiveFieldIndex(null);
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(
-            RegExp(r'\d|\.|-'),
-            replacementString: '',
-          ),
-        ],
       ),
     );
   }

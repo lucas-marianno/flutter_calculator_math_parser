@@ -20,8 +20,6 @@ class CalculatorApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Uncomment this to run the app in fullscreen mode (full restart required):
-    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: material2themeData,

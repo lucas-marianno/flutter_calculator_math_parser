@@ -34,9 +34,9 @@ class ExchangeRates {
         hasUpdatedRates = true;
         lastUpdated = DateTime.now();
 
-        sharedPreferences.setString('exchangeRates', rates.toString());
-        sharedPreferences.setString('favRates', favRates.toString());
-        sharedPreferences.setInt('last update', lastUpdated!.millisecondsSinceEpoch);
+        await sharedPreferences.setString('exchangeRates', rates.toString());
+        await sharedPreferences.setString('favRates', favRates.toString());
+        await sharedPreferences.setInt('last update', lastUpdated!.millisecondsSinceEpoch);
       } else {
         throw 'some weired shit went bad when trying to get weather data from api.'
             ' Response statuscode:  ${response.statusCode}';

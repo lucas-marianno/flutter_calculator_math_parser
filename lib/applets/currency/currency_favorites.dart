@@ -7,15 +7,18 @@ Future<void> initializeSharedPreferences() async {
 }
 
 class Favorites {
-  Favorites() {
-    _favorites = sharedPreferences.getStringList('favorites') ?? [];
-  }
-  late List<String> _favorites;
+  Favorites();
+  bool isUpdating = false;
+  List<String> _favorites = sharedPreferences.getStringList('favorites') ?? [];
 
   bool contains(String currency) => _favorites.contains(currency);
-  void clearAll() => sharedPreferences.remove('favorites');
-  bool isEmpty() => !sharedPreferences.containsKey('favorites');
+  Future<void> clearAll() async {
+    isUpdating = true;
+    await sharedPreferences.remove('favorites');
+    isUpdating = false;
+  }
 
+  bool isEmpty() => !sharedPreferences.containsKey('favorites');
   List<String> getFavoritesList() {
     try {
       _favorites.sort();
@@ -25,23 +28,31 @@ class Favorites {
     return _favorites;
   }
 
-  void toggleFavorite(String currency) {
-    _favorites.contains(currency) ? _removeFavorite(currency) : _addFavorite(currency);
+  Future<void> toggleFavorite(String currency) async {
+    isUpdating = true;
+    _favorites.contains(currency) ? await _removeFavorite(currency) : await _addFavorite(currency);
+    isUpdating = false;
   }
 
-  void _addFavorite(String currency) {
+  Future<void> _addFavorite(String currency) async {
+    isUpdating = true;
     _favorites.add(currency);
     _favorites = _favorites.toSet().toList();
-    _saveToSharedPreferences();
+    await _saveToSharedPreferences();
+    isUpdating = false;
   }
 
-  void _removeFavorite(String currency) {
+  Future<void> _removeFavorite(String currency) async {
+    isUpdating = true;
     if (!_favorites.contains(currency)) return;
     _favorites.remove(currency);
-    _saveToSharedPreferences();
+    await _saveToSharedPreferences();
+    isUpdating = false;
   }
 
-  void _saveToSharedPreferences() {
-    sharedPreferences.setStringList('favorites', _favorites);
+  Future<void> _saveToSharedPreferences() async {
+    isUpdating = true;
+    await sharedPreferences.setStringList('favorites', _favorites);
+    isUpdating = false;
   }
 }

@@ -13,29 +13,47 @@ class CurrencyMain extends StatefulWidget {
 
 class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-  Widget tab0 = CurrencyConverter(exchangeRates: exchangeRates.favs());
-  Widget tab1 = CurrencyConverter(exchangeRates: exchangeRates);
+  late Widget tab0;
+  late Widget tab1;
+  bool isBuilding = true;
 
-  _handleTabSelection() {
+  Future<void> _handleTabSelection() async {
+    if (!tabController.indexIsChanging && tabController.index == 0) {
+      _reloadFavoritesTab();
+    }
+  }
+
+  Future<void> _reloadFavoritesTab() async {
+    if (isBuilding) return;
+    if (tabController.index == 1) return;
+    if (tabController.indexIsChanging) return;
+
     /// TODO: Investigate this further and fix it.
     /// This is a horrible way of achieving the goal of reloading the page.
     /// for some reason, [setState] isn't rebuilding everything, probably due to
     /// [CurrencyFieldTile] be a StatefulWidget.
-    if (tabController.index == 0) {
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          transitionDuration: Duration.zero,
-          pageBuilder: (_, __, ___) => const CurrencyMain(),
-        ),
-      );
-    }
+
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 500),
+        pageBuilder: (_, __, ___) => const CurrencyMain(),
+      ),
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    tabController.addListener(() => _handleTabSelection());
+    tabController.addListener(() async => await _handleTabSelection());
+    tab0 = CurrencyConverter(
+      exchangeRates: exchangeRates.favs(),
+      refreshCallBackFunction: _reloadFavoritesTab,
+    );
+    tab1 = CurrencyConverter(
+      exchangeRates: exchangeRates,
+      refreshCallBackFunction: _reloadFavoritesTab,
+    );
   }
 
   @override
@@ -44,8 +62,16 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
     super.dispose();
   }
 
+  afterBuild() {
+    // print('hi');
+    isBuilding = false;
+    print(isBuilding);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(milliseconds: 200), () => afterBuild());
+    print(isBuilding);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -68,7 +94,10 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
               itemBuilder: (context) => [
                 PopupMenuItem(
                   child: const Text('Clear favorites'),
-                  onTap: () => Favorites().clearAll(),
+                  onTap: () async {
+                    await Favorites().clearAll();
+                    await _reloadFavoritesTab();
+                  },
                 ),
                 // PopupMenuItem(
                 //   child: const Text('Print shit'),
