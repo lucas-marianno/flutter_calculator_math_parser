@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/applets/currency/currency_converter.dart';
+import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 import 'package:math_expression_parser/applets/currency/exchange_rates_getter.dart';
 import '../../constants.dart';
 
 class CurrencyMain extends StatefulWidget {
-  const CurrencyMain({super.key, required this.exchangeRates});
-
-  final ExchangeRates exchangeRates;
+  const CurrencyMain({super.key});
 
   @override
   State<CurrencyMain> createState() => _CurrencyMainState();
 }
 
 class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderStateMixin {
-  late TabController tabController;
-  late Widget child1;
-  late Widget child2;
+  late TabController tabController = TabController(length: 2, vsync: this);
+  Widget child1 = CurrencyConverter(exchangeRates: exchangeRates.favs());
+  Widget child2 = CurrencyConverter(exchangeRates: exchangeRates);
+
+  _handleTabSelection() async {
+    Future.delayed(const Duration(milliseconds: 250), () {
+      setState(() {
+        child1 = CurrencyConverter(exchangeRates: exchangeRates.favs());
+      });
+    });
+    setState(() {});
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    child1 = CurrencyConverter(exchangeRates: widget.exchangeRates.favs());
-    child2 = CurrencyConverter(exchangeRates: widget.exchangeRates);
-    tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() => _handleTabSelection());
   }
 
-  _handleTabSelection() {
-    setState(() {
-      child1 = CurrencyConverter(exchangeRates: widget.exchangeRates.favs());
-    });
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -51,77 +56,47 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
               Tab(icon: Icon(Icons.view_list)),
             ],
           ),
+          actions: [
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text('Clear favorites'),
+                  onTap: () => Favorites().clearAll(),
+                ),
+                // PopupMenuItem(
+                //   child: const Text('Print shit'),
+                //   onTap: () {
+                //     // print(parseStringToMap(exchangeRates.rates.toString()));
+                //   },
+                // ),
+              ],
+            )
+          ],
         ),
-        body: TabBarView(
-          controller: tabController,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            child1,
-            child2,
+            Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  child1,
+                  child2,
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 30,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  'Exchange rates last updated in ${exchangeRates.lastUpdated}',
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class MyTabbedPage extends StatefulWidget {
-  const MyTabbedPage({super.key});
-
-  @override
-  State<MyTabbedPage> createState() => _MyTabbedPageState();
-}
-
-class _MyTabbedPageState extends State<MyTabbedPage> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(_handleTabSelection);
-  }
-
-  @override
-  void dispose() {
-    _tabController.removeListener(_handleTabSelection);
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  void _handleTabSelection() {
-    print('new state');
-
-    if (_tabController.indexIsChanging) {
-      setState(() {
-        // This function will be called every time the tab changes
-        // You can update your data here based on the selected tab
-        // For example, you can update a list of items to be displayed
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tabbed Page'),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: [
-            Tab(text: 'Tab 1'),
-            Tab(text: 'Tab 2'),
-            Tab(text: 'Tab 3'),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          // Replace these with your actual widget builders
-          Center(child: Text('Contents of Tab 1')),
-          Center(child: Text('Contents of Tab 2')),
-          Center(child: Text('Contents of Tab 3')),
-        ],
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 
+ExchangeRates exchangeRates = ExchangeRates();
+
 class ExchangeRates {
   ExchangeRates();
   Map<String, double> rates = {}..addAll(mockRatesDebug);
@@ -31,10 +33,23 @@ class ExchangeRates {
 
         hasUpdatedRates = true;
         lastUpdated = DateTime.now();
+
+        sharedPreferences.setString('exchangeRates', rates.toString());
+        sharedPreferences.setString('favRates', favRates.toString());
+        sharedPreferences.setInt('last update', lastUpdated!.millisecondsSinceEpoch);
       } else {
-        hasUpdatedRates = false;
+        throw 'some weired shit went bad when trying to get weather data from api.'
+            ' Response statuscode:  ${response.statusCode}';
       }
     } catch (e) {
+      hasUpdatedRates = false;
+      final hasLast = sharedPreferences.getInt('last update') != null;
+      lastUpdated = hasLast
+          ? DateTime.fromMillisecondsSinceEpoch(sharedPreferences.getInt('last update')!)
+          : null;
+      rates = _parseStringToMap(sharedPreferences.getString('exchangeRates'));
+      favRates = _parseStringToMap(sharedPreferences.getString('favRates'));
+
       print(e);
     }
   }
@@ -42,7 +57,7 @@ class ExchangeRates {
   ExchangeRates favs() {
     Map<String, double> nf = {};
     for (var f in Favorites().getFavoritesList()) {
-      nf.addAll({f: rates[f]!});
+      nf.addAll({f: rates[f] ?? 0});
     }
 
     ExchangeRates favs = ExchangeRates();
@@ -58,6 +73,23 @@ class ExchangeRates {
     mock.hasUpdatedRates = false;
     mock.lastUpdated = null;
     return mock;
+  }
+
+  Map<String, double> _parseStringToMap(String? input) {
+    if (input == null) return {};
+
+    input = input.substring(1, input.length - 1);
+    List<String> keyValuePairs = input.split(',');
+    Map<String, double> resultMap = {};
+
+    for (String pair in keyValuePairs) {
+      List<String> keyValue = pair.split(':');
+      String key = keyValue[0].trim();
+      double value = double.parse(keyValue[1].trim());
+      resultMap[key] = value;
+    }
+
+    return resultMap;
   }
 }
 

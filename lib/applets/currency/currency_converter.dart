@@ -1,42 +1,58 @@
 import 'package:flutter/material.dart';
-import 'currency_field_column.dart';
+import 'package:math_expression_parser/applets/currency/currency_field_tile.dart';
 import 'exchange_rates_getter.dart';
 
-class CurrencyConverter extends StatelessWidget {
+class CurrencyConverter extends StatefulWidget {
   const CurrencyConverter({super.key, required this.exchangeRates});
 
   final ExchangeRates exchangeRates;
 
   @override
+  State<CurrencyConverter> createState() => _CurrencyConverterState();
+}
+
+class _CurrencyConverterState extends State<CurrencyConverter> {
+  late Map<String, double> exchangeRatesMap;
+  int? selectedField;
+  num valueInUSD = 1;
+  List ratesList = [];
+
+  void setSelectedField(int? fieldIndex) {
+    setState(() {
+      selectedField = fieldIndex;
+    });
+  }
+
+  void setValueInUSD(num newValueInUSD) {
+    setState(() {
+      valueInUSD = newValueInUSD;
+    });
+  }
+
+  @override
+  void initState() {
+    exchangeRatesMap = widget.exchangeRates.rates;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 0),
-                  child: CurrencyFieldColumn(
-                    exchangeRates: exchangeRates.rates,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  'Exchange rates last updated in ${exchangeRates.lastUpdated}',
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ListView.builder(
+      itemCount: exchangeRatesMap.entries.length,
+      itemBuilder: (context, index) {
+        final String label = exchangeRatesMap.entries.toList()[index].key;
+        final double currencyRatio = exchangeRatesMap[label]!;
+
+        return CurrencyFieldTile(
+          label: label,
+          currencyRatio: currencyRatio,
+          thisFieldIndex: index,
+          activeIndex: selectedField,
+          setActiveFieldIndex: setSelectedField,
+          valueInUSD: valueInUSD,
+          setValueInUSD: setValueInUSD,
+        );
+      },
     );
   }
 }

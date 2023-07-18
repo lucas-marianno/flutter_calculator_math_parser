@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
+import 'package:math_expression_parser/applets/currency/exchange_rates_getter.dart';
 import 'package:math_expression_parser/constants.dart';
 import 'package:math_expression_parser/pages/applet_selection_page.dart';
 import 'package:math_expression_parser/applets/calculator/calculator_page.dart';
@@ -10,6 +11,7 @@ import 'package:math_expression_parser/widgets/popupmenu.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeSharedPreferences();
+  await exchangeRates.initializeExchangeRates();
   runApp(const CalculatorApp());
 }
 

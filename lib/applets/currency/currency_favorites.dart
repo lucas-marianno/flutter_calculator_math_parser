@@ -1,31 +1,29 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-late final SharedPreferences _sharedPreferences;
+late final SharedPreferences sharedPreferences;
 
 Future<void> initializeSharedPreferences() async {
-  _sharedPreferences = await SharedPreferences.getInstance();
+  sharedPreferences = await SharedPreferences.getInstance();
 }
 
 class Favorites {
   Favorites() {
-    _favorites = _sharedPreferences.getStringList('favorites') ?? _defaultFavs;
+    _favorites = sharedPreferences.getStringList('favorites') ?? [];
   }
+  late List<String> _favorites;
 
   bool contains(String currency) => _favorites.contains(currency);
+  void clearAll() => sharedPreferences.remove('favorites');
+  bool isEmpty() => !sharedPreferences.containsKey('favorites');
 
   List<String> getFavoritesList() {
-    //TODO: this throuws an error
-
     try {
       _favorites.sort();
     } catch (e) {
       null;
     }
-
     return _favorites;
   }
-
-  void clearAll() => _sharedPreferences.remove('favorites');
 
   void toggleFavorite(String currency) {
     _favorites.contains(currency) ? _removeFavorite(currency) : _addFavorite(currency);
@@ -44,9 +42,6 @@ class Favorites {
   }
 
   void _saveToSharedPreferences() {
-    _sharedPreferences.setStringList('favorites', _favorites);
+    sharedPreferences.setStringList('favorites', _favorites);
   }
-
-  late List<String> _favorites;
-  static const List<String> _defaultFavs = ['USD', 'BRL', 'EUR', 'NZD', 'ARS', 'CLP'];
 }
