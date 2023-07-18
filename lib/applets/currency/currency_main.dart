@@ -13,16 +13,23 @@ class CurrencyMain extends StatefulWidget {
 
 class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderStateMixin {
   late TabController tabController = TabController(length: 2, vsync: this);
-  Widget child1 = CurrencyConverter(exchangeRates: exchangeRates.favs());
-  Widget child2 = CurrencyConverter(exchangeRates: exchangeRates);
+  Widget tab0 = CurrencyConverter(exchangeRates: exchangeRates.favs());
+  Widget tab1 = CurrencyConverter(exchangeRates: exchangeRates);
 
-  _handleTabSelection() async {
-    Future.delayed(const Duration(milliseconds: 250), () {
-      setState(() {
-        child1 = CurrencyConverter(exchangeRates: exchangeRates.favs());
-      });
-    });
-    setState(() {});
+  _handleTabSelection() {
+    /// TODO: Investigate this further and fix it.
+    /// This is a horrible way of achieving the goal of reloading the page.
+    /// for some reason, [setState] isn't rebuilding everything, probably due to
+    /// [CurrencyFieldTile] be a StatefulWidget.
+    if (tabController.index == 0) {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration.zero,
+          pageBuilder: (_, __, ___) => const CurrencyMain(),
+        ),
+      );
+    }
   }
 
   @override
@@ -81,8 +88,8 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  child1,
-                  child2,
+                  tab0,
+                  tab1,
                 ],
               ),
             ),

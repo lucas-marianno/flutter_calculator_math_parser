@@ -37,6 +37,16 @@ class _CurrencyConverterState extends State<CurrencyConverter> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.exchangeRates.rates.isEmpty) {
+      return const Center(
+        child: Text(
+          'Your favorites will appear here when you select them',
+          style: TextStyle(fontSize: 30),
+          textAlign: TextAlign.center,
+        ),
+      );
+    }
+
     return ListView.builder(
       itemCount: exchangeRatesMap.entries.length,
       itemBuilder: (context, index) {
