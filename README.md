@@ -20,6 +20,7 @@ The Math Expression Calculator is, at its core, a [Mathematical Expression Parse
 - [x] Users can easily calculate their [Body Mass Index.](https://en.wikipedia.org/wiki/Body_mass_index)
 - [x] Responsive Design
 - [x] Real-time Currency Converter
+- [x] BMI - Body Mass Index calculator
 - [ ] Scientific Notation
 - [ ] Language Selection (English, Portuguese, Spanish).
 - [ ] Customization (Switch Dark/Light Mode, select accent color).
@@ -48,7 +49,7 @@ The project serves the following purposes:
 
 ## The Developer:
 
-This entire project was idealized and developed by Lucas Mariano, an enthusiast and aspiring Flutter Developer. You check more of my work on my [GitHub page.](https://github.com/lucas-marianno)
+This entire project was idealized and developed by [Lucas Marianno](https://linktr.ee/lucasmarianno), an enthusiast and aspiring Flutter Developer.
 
 ##
 
