@@ -14,11 +14,9 @@ class ExchangeRates {
   String? error;
 
   Future<void> initializeExchangeRates() async {
-    int statusCode = 0;
     try {
       http.Response response = await http.get(Uri.parse('https://open.er-api.com/v6/latest/USD'));
       const success = 200;
-      statusCode = response.statusCode;
       if (response.statusCode == success) {
         rates.clear();
         favRates.clear();
@@ -44,7 +42,7 @@ class ExchangeRates {
             ' Response statuscode:  ${response.statusCode}';
       }
     } catch (e) {
-      error = 'Status code: $statusCode\nError:\n${e.toString()}';
+      error = 'Error:\n${e.toString()}';
 
       hasUpdatedRates = false;
       final hasLast = sharedPreferences.getInt('last update') != null;

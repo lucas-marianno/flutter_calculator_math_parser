@@ -77,24 +77,27 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
       return Scaffold(
         appBar: AppBar(),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'An error has occured:',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
-              Text(
-                '${exchangeRates.error}',
-                textAlign: TextAlign.justify,
-              ),
-              const SizedBox(height: 10),
-              OutlinedButton(
-                onPressed: () => reportError(exchangeRates.error, context),
-                child: const Text('report this error'),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'An error has occured:',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  '${exchangeRates.error}',
+                  textAlign: TextAlign.justify,
+                ),
+                const SizedBox(height: 10),
+                OutlinedButton(
+                  onPressed: () => reportError(exchangeRates.error, context),
+                  child: const Text('report this error'),
+                ),
+              ],
+            ),
           ),
         ),
       );
