@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/util/md_reader.dart';
 
-class AboutPage extends StatelessWidget {
-  const AboutPage({super.key});
+class HelpPage extends StatelessWidget {
+  const HelpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
-        child: MdReader('README.md'),
+        child: MdReader('assets/markdown/help.md'),
       ),
     );
   }

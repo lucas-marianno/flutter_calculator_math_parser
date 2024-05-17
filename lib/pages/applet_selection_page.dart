@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:math_expression_parser/routes.dart';
+import 'package:math_expression_parser/widgets/applet_selection_button.dart';
 
 class AppletSelection extends StatefulWidget {
   const AppletSelection({super.key});
@@ -17,51 +18,26 @@ class _AppletSelectionState extends State<AppletSelection> {
         crossAxisCount: 3,
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
-        children: [
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Pages.currencyConverter);
-            },
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: Icon(Icons.currency_exchange, size: 80)),
-                SizedBox(
-                  height: 20,
-                  child: FittedBox(child: Text('Currency Converter')),
-                ),
-              ],
-            ),
+        children: const [
+          AppletSelectionButton(
+            title: 'Currency Converter',
+            icon: Icons.currency_exchange,
+            navigateTo: Pages.currencyConverter,
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Pages.bmiPage);
-            },
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: Icon(Icons.monitor_weight, size: 80)),
-                SizedBox(
-                  height: 20,
-                  child: FittedBox(child: Text('BMI Calculator')),
-                ),
-              ],
-            ),
+          AppletSelectionButton(
+            title: 'BMI Calculator',
+            icon: Icons.monitor_weight,
+            navigateTo: Pages.bmiPage,
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Pages.aboutPage);
-            },
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: Icon(Icons.info, size: 80)),
-                SizedBox(
-                  height: 20,
-                  child: FittedBox(child: Text('About this App')),
-                ),
-              ],
-            ),
+          AppletSelectionButton(
+            title: 'About this App',
+            icon: Icons.info,
+            navigateTo: Pages.aboutPage,
+          ),
+          AppletSelectionButton(
+            title: 'Need help?',
+            icon: Icons.help,
+            navigateTo: Pages.helpPage,
           ),
         ],
       ),
