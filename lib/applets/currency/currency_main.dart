@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:math_expression_parser/applets/currency/currency_converter.dart';
 import 'package:math_expression_parser/applets/currency/currency_favorites.dart';
 import 'package:math_expression_parser/applets/currency/exchange_rates_getter.dart';
+import 'package:math_expression_parser/util/bug_report.dart';
 import '../../constants.dart';
 
 class CurrencyMain extends StatefulWidget {
@@ -71,68 +72,90 @@ class _CurrencyMainState extends State<CurrencyMain> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(milliseconds: 200), () => afterBuild());
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: TabBar(
-            controller: tabController,
-            onTap: (value) {},
-            isScrollable: false,
-            indicatorColor: kHighEmphasisButtonColor,
-            indicatorSize: TabBarIndicatorSize.label,
-            labelColor: kHighEmphasisButtonColor,
-            unselectedLabelColor: Colors.grey,
-            tabs: const [
-              Tab(icon: Icon(Icons.star)),
-              Tab(icon: Icon(Icons.view_list)),
+
+    if (exchangeRates.lastUpdated == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'An error has occured:',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                '${exchangeRates.error}',
+                textAlign: TextAlign.justify,
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                onPressed: () => reportError(exchangeRates.error, context),
+                child: const Text('report this error'),
+              ),
             ],
           ),
-          actions: [
-            PopupMenuButton(
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  child: const Text('Clear favorites'),
-                  onTap: () async {
-                    await Favorites().clearAll();
-                    await _reloadFavoritesTab();
-                  },
-                ),
-                // PopupMenuItem(
-                //   child: const Text('Print shit'),
-                //   onTap: () {
-                //     // print(parseStringToMap(exchangeRates.rates.toString()));
-                //   },
-                // ),
+        ),
+      );
+    } else {
+      return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: TabBar(
+              controller: tabController,
+              onTap: (value) {},
+              isScrollable: false,
+              indicatorColor: kHighEmphasisButtonColor,
+              indicatorSize: TabBarIndicatorSize.label,
+              labelColor: kHighEmphasisButtonColor,
+              unselectedLabelColor: Colors.grey,
+              tabs: const [
+                Tab(icon: Icon(Icons.star)),
+                Tab(icon: Icon(Icons.view_list)),
               ],
-            )
-          ],
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: [
-                  tab0,
-                  tab1,
-                ],
-              ),
             ),
-            SizedBox(
-              height: 30,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  'Exchange rates last updated in ${exchangeRates.lastUpdated}',
+            actions: [
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: const Text('Clear favorites'),
+                    onTap: () async {
+                      await Favorites().clearAll();
+                      await _reloadFavoritesTab();
+                    },
+                  ),
+                ],
+              )
+            ],
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    tab0,
+                    tab1,
+                  ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 30,
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    'Exchange rates last updated in ${exchangeRates.lastUpdated}',
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }
