@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 
-version: 1.0.1+4
+version: 1.0.1+5
 
 environment:
   sdk: '>=3.0.0'
@@ -23,11 +23,11 @@ dependencies:
 # run 'flutter pub run flutter_launcher_icons' to get the icons
 flutter_launcher_icons:
   android: true
-  image_path: "assets/icon.png"
+  image_path: "assets/math parser logob.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/icon.png"
+    image_path: "assets/math parser logob.png"
   # windows:
   #   generate: true
   #   image_path: "assets/icon.png"
