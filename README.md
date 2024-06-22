@@ -1,4 +1,4 @@
-# Math Expression Calculator <a href="https://play.google.com/store/apps/details?id=com.lucasmarianno.AlgoVis"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=50px /></a>
+# Math Expression Calculator <a href="https://play.google.com/store/apps/details?id=com.lucasmarianno.mathparser"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=50px /></a>
 
 
 A Flutter Application that includes a Scientific Calculator, Mathematical Expressions Parser, BMI Calculator, Currency Converter, with real time exchange rates, favorites tab and more!
